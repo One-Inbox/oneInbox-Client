@@ -1,0 +1,18 @@
+.swal2-icon {
+    overflow: hidden;
+    }
+    .swal2-title {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 2em !important;
+    }
+    .swal2-html-container {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 1em !important;
+      color: #57D5D4 !important;
+    }
+    .swal2-confirm {
+      font-weight: 700;
+      background-color: #57D5D4 !important;
+      border: none;
+    }
+    
