@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { URL_API } from "../../config.js";
 import {
   ADD_NEW_MESSAGE_RECEIVED,
   CONNECT_SOCKET,
@@ -15,12 +16,12 @@ import {
 //SERVER DESARROLLO
 //const URL = 'https://electrica-mosconi-backend.onrender.com';
 //SERVER PRODUCCION
-const URL ='https://electrica-mosconi-backend-main.onrender.com'
+//const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const connectSocket = () => (dispatch) => {
   try {
     // conexión del socket y despacho el socket como payload
-    const socket = io(URL);
+    const socket = io(URL_API);
     //console.log('action me conecto con socket', socket);
     dispatch({
       type: CONNECT_SOCKET,

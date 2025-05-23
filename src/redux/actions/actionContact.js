@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL_API } from "../../config.js";
 import {
   sweetAlertsSuccessfully,
   sweetAlertsError,
@@ -10,13 +11,12 @@ import { GET_CONTACT_BY_ID, GET_CONTACT_BY_MESSAGE_RECEIVED } from "../types";
 //SERVER DESARROLLO
 //const URL = 'https://electrica-mosconi-backend.onrender.com';
 //SERVER PRODUCCION
-const URL ='https://electrica-mosconi-backend-main.onrender.com'
-
+//const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getContactByIdAction = (contactId) => {
   try {
     return async (dispatch) => {
-      const response = await axios.get(`${URL}/contact/${contactId}`);
+      const response = await axios.get(`${URL_API}/contact/${contactId}`);
       const contact = response.data;
       dispatch({ type: GET_CONTACT_BY_ID, payload: contact });
     };
@@ -31,10 +31,10 @@ export const getContactByIdAction = (contactId) => {
 export const getContactByMessageReceivedAction = (messageId) => {
   try {
     return async (dispatch) => {
-      const res = await axios.get(`${URL}/message/received/${messageId}`);
+      const res = await axios.get(`${URL_API}/message/received/${messageId}`);
       const message = res.data;
       const contactId = message.Contact.id;
-      const response = await axios.get(`${URL}/contact/${contactId}`);
+      const response = await axios.get(`${URL_API}/contact/${contactId}`);
       const contact = response.data;
       dispatch({
         type: GET_CONTACT_BY_MESSAGE_RECEIVED,

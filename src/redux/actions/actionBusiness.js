@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL_API } from "../../config.js";
 import {
   sweetAlertsSuccessfully,
   sweetAlertsError,
@@ -16,31 +17,31 @@ import {
 //SERVER DESARROLLO
 //const URL = 'https://electrica-mosconi-backend.onrender.com';
 //SERVER PRODUCCION
-const URL ='https://electrica-mosconi-backend-main.onrender.com'
+//const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getBusinessByIdAction = (businessId, businessName) => {
-    const idBusiness = businessId || sessionStorage.getItem('businessId')
-    //console.log('empresa: ', idBusiness);
-    
-    try {
-        return async (dispatch) => {
-            const response = await axios.get(`${URL}/business/${idBusiness}`);
-            const business = response.data;   
-            dispatch({type: GET_BUSINESS_BY_ID, payload: business}) 
-        }
-    } catch (error) {
-        sweetAlertsError(
-            "Intenta de nuevo",
-            `No podemos encontrar a ${businessName}`,
-            "Ok"
-          ); 
-    }
-}
+  const idBusiness = businessId || sessionStorage.getItem("businessId");
+  //console.log('empresa: ', idBusiness);
+
+  try {
+    return async (dispatch) => {
+      const response = await axios.get(`${URL_API}/business/${idBusiness}`);
+      const business = response.data;
+      dispatch({ type: GET_BUSINESS_BY_ID, payload: business });
+    };
+  } catch (error) {
+    sweetAlertsError(
+      "Intenta de nuevo",
+      `No podemos encontrar a ${businessName}`,
+      "Ok"
+    );
+  }
+};
 
 export const updateBusnisessAction = (busnisessId, input) => {
   return async (dispatch) => {
     try {
-      await axios.put(`${URL}/business/update/${busnisessId}`, input);
+      await axios.put(`${URL_API}/business/update/${busnisessId}`, input);
       dispatch({ type: UPDATE_BUSINESS });
     } catch (error) {
       console.log(error.message);
@@ -52,7 +53,7 @@ export const loginBusinessAction = (input) => {
   //console.log('input en action', input);
   return async (dispatch) => {
     try {
-      const response = await axios.post(`${URL}/auth/login`, input, {
+      const response = await axios.post(`${URL_API}/auth/login`, input, {
         withCredentials: true,
       });
       //console.log('business en action', response.data.business);
@@ -73,16 +74,20 @@ export const loginBusinessAction = (input) => {
 
 export const logoutBusinessAction = () => {
   return async (dispatch) => {
-    await axios.post(`${URL}/business/logout`, {}, { withCredentials: true });
+    await axios.post(
+      `${URL_API}/business/logout`,
+      {},
+      { withCredentials: true }
+    );
     dispatch({ type: LOGOUT_BUSINESS });
   };
 };
 
 export const authBusinessByAllSocialMediaAction = (businessId) => {
   return async (dispatch) => {
-    const meli = await axios.get(`${URL}/mercadolibre/auth`, businessId);
+    const meli = await axios.get(`${URL_API}/mercadolibre/auth`, businessId);
     if (meli) {
-      await axios.get(`${URL}/auth/facebook`, businessId);
+      await axios.get(`${URL_API}/auth/facebook`, businessId);
     }
     dispatch({ type: AUTH_BUSINESS_BY_ALL_SOCIAL_MEDIA });
   };

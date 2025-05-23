@@ -1,12 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUploadFileAction } from "../../redux/actions/actionMessages";
+import { CLOUDINARY_URL, CLOUD_NAME, CLOUD_PRESET } from "../../config";
 import axios from "axios";
 import Spinner from "./spinners/Spinner";
 
 const UploadFiles = () => {
-  const cloudName = "dibwxv9d2";
-  const cloudPreset = "preset-electricaMosconi";
+  // const cloudName = "dibwxv9d2";
+  // const cloudPreset = "preset_oneinbox";
   const dispatch = useDispatch();
 
   const [URLfile, setURLfile] = useState("");
@@ -27,12 +28,14 @@ const UploadFiles = () => {
     const file = e.target.files[0];
     const data = new FormData();
     data.append("file", file);
-    data.append("upload_preset", cloudPreset);
+    data.append("upload_preset", CLOUD_PRESET);
+    //data.append("upload_preset", cloudPreset);
     // const typeFile = file.type;
     // const typeRoute = typeFile === "application/pdf" ? "raw" : "image";
     setLoading(true);
     const response = await axios.post(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      `${CLOUDINARY_URL}/${CLOUD_NAME}/image/upload`,
+      //`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       // `https://api.cloudinary.com/v1_1/${cloudName}/${typeRoute}/upload`,
       data
       // {
@@ -90,7 +93,7 @@ const UploadFiles = () => {
 
       {loading ? (
         <div className=" relative -mt-52 -ml-12 w-28 h-auto bg-white rounded-md py-4 px-8">
-          <Spinner text={'loading...'}/>
+          <Spinner text={"loading..."} />
         </div>
       ) : (
         URLfile && (

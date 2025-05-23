@@ -1,4 +1,5 @@
 import axios from "axios";
+import { URL_API } from "../../config.js";
 import {
   sweetAlertsSuccessfully,
   sweetAlertsError,
@@ -9,6 +10,7 @@ import {
   GET_USER_BY_ID,
   UPDATE_USER,
   ADMI_LOGIN,
+  GET_USER_BY_ADMI,
 } from "../types.js";
 
 //LOCALHOST
@@ -16,13 +18,13 @@ import {
 //SERVER DESARROLLO
 //const URL = 'https://electrica-mosconi-backend.onrender.com';
 //SERVER PRODUCCION
-const URL ='https://electrica-mosconi-backend-main.onrender.com'
+//const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllUsersAction = () => {
   return async (dispatch) => {
-   // console.log("entro en la action GetAllUsersAction");
+    // console.log("entro en la action GetAllUsersAction");
     try {
-      const response = await axios.get(`${URL}/user`);
+      const response = await axios.get(`${URL_API}/user`);
       //console.log("repuesta en action de getAllUsers", response);
       const users = response.data;
       dispatch({ type: GET_ALL_USERS, payload: users });
@@ -41,7 +43,7 @@ export const getUserByIdAction = (userId) => {
   //console.log('2A- entro en getUserByIdAction con ID', userId);
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/user/${userId}`);
+      const response = await axios.get(`${URL_API}/user/${userId}`);
       const user = response.data;
       dispatch({ type: GET_USER_BY_ID, payload: user });
     } catch (error) {
@@ -67,7 +69,7 @@ export const updateUserAction = (userId, input) => {
     console.log("entro a la action del", userId, "con data", input);
 
     try {
-      await axios.put(`${URL}/user/update/${userId}`, input);
+      await axios.put(`${URL_API}/user/update/${userId}`, input);
       dispatch({ type: UPDATE_USER });
       console.log("salgo al reducer");
     } catch (error) {
@@ -86,7 +88,7 @@ export const getUserByAdmiAction = (userId) => {
   //console.log('2A- entro en getUserByIdAction con ID', userId);
   return async (dispatch) => {
     try {
-      const response = await axios.get(`${URL}/user/${userId}`);
+      const response = await axios.get(`${URL_API}/user/${userId}`);
       const user = response.data;
       dispatch({ type: GET_USER_BY_ADMI, payload: user });
     } catch (error) {

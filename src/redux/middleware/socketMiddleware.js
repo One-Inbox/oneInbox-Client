@@ -1,4 +1,5 @@
 import { io } from "socket.io-client";
+import { URL_API } from "../../config";
 import {
   ADD_NEW_MESSAGE_RECEIVED,
   CONNECT_SOCKET,
@@ -11,7 +12,7 @@ import {
 //SERVER DESARROLLO
 //const URL = 'https://electrica-mosconi-backend.onrender.com';
 //SERVER PRODUCCION
-const URL ='https://electrica-mosconi-backend-main.onrender.com'
+//const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 const socketMiddleware = (store) => {
   let socket = null;
@@ -22,7 +23,7 @@ const socketMiddleware = (store) => {
         if (socket) {
           socket.disconnect();
         }
-        socket = io(URL, {
+        socket = io(URL_API, {
           transports: ["websocket"],
         });
 
