@@ -16,7 +16,7 @@ import {
   InboxDetailAdmi,
   UsersManagement,
   MetricsAnalysis,
-  MercadoLibreAuth
+  MercadoLibreAuth,
 } from "./layouts";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -38,19 +38,20 @@ const App = () => {
 
   return (
     <div>
-      {location.pathname === "/" || 
+      {location.pathname === "/" ||
       location.pathname === "/login" ||
       location.pathname === "/loginAdmi" ||
       location.pathname === "/dashboardAdmi/profile/edit" ||
       location.pathname === "/dashboardAdmi/profile/edit-business" ||
-      location.pathname === "/dashboardAdmi/profile/edit-socialMedia" ||  location.pathname.includes("/MeLi_auth")? null : (
+      location.pathname === "/dashboardAdmi/profile/edit-socialMedia" ||
+      location.pathname.includes("/MeLi_auth") ? null : (
         <div>
           <NavBar />
         </div>
       )}
 
       {/* RUTAS  PROTEGIDAS  */}
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<BusinessLogin />} />
         <Route path="/MeLi_auth" element={<MercadoLibreAuth />} />
@@ -69,10 +70,10 @@ const App = () => {
             <Route path="/dashboardAdmi/metrics" element={<MetricsAnalysis />} />
           </Route>
         </Route>
-      </Routes>
+      </Routes> */}
 
-{/* RUTAS SIN PROTEGER */}
-      {/* <Routes>
+      {/* RUTAS SIN PROTEGER */}
+      <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<BusinessLogin />} />
         <Route path="/MeLi_auth" element={<MercadoLibreAuth />} />
@@ -81,13 +82,25 @@ const App = () => {
         <Route path="/dashboardAdmi/homeAdmi" element={<HomeAdmi />} />
         <Route path="/dashboardAdmi/profile" element={<Profile />} />
         <Route path="/dashboardAdmi/profile/edit" element={<EditProfile />} />
-        <Route path="/dashboardAdmi/profile/edit-business" element={<EditBusiness />}/>
-        <Route path="/dashboardAdmi/profile/edit-socialMedia" element={<EditSocialMedia />}/>
+        <Route
+          path="/dashboardAdmi/profile/edit-business"
+          element={<EditBusiness />}
+        />
+        <Route
+          path="/dashboardAdmi/profile/edit-socialMedia"
+          element={<EditSocialMedia />}
+        />
         <Route path="/dashboardAdmi/inboxAdmi" element={<InboxAdmi />} />
-        <Route path="/inboxDetailAdmi/:detailId" element={<InboxDetailAdmi />}/>
-        <Route path="/dashboardAdmi/usersManagement" element={<UsersManagement />}/>
+        <Route
+          path="/inboxDetailAdmi/:detailId"
+          element={<InboxDetailAdmi />}
+        />
+        <Route
+          path="/dashboardAdmi/usersManagement"
+          element={<UsersManagement />}
+        />
         <Route path="/dashboardAdmi/metrics" element={<MetricsAnalysis />} />
-      </Routes> */}
+      </Routes>
     </div>
   );
 };

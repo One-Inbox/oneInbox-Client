@@ -1,4 +1,4 @@
-export const URL_API = "http://localhost:3001";
+export const URL_API = "http://localhost:3000";
 //CLOUDINARY
 export const CLOUD_NAME = "ddadcafpa";
 export const CLOUD_PRESET = "preset_oneinbox";
