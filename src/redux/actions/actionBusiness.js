@@ -56,7 +56,7 @@ export const loginBusinessAction = (input) => {
       const response = await axios.post(`${URL_API}/auth/login`, input, {
         withCredentials: true,
       });
-      //console.log('business en action', response.data.business);
+      console.log("business en action", response.data.business);
 
       dispatch({ type: LOGIN_BUSINESS, payload: response.data.business });
       //getBusinessByIdAction(busnisessId, input.businessname)
