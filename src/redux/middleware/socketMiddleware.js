@@ -13,8 +13,8 @@ import {
 //const URL = 'https://electrica-mosconi-backend.onrender.com';
 //SERVER PRODUCCION
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
-
 const socketMiddleware = (store) => {
+  console.log("URL_API en socketMiddleware", URL_API);
   let socket = null;
 
   return (next) => (action) => {

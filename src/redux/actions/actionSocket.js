@@ -19,6 +19,7 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const connectSocket = () => (dispatch) => {
+  console.log("URL_API en connectSocket ", URL_API);
   try {
     // conexión del socket y despacho el socket como payload
     const socket = io(URL_API);

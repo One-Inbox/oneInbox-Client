@@ -21,7 +21,8 @@ import {
 
 export const getBusinessByIdAction = (businessId, businessName) => {
   const idBusiness = businessId || sessionStorage.getItem("businessId");
-  //console.log('empresa: ', idBusiness);
+  console.log("empresa: ", idBusiness);
+  console.log("URL_API en getBusinessById ", URL_API);
 
   try {
     return async (dispatch) => {
@@ -51,6 +52,7 @@ export const updateBusnisessAction = (busnisessId, input) => {
 
 export const loginBusinessAction = (input) => {
   //console.log('input en action', input);
+  console.log("URL_API en loginBusiness ", URL_API);
   return async (dispatch) => {
     try {
       const response = await axios.post(`${URL_API}/auth/login`, input, {
@@ -84,6 +86,7 @@ export const logoutBusinessAction = () => {
 };
 
 export const authBusinessByAllSocialMediaAction = (businessId) => {
+  console.log("URL_API en authBusinessByAllSocialMedia ", URL_API);
   return async (dispatch) => {
     const meli = await axios.get(`${URL_API}/mercadolibre/auth`, businessId);
     if (meli) {

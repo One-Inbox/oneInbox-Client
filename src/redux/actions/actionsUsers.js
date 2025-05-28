@@ -21,6 +21,7 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllUsersAction = () => {
+  console.log("URL_API en getAllUsers ", URL_API);
   return async (dispatch) => {
     // console.log("entro en la action GetAllUsersAction");
     try {

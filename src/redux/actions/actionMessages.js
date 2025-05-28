@@ -25,14 +25,14 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllMessagesReceivedAction = () => {
-  console.log("entro en la action getAllMessages");
+  console.log("URL_API en getAllMessagesReceived ", URL_API);
 
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${URL_API}/message/received`);
-      console.log("respusta del back en action getAllMessages", response);
+      //console.log("respusta del back en action getAllMessages", response);
       const messages = response.data;
-      console.log("despacho la action getALlMessages con Payload", messages);
+      //console.log("despacho la action getALlMessages con Payload", messages);
       dispatch({ type: GET_ALL_MESSAGES_RECIVED, payload: messages });
 
       const { socket } = getState(); // socket desde el estado global
