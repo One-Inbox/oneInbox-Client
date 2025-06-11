@@ -2,7 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBusinessByIdAction } from "../../redux/actions/actionBusiness";
-import { getUserByIdAction, getAllUsersAction } from "../../redux/actions/actionsUsers";
+import {
+  getUserByIdAction,
+  getAllUsersAction,
+} from "../../redux/actions/actionsUsers";
 import SideBarA from "../../components/admi/SideBarA";
 import MenuInboxAdmi from "../../components/admi/inbox/MenuInboxAdmi";
 import InboxAdmiTable from "../../components/admi/inbox/InboxAdmiTable";
@@ -18,10 +21,10 @@ const InboxAdmi = () => {
   useEffect(() => {
     if (businessId) {
       dispatch(getBusinessByIdAction(businessId));
-      dispatch(getAllMessagesReceivedAction()); 
-      dispatch(getAllUsersAction())
+      dispatch(getAllMessagesReceivedAction());
+      dispatch(getAllUsersAction());
       //console.log('despacho la action getAllMessages desde inboxAdmi');
-      
+
       if (userId) {
         dispatch(getUserByIdAction(userId));
       }
@@ -46,7 +49,15 @@ const InboxAdmi = () => {
 
         {/* Tabla que ocupa el resto del espacio */}
         <div className="flex-grow overflow-auto">
-          <InboxAdmiTable />
+          <div className="flex-1 flex justify-center items-center">
+            <img
+              //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
+              src="/pagina en construccion.png"
+              alt="sector en construccion"
+              className="w-auto h-3/4"
+            />
+          </div>
+          {/* <InboxAdmiTable /> */}
         </div>
       </div>
     </div>

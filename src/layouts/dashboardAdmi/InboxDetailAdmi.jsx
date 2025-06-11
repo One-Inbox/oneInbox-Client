@@ -2,28 +2,26 @@ import React from "react";
 import SideBarA from "../../components/admi/SideBarA";
 import MenuInboxAdmi from "../../components/admi/inbox/MenuInboxAdmi";
 import DetailTable from "../../components/admi/inbox/DetailTable";
-import ConversationDetail from "../../components/utils/conversationDetail/ConversationDetail"
+import ConversationDetail from "../../components/utils/conversationDetail/ConversationDetail";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { getContactByIdAction } from "../../redux/actions/actionContact";
 
-
-
 const InboxDetailAdmi = () => {
   const dispatch = useDispatch();
-  const {contactId} = useParams();
-  console.log('contacto por params', contactId);
+  const { contactId } = useParams();
+  console.log("contacto por params", contactId);
   //chequeo que la ubicacion del link sea impar
   const location = useLocation();
   const isOdd = location.state?.isOdd;
-  
-  const contact = useSelector((state) => state.contact)
-   const user = useSelector((state) => state.user);
+
+  const contact = useSelector((state) => state.contact);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
-      dispatch(getContactByIdAction(contactId))
-  }, [contactId])
+    dispatch(getContactByIdAction(contactId));
+  }, [contactId]);
 
   return (
     <div className="w-screen h-screen-minus-navbar flex overflow-hidden">
@@ -41,9 +39,16 @@ const InboxDetailAdmi = () => {
 
         {/* Tabla que ocupa el resto del espacio */}
         <div className="flex-grow overflow-auto">
-          <DetailTable state={isOdd}/>
-          <ConversationDetail contact={contact} path={-1}/> 
-       
+          <div className="flex-1 flex justify-center items-center">
+            <img
+              //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
+              src="/pagina en construccion.png"
+              alt="sector en construccion"
+              className="w-auto h-3/4"
+            />
+          </div>
+          {/* <DetailTable state={isOdd}/>
+          <ConversationDetail contact={contact} path={-1}/>  */}
         </div>
       </div>
     </div>

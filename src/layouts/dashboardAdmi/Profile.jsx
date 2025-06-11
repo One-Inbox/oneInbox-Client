@@ -13,7 +13,6 @@ const Profile = () => {
   const businessId = businessRedux || sessionStorage.getItem("businessId");
   const userRedux = useSelector((state) => state.user.id);
   const userId = userRedux || sessionStorage.getItem("Admi");
- 
 
   useEffect(() => {
     if (businessId) {
@@ -31,12 +30,20 @@ const Profile = () => {
       <div className="w-48 flex-shrink-0">
         <SideBarA user={user} />
       </div>
-      <div className="flex flex-col">
+      <div className="flex-1 flex justify-center items-center">
+        <img
+          //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
+          src="/pagina en construccion.png"
+          alt="sector en construccion"
+          className="w-auto h-3/4"
+        />
+      </div>
+      {/* <div className="flex flex-col">
         <MenuProfile />
       </div>
       <div className="flex flex-1 items-center justify-center overflow-y-auto overflow-x-hidden">
         <Data />
-      </div>
+      </div> */}
     </div>
   );
 };
