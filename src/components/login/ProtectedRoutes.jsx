@@ -30,26 +30,28 @@ export const ProtectRoutes = ({ type }) => {
   useEffect(() => {
     const isBusinessLogged = sessionStorage.getItem("loginBusiness") === "true";
     const isAdmiLogged = sessionStorage.getItem("loginAdmi") === "true";
-  
+
     //console.log("isBusinessLogged:", isBusinessLogged);
-   // console.log("isAdmiLogged:", isAdmiLogged);
-  
-    if (type === "business" && !isBusinessLogged) {
-      navigate("/"); 
-      sweetAlertsError(
-        "Acceso denegado",
-        "No tienes privilegios para acceder a esta ruta.",
-        "Ok"
-      );
-    } else if (type === "admi" && !isAdmiLogged) {
-      navigate(isBusinessLogged ? "/inbox" : "/"); 
-      sweetAlertsError(
-        "Acceso denegado",
-        "No tienes privilegios para acceder a esta ruta.",
-        "Ok"
-      );
-    }
-  }, [navigate, type])
+    // console.log("isAdmiLogged:", isAdmiLogged);
+    const checkAccess = async () => {
+      if (type === "business" && !isBusinessLogged) {
+        await sweetAlertsError(
+          "Acceso denegado",
+          "No tienes privilegios para acceder a esta ruta.",
+          "Ok"
+        );
+        navigate("/");
+      } else if (type === "admi" && !isAdmiLogged) {
+        await sweetAlertsError(
+          "Acceso denegado",
+          "No tienes privilegios para acceder a esta ruta.",
+          "Ok"
+        );
+        navigate(isBusinessLogged ? "/inbox" : "/");
+      }
+    };
+    checkAccess();
+  }, [navigate, type]);
 
   return <Outlet />;
 };
