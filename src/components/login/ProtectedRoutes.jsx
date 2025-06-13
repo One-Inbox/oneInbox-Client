@@ -26,6 +26,7 @@ import { sweetAlertsError } from "../utils/alerts/alerts";
 
 export const ProtectRoutes = ({ type }) => {
   const navigate = useNavigate();
+  const [isAuthorized, setIsAuthorized] = useState(null); // null = en validación true = autorizado, false = no autorizado
 
   useEffect(() => {
     const isBusinessLogged = sessionStorage.getItem("loginBusiness") === "true";
@@ -41,6 +42,7 @@ export const ProtectRoutes = ({ type }) => {
           "Ok"
         );
         navigate("/");
+        setIsAuthorized(false);
       } else if (type === "admi" && !isAdmiLogged) {
         await sweetAlertsError(
           "Acceso denegado",
@@ -48,10 +50,14 @@ export const ProtectRoutes = ({ type }) => {
           "Ok"
         );
         navigate(isBusinessLogged ? "/inbox" : "/");
+        setIsAuthorized(false);
+      } else {
+        setIsAuthorized(true);
       }
     };
     checkAccess();
   }, [navigate, type]);
 
+  if (isAuthorized === null) return null;
   return <Outlet />;
 };
