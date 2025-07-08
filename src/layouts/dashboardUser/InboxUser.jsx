@@ -33,7 +33,7 @@ const InboxUser = () => {
   //mensajes
   const messageActive = useSelector((state) => state.messageActive);
   const msgSent = useSelector((state) => state.messagesSent);
-  const msgReceived = useSelector((state) => state.messagesReceived)
+  const msgReceived = useSelector((state) => state.messagesReceived);
 
   useEffect(() => {
     if (businessId) {
@@ -71,13 +71,19 @@ const InboxUser = () => {
 
   return (
     <div className="w-screen h-screen-minus-navbar flex overflow-hidden">
+      {/* Sidebar izquierda */}
       <div className="w-48 flex-shrink-0">
         <SideBarU />
       </div>
-      <div className="flex flex-1 h-full overflow-hidden">
-        <div className="w-64 h-full overflow-y-auto  overflow-x-hidden flex-shrink-0">
+
+      {/* Contenedor principal */}
+      <div className="flex flex-1 min-h-0 overflow-hidden">
+        {/* Lista de mensajes con scroll funcional */}
+        <div className="w-64 overflow-y-auto overflow-x-hidden flex-shrink-0 h-full">
           <InboxListUser />
         </div>
+
+        {/* Panel de conversación */}
         <div className="flex flex-1 h-full overflow-x-hidden">
           {!messageActive ? (
             <div className="flex items-center justify-center w-full h-full">
@@ -88,7 +94,7 @@ const InboxUser = () => {
               />
             </div>
           ) : (
-            <div className=" h-full overflow-y-auto w-full">
+            <div className="h-full overflow-y-auto w-full">
               <ConversationActive />
             </div>
           )}

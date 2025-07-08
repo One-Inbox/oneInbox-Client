@@ -65,7 +65,7 @@ const InboxCardUser = ({
               </div>
               <div className="flex flex-col justify-center ">
                 <span className="text-black text-base font-normal font-['Oswald'] capitalize">
-                  {name.length > 5 ? name : `${name.slice(0, 5)}...`}
+                  {name.length < 10 ? name : `${name.slice(0, 10)}...`}
                   <br />
                 </span>
                 <span className="text-black  text-[0.65rem] font-normal font-['Oswald'] capitalize">
