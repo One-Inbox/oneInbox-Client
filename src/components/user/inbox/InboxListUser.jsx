@@ -24,7 +24,9 @@ const InboxListUser = () => {
     };
   }, [allMessagesReceived]);
 
-  const notArchivedMessages = allMessagesReceived.filter(message => message.state !== 'Archivados')
+  const notArchivedMessages = allMessagesReceived.filter(
+    (message) => message.state !== "Archivados"
+  );
   //const sortedMessages = allMessagesReceived
   const sortedMessages = notArchivedMessages
     .slice()
@@ -42,9 +44,9 @@ const InboxListUser = () => {
   }
 
   return (
-    <div className="sticky w-64 h-screen overflow-y-auto overflow-x-hidden bg-green-400">
+    <div className="w-64 max-h-screen overflow-y-auto overflow-x-hidden bg-green-400">
       {loading ? (
-        <Spinner text={'loading...'}/>
+        <Spinner text={"loading..."} />
       ) : allMessagesReceived.length ? (
         messagesByContact.map((message, index) => {
           const { id, name, timestamp, state, SocialMedium, ContactId } =
