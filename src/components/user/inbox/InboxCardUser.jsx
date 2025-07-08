@@ -23,7 +23,7 @@ const InboxCardUser = ({
       ? SocialMedium.name.toUpperCase()
       : "RED SOCIAL";
   //const upperSMName = socialMediaName && socialMediaName.toUpperCase();
- // console.log("inboxUser", socialMediaName);
+  // console.log("inboxUser", socialMediaName);
 
   const msgActive = useSelector((state) => state.messageActive);
 
@@ -46,7 +46,7 @@ const InboxCardUser = ({
       //console.log('depacho la action para mensajes nuevos:', noReadMsg);
       //noReadMsg.forEach((message) => message && message.status && console.log(message.status));
       noReadMsg.forEach((message) =>
-       dispatch(updateStateToReadMessageReceivedAction(message.id))
+        dispatch(updateStateToReadMessageReceivedAction(message.id))
       );
     }
   };
@@ -59,13 +59,13 @@ const InboxCardUser = ({
       {msgActive && msgActive === id ? (
         <div className="w-64 h-24 relative shadow-inner bg-white flex items-center justify-between p-2">
           <div className="w-full h-full flex items-center justify-between bg-transparent border-l-4 border-t-4 border-b-4 border-amber-500">
-            <div className="flex items-center">  
+            <div className="flex items-center">
               <div className="w-11 h-auto opacity-90 rounded-full border-2 border-white ml-2">
                 <SocialMediaIcons socialMedia={socialMediaName} />
               </div>
               <div className="flex flex-col justify-center ">
                 <span className="text-black text-base font-normal font-['Oswald'] capitalize">
-                  {name}
+                  {name.length >= 10 ? name : `${name.slice(0, 10)}...`}
                   <br />
                 </span>
                 <span className="text-black  text-[0.65rem] font-normal font-['Oswald'] capitalize">
@@ -83,7 +83,6 @@ const InboxCardUser = ({
         </div>
       ) : (
         <div className="w-64 h-24 relative shadow-inner bg-green-400 flex items-center justify-between p-2">
-          
           <div className="w-11 h-auto opacity-90 rounded-full border-2 border-white mr-2">
             <SocialMediaIcons socialMedia={socialMediaName} />
           </div>
