@@ -64,10 +64,14 @@ const InboxCardUser = ({
                 <SocialMediaIcons socialMedia={socialMediaName} />
               </div>
               <div className="flex flex-col justify-center ">
-                <span className="text-black text-base font-normal font-['Oswald'] capitalize">
+                {/* <span className="text-black text-base font-normal font-['Oswald'] capitalize">
                   {name.length < 10 ? name : `${name.slice(0, 10)}...`}
                   <br />
+                </span> */}
+                <span className="text-black text-base font-normal font-['Oswald'] capitalize truncate overflow-hidden whitespace-nowrap max-w-[130px]">
+                  {name}
                 </span>
+
                 <span className="text-black  text-[0.65rem] font-normal font-['Oswald'] capitalize">
                   <FormattedTimestamp timestamp={timestamp} />
                   <br />
