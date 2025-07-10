@@ -50,7 +50,6 @@ const InboxCardUser = ({
       );
     }
   };
-
   return (
     <button
       className="bg-transparent border-none m-0 p-0"
@@ -58,27 +57,19 @@ const InboxCardUser = ({
     >
       {msgActive && msgActive === id ? (
         <div className="w-64 h-24 relative shadow-inner bg-white flex items-center justify-between p-2">
-          <div className="w-full h-full flex items-center justify-between bg-transparent border-l-4 border-t-4 border-b-4 border-amber-500">
-            <div className="flex items-center">
-              <div className="w-11 h-auto opacity-90 rounded-full border-2 border-white ml-2">
-                <SocialMediaIcons socialMedia={socialMediaName} />
-              </div>
-              <div className="flex flex-col justify-center ">
-                {/* <span className="text-black text-base font-normal font-['Oswald'] capitalize">
-                  {name.length < 10 ? name : `${name.slice(0, 10)}...`}
-                  <br />
-                </span> */}
-                <span className="text-black text-base font-normal font-['Oswald'] capitalize truncate overflow-hidden whitespace-nowrap max-w-[130px]">
-                  {name}
-                </span>
-
-                <span className="text-black  text-[0.65rem] font-normal font-['Oswald'] capitalize">
-                  <FormattedTimestamp timestamp={timestamp} />
-                  <br />
-                </span>
-              </div>
+          <div className="w-full h-full flex items-center gap-2 bg-transparent border-l-4 border-t-4 border-b-4 border-amber-500">
+            <div className="w-11 h-auto opacity-90 rounded-full border-2 border-white ml-2">
+              <SocialMediaIcons socialMedia={socialMediaName} />
             </div>
-            <div className="flex flex-col items-end mr-4">
+            <div className="flex flex-col justify-center max-w-[130px]">
+              <span className="truncate overflow-hidden whitespace-nowrap block text-black text-base font-normal font-['Oswald'] capitalize">
+                {name}
+              </span>
+              <span className="text-black text-[0.65rem] font-normal font-['Oswald'] capitalize">
+                <FormattedTimestamp timestamp={timestamp} />
+              </span>
+            </div>
+            <div className="flex flex-col items-end mr-4 ml-auto">
               <div className="w-8 h-8 bg-white rounded-full mb-1">
                 <StateMessagesIcons state={state} />
               </div>
@@ -91,17 +82,15 @@ const InboxCardUser = ({
             <SocialMediaIcons socialMedia={socialMediaName} />
           </div>
 
-          <div className="flex flex-col justify-center">
-            <span className="text-black text-base font-normal font-['Oswald'] capitalize">
+          <div className="flex flex-col justify-center max-w-[130px]">
+            <span className="truncate overflow-hidden whitespace-nowrap block text-black text-base font-normal font-['Oswald'] capitalize">
               {name}
-              <br />
             </span>
             <div className="text-black text-[0.65rem] font-normal font-['Oswald'] capitalize">
               <FormattedTimestamp timestamp={timestamp} />
-              <br />
             </div>
           </div>
-          <div className="flex flex-col items-end mr-6">
+          <div className="flex flex-col items-end mr-6 ml-auto">
             <div className="w-8 h-8 bg-white rounded-full mb-1">
               <StateMessagesIcons state={state} />
             </div>
