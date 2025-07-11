@@ -14,44 +14,52 @@ const InputConversation = () => {
     chatId: "", //id de la conversacion/ mensaje
     message: "", //el mensaje en si mismo
     UserId: "", // id de quien responde el mensaje
-    accessToken: "",//token
+    accessToken: "", //token
     businessId: "", // id de la empresa
     IdSocialMedia: "", //id de la red social
     contactId: "", //id del contacto creado
-    phone:"", //telefono del quien envia el mensaje
-    idUser: "" //usuario que envia el mensaje contacto (id del usuario que envia el mensaje de instagram)
+    phone: "", //telefono del quien envia el mensaje
+    idUser: "", //usuario que envia el mensaje contacto (id del usuario que envia el mensaje de instagram)
+    idSeller: "", //id como vendedor en mercado libre, una vez realizada la compra
+    idBuyer: "", //id del comprador en mercado libre, compra realizada
   });
 
   //console.log("Esto es lo que sale del input:", input)
   const dispatch = useDispatch();
   const contact = useSelector((state) => state.contact);
   //console.log("contacto", contact);
-  
+
   const socialMedia = useSelector((state) => state.socialMedia);
   //console.log("socialMedia", socialMedia);
 
-        const findSocialMedia = socialMedia.find((sm) => sm.socialMediaId === contact.SocialMediumId)
-        const token = findSocialMedia && findSocialMedia.accessToken ? findSocialMedia.accessToken : null; 
+  const findSocialMedia = socialMedia.find(
+    (sm) => sm.socialMediaId === contact.SocialMediumId
+  );
+  const token =
+    findSocialMedia && findSocialMedia.accessToken
+      ? findSocialMedia.accessToken
+      : null;
 
-   // console.log('token', token);
-    
- 
+  // console.log('token', token);
+
   const user = useSelector((state) => state.user);
   const uploadedFile = useSelector((state) => state.uploadedFile);
   const business = useSelector((state) => state.business);
-  
+
   const messages =
-  contact && contact.MsgReceiveds && contact.MsgReceiveds.length > 1
-  ? contact.MsgReceiveds.sort((a, b) => b.timestamp - a.timestamp)
-  : contact.MsgReceiveds;
+    contact && contact.MsgReceiveds && contact.MsgReceiveds.length > 1
+      ? contact.MsgReceiveds.sort((a, b) => b.timestamp - a.timestamp)
+      : contact.MsgReceiveds;
   //console.log("mensajes", messages);
   const contactChatId = messages ? messages[0].chatId : null;
   //console.log("chatId", contactChatId);
-  
+  const contactIdSeller = messages ? messages[0].idSeller : null;
+  const contactIdBuyer = messages ? messages[0].idBuyer : null;
+
   const newMessages =
-  messages && messages.filter((message) => message.state === "Leidos");
+    messages && messages.filter((message) => message.state === "Leidos");
   //const userNameContact = messages ? messages[0].userName : null;
-  
+
   useEffect(() => {
     if (uploadedFile) {
       // Si hay archivo subido, establece el mensaje como la URL del archivo
@@ -65,7 +73,9 @@ const InputConversation = () => {
         IdSocialMedia: contact.SocialMediumId,
         contactId: contact.id,
         phone: contact.phone,
-        idUser: contact.idUser
+        idUser: contact.idUser,
+        idSeller: contactIdSeller,
+        idBuyer: contactIdBuyer,
       }));
     } else {
       // Si se borra el archivo subido, limpia el campo de mensaje
@@ -76,7 +86,7 @@ const InputConversation = () => {
     }
   }, [uploadedFile, user, contactChatId]);
   // }, [uploadedFile, user]);
-  
+
   const inputHandler = (e) => {
     setInput({
       chatId: contactChatId,
@@ -87,7 +97,9 @@ const InputConversation = () => {
       IdSocialMedia: contact.SocialMediumId,
       contactId: contact.id,
       phone: contact.phone,
-      idUser: contact.idUser
+      idUser: contact.idUser,
+      idSeller: contactIdSeller,
+      idBuyer: contactIdBuyer,
     });
     //}
     //console.log("Esto es lo que sale del input:", input)
@@ -106,7 +118,9 @@ const InputConversation = () => {
         IdSocialMedia: contact.SocialMediumId,
         contactId: contact.id,
         phone: contact.phone,
-        idUser: contact.idUser
+        idUser: contact.idUser,
+        idSeller: contactIdSeller,
+        idBuyer: contactIdBuyer,
       });
     }
     //console.log("input SUBMIT: ", input);
@@ -127,7 +141,9 @@ const InputConversation = () => {
         IdSocialMedia: "",
         contactId: "",
         phone: "",
-        idUser: ""
+        idUser: "",
+        idSeller: "",
+        idBuyer: "",
       });
       uploadedFile && dispatch(setUploadFileAction(""));
     } else if (!input.UserId && input.message && input.chatId) {
