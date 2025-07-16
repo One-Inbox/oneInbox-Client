@@ -25,7 +25,7 @@ const InboxListUser = () => {
   }, [allMessagesReceived]);
 
   const notArchivedMessages = allMessagesReceived.filter(
-    (message) => message.state !== "Archivados"
+    (message) => message.archived === false
   );
   //const sortedMessages = allMessagesReceived
   const sortedMessages = notArchivedMessages

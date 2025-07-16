@@ -76,7 +76,7 @@ const InboxAdmiTable = () => {
           <tbody>
             <tr>
               <td colSpan="7" className="text-center py-4 h-[600px]">
-                <Spinner text={'loading...'}/>
+                <Spinner text={"loading..."} />
               </td>
             </tr>
           </tbody>
@@ -99,12 +99,15 @@ const InboxAdmiTable = () => {
                         (a, b) => b.timestamp - a.timestamp
                       )[0]
                     : null;
-                    //console.log('ultimo mensaje enviado', lastMsgSent);
-                    
+                //console.log('ultimo mensaje enviado', lastMsgSent);
+
                 return (
-                  <tr key={index} className="odd:bg-white even:bg-stone-300 "> 
+                  <tr key={index} className="odd:bg-white even:bg-stone-300 ">
                     <td className="pl-6 pr-4 py-2 text-center">
-                      <StateMessagesIcons state={message.state} />
+                      <StateMessagesIcons
+                        state={message.state}
+                        archived={message.archived}
+                      />
                     </td>
                     <td className="px-4 py-2 text-center text-[0.65rem] font-normal font-['Inter'] capitalize">
                       <FormattedTimestamp
@@ -128,8 +131,13 @@ const InboxAdmiTable = () => {
                       />
                     </td>
                     <td className="px-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize">
-                    <Link to={`/inboxDetailAdmi/${message.Contact.id}`} state={{ isOdd: index % 2 !== 0 }}>{message.name} </Link>
-                    {/* con state paso la data si su ubicacion es par o impar */}
+                      <Link
+                        to={`/inboxDetailAdmi/${message.Contact.id}`}
+                        state={{ isOdd: index % 2 !== 0 }}
+                      >
+                        {message.name}{" "}
+                      </Link>
+                      {/* con state paso la data si su ubicacion es par o impar */}
                     </td>
                     <td className="pl-6 pr-4 py-2 text-center w-6 h-6 ">
                       <IconUser
@@ -147,7 +155,7 @@ const InboxAdmiTable = () => {
                       />
                     </td>
                     <td className="pl-8 pr-4 py-2 text-center ">
-                      <ArchivedButton />
+                      <ArchivedButton messageId={message.id} />
                     </td>
                   </tr>
                 );

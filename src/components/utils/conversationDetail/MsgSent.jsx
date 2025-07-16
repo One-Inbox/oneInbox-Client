@@ -7,7 +7,7 @@ const MsgSent = (props) => {
   const users = useSelector((state) => state.users);
   const user = users.find((user) => user.id === props.props.UserId);
   //console.log('usuario en msgSent', user);
-  
+
   const message = props.props.message;
   const firstCharMsg = message.slice(0, 4);
   const [isPDF, setIsPDF] = useState(false);
@@ -16,7 +16,7 @@ const MsgSent = (props) => {
 
   return (
     <div className="w-full flex justify-end">
-      <div className="w-[26rem] h-auto bg-stone-300 rounded-tr-[40px] rounded-bl-[40px] rounded-br-[40px] p-4 flex flex-col justify-between m-4 self-end mr-10">
+      <div className="w-[28rem] h-auto bg-stone-300 rounded-tr-[40px] rounded-bl-[40px] rounded-br-[40px] p-4 flex flex-col justify-between m-4 self-end mr-10">
         <div className="text-center mb-4">
           {firstCharMsg === "http" ? (
             <div>
@@ -41,7 +41,7 @@ const MsgSent = (props) => {
               )}
             </div>
           ) : (
-            <h2 className="w-[26rem] h-auto text-black text-sm font-normal font-['Inter']">
+            <h2 className="w-11/12 h-auto ml-4 text-black text-sm font-normal font-['Inter']">
               {message}
             </h2>
           )}

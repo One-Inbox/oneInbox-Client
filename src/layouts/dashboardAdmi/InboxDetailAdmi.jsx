@@ -24,32 +24,21 @@ const InboxDetailAdmi = () => {
   }, [contactId]);
 
   return (
-    <div className="w-screen h-screen-minus-navbar flex overflow-hidden">
+    <div className="flex h-screen-minus-navbar w-screen overflow-hidden">
       {/* Sidebar */}
-      <div className="w-48 flex-shrink-0">
+      <div className="w-48 bg-gray-800 overflow-hidden">
         <SideBarA user={user} />
       </div>
 
-      {/* Contenedor del menú y tabla */}
-      <div className="flex flex-row flex-grow overflow-hidden">
-        {/* Menu fijo */}
-        <div className="w-56 flex-shrink-0 bg-white shadow-md h-full relative z-20 top-14">
-          <MenuInboxAdmi />
-        </div>
+      {/* Menu fijo */}
+      <div className="w-56 bg-white shadow-md overflow-hidden">
+        <MenuInboxAdmi />
+      </div>
 
-        {/* Tabla que ocupa el resto del espacio */}
-        <div className="flex-grow overflow-auto">
-          <div className="flex-1 flex justify-center items-center">
-            <img
-              //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
-              src="/pagina en construccion.png"
-              alt="sector en construccion"
-              className="w-auto h-3/4"
-            />
-          </div>
-          {/* <DetailTable state={isOdd}/>
-          <ConversationDetail contact={contact} path={-1}/>  */}
-        </div>
+      {/* Tabla que ocupa el resto del espacio */}
+      <div className="flex-1 overflow-hidden pt-20">
+        <DetailTable state={isOdd} />
+        <ConversationDetail contact={contact} path={-1} />
       </div>
     </div>
   );

@@ -3,10 +3,11 @@ import { URL_API } from "../../config.js";
 import {
   //sweetAlertsSuccessfully,
   sweetAlertsError,
+  sweetAlertsSuccessfully,
 } from "../../components/utils/alerts/alerts.jsx";
 import {
   GET_ALL_MESSAGES_RECIVED,
-  UPDATE_ACTIVE_MESSAGE_RECEIVED,
+  //UPDATE_ACTIVE_MESSAGE_RECEIVED,
   GET_MESSAGE_RECIVED_BY_ID,
   UPDATE_STATE_TO_READ_MESSAGE_RECEIVED,
   UPDATE_STATE_TO_ANSWERED_MESSAGE_RECEIVED,
@@ -15,6 +16,7 @@ import {
   GET_ALL_MESSAGES_SENT,
   SET_ACTIVE_MESSAGE,
   SET_UPLOAD_FILE,
+  UPDATE_ARCHIVED_MESSAGE_RECEIVED,
 } from "../types";
 
 //LOCALHOST
@@ -75,22 +77,71 @@ export const getMessageReceivedByIdAction = (messageId) => {
     );
   }
 };
-// export const updateActiveMessageReceivedAction = (messageId) => {
-//     try {
-//         return async (dispatch) => {
-//             const response = await axios.put(`${URL_API}/message/received/active/${messageId}`)
-//             dispatch({ type: UPDATE_ACTIVE_MESSAGE_RECEIVED, })
-//             return response
-//           }
-//     } catch (error) {
-//         sweetAlertsError(
-//             "Intenta de nuevo",
-//             "No podemos activar/desactivar el mensaje seleccionado",
-//             "Ok"
-//           );
-//     }
-// }
+//***UPDATE PARA CAMBIAR LA CONVERSACION A ARCHIVADA-DESARCHIVADA */
+export const updateArchivedMessageReceivedAction = (messageId) => {
+  try {
+    return async (dispatch) => {
+      const responseMessage = await axios.get(
+        `${URL_API}/message/received/${messageId}`
+      );
+      const message = responseMessage.data;
+      const contactId = message.ContactId;
 
+      const responseContact = await axios.get(
+        `${URL_API}/contact/${contactId}`
+      );
+      const contact = responseContact.data;
+      const messagesByContact = contact.MsgReceiveds;
+
+      const areAllArchived = messagesByContact.every((msg) => msg.archived);
+
+      if (messagesByContact.length === 1) {
+        const response = await axios.put(
+          `${URL_API}/message/received/archived/${messageId}`
+        );
+        const updated = response.data.message;
+        dispatch({ type: UPDATE_ARCHIVED_MESSAGE_RECEIVED, payload: updated });
+      } else {
+        for (const msg of messagesByContact) {
+          const response = await axios.put(
+            `${URL_API}/message/received/archived/${msg.id}`
+          );
+          const updated = response.data.message;
+          dispatch({
+            type: UPDATE_ARCHIVED_MESSAGE_RECEIVED,
+            payload: updated,
+          });
+        }
+      }
+
+      areAllArchived
+        ? sweetAlertsSuccessfully(
+            "Éxito",
+            "La conversación ha sido desarchivada correctamente",
+            "Ok"
+          )
+        : sweetAlertsSuccessfully(
+            "Éxito",
+            "La conversación ha sido archivada correctamente",
+            "Ok"
+          );
+    };
+  } catch (error) {
+    areAllArchived
+      ? sweetAlertsError(
+          "Intenta de nuevo",
+          "No podemos desarchivar la conversacion seleccionada",
+          "Ok"
+        )
+      : sweetAlertsError(
+          "Intenta de nuevo",
+          "No podemos archivar la conversacion seleccionada",
+          "Ok"
+        );
+  }
+};
+
+//*** PARA CAMBIAR ESTILOS DE CONVERSACION ABIERTA */
 export const setActiveMessageAction = (messageId) => {
   return {
     type: SET_ACTIVE_MESSAGE,
@@ -98,6 +149,7 @@ export const setActiveMessageAction = (messageId) => {
   };
 };
 
+//***UPDATE PARA PASAR EL MENSAJE A LEIDO */
 export const updateStateToReadMessageReceivedAction = (messageId) => {
   console.log("entro en la action de cambio estado a leido:", messageId);
   try {
@@ -120,6 +172,7 @@ export const updateStateToReadMessageReceivedAction = (messageId) => {
     );
   }
 };
+//**UPDATE PARA PASAR MENSAJE A RESPONDIDO */
 export const updateStateToAnsweredMessageReceivedAction = (messageId) => {
   try {
     return async (dispatch) => {
@@ -141,11 +194,11 @@ export const updateStateToAnsweredMessageReceivedAction = (messageId) => {
   }
 };
 
-export const deactivateAllMessagesReceivedAction = () => {
-  return {
-    type: "DESACTIVATE_ALL_MESSAGES_RECEIVED",
-  };
-};
+// export const deactivateAllMessagesReceivedAction = () => {
+//   return {
+//     type: "DESACTIVATE_ALL_MESSAGES_RECEIVED",
+//   };
+// };
 
 export const createMessageSentAction = (input) => {
   //console.log('input en action', input);
@@ -202,3 +255,5 @@ export const setUploadFileAction = (file) => {
     payload: file,
   };
 };
+
+//**ARCHIVAR-DESARCHIVAR MENSAJES */

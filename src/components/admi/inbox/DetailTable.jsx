@@ -59,6 +59,7 @@ const DetailTable = ({ state }) => {
               <td className="pl-6 pr-4 py-2 text-center">
                 <StateMessagesIcons
                   state={lastMsgReceived && lastMsgReceived.state}
+                  archived={lastMsgReceived && lastMsgReceived.archived}
                 />
               </td>
               <td className="px-4 py-2 text-center text-[0.65rem] font-normal font-['Inter'] capitalize">

@@ -38,12 +38,12 @@ const ConversationDetail = ({ contact, path }) => {
   const sortedMessages = formattedMessages.sort((a, b) =>
     a.timestamp.localeCompare(b.timestamp)
   );
-  //console.log("mensajes ordenados", sortedMessages);
+  console.log("mensajes ordenados", sortedMessages);
 
   return (
     <div className="w-full h-full relative flex flex-col overflow-y-auto overflow-x-hidden">
       <div className="fixed top-24 right-10 mt-2">
-        <ClouseConversationButton path={path}/>
+        <ClouseConversationButton path={path} />
       </div>
       <div className="flex-grow">
         {sortedMessages &&

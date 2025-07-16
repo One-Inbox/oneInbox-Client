@@ -15,6 +15,7 @@ const InboxCardUser = ({
   SocialMedium,
   ContactId,
   messagesReceived,
+  archived,
 }) => {
   const dispatch = useDispatch();
 
@@ -71,7 +72,7 @@ const InboxCardUser = ({
             </div>
             <div className="flex flex-col items-end mr-4 ml-auto">
               <div className="w-8 h-8 bg-white rounded-full mb-1">
-                <StateMessagesIcons state={state} />
+                <StateMessagesIcons state={state} archived={archived} />
               </div>
             </div>
           </div>
@@ -92,7 +93,7 @@ const InboxCardUser = ({
           </div>
           <div className="flex flex-col items-end mr-6 ml-auto">
             <div className="w-8 h-8 bg-white rounded-full mb-1">
-              <StateMessagesIcons state={state} />
+              <StateMessagesIcons state={state} archived={archived} />
             </div>
           </div>
         </div>

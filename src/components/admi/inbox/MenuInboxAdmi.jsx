@@ -11,10 +11,10 @@ const MenuInboxAdmi = () => {
     <div className="sticky w-56 h-screen overflow-y-auto overflow-x-hidden bg-green-400 flex flex-col py-4">
       <div className="flex flex-col justify-between">
         <SearchBar
-          customWidth="w-36 mx-auto"
-          customButton="bg-green-400 -ml-16 text-white"
+          customWidth="w-40 mx-auto"
+          customButton="bg-green-400 -ml-14 text-white"
         />
-        <FilterByUser />
+        <FilterByUser className="w-40" />
         <div className="mt-6">
           <FilterBySocialMedia />
         </div>
