@@ -75,7 +75,7 @@ const App = () => {
             />
             <Route path="/dashboardAdmi/inboxAdmi" element={<InboxAdmi />} />
             <Route
-              path="/inboxDetailAdmi/:contactId"
+              path="/dashboardAdmi/inboxAdmi/detail/:contactId"
               element={<InboxDetailAdmi />}
             />
             <Route
@@ -110,7 +110,7 @@ const App = () => {
         />
         <Route path="/dashboardAdmi/inboxAdmi" element={<InboxAdmi />} />
         <Route
-          path="/inboxDetailAdmi/:detailId"
+          path="/dashboardAdmi/inboxAdmi/detail/:contactId"
           element={<InboxDetailAdmi />}
         />
         <Route

@@ -141,7 +141,7 @@ const InboxAdmiTable = () => {
                     </td>
                     <td className="px-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize">
                       <Link
-                        to={`/inboxDetailAdmi/${message.Contact.id}`}
+                        to={`/dashboardAdmi/inboxAdmi/detail/${message.Contact.id}`}
                         state={{ isOdd: index % 2 !== 0 }}
                       >
                         {message.name}{" "}
