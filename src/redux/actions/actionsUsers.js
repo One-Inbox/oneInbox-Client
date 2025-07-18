@@ -21,7 +21,7 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllUsersAction = () => {
-  console.log("URL_API en getAllUsers ", URL_API);
+  //console.log("URL_API en getAllUsers ", URL_API);
   return async (dispatch) => {
     // console.log("entro en la action GetAllUsersAction");
     try {
@@ -67,14 +67,14 @@ export const cleanUserByIdAction = () => {
 
 export const updateUserAction = (userId, input) => {
   return async (dispatch) => {
-    console.log("entro a la action del", userId, "con data", input);
+    //console.log("entro a la action del", userId, "con data", input);
 
     try {
       await axios.put(`${URL_API}/user/update/${userId}`, input);
       dispatch({ type: UPDATE_USER });
-      console.log("salgo al reducer");
+      //console.log("salgo al reducer");
     } catch (error) {
-      console.log(error.message);
+      //console.log(error.message);
     }
   };
 };

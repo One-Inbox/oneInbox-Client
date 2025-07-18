@@ -2,7 +2,7 @@ import React from "react";
 
 const EditUserButton = () => {
   const handlerOnClick = () => {
-    console.log("click en edit user");
+    // console.log("click en edit user");
   };
 
   return (

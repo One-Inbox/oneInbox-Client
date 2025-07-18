@@ -49,7 +49,7 @@ const UploadFiles = () => {
     setURLfile(response.data.secure_url);
     //setDataFormat(response.data.format);
     dispatch(setUploadFileAction(response.data.secure_url));
-    console.log("despacho setUploadFile con data:", response.data.secure_url);
+    //console.log("despacho setUploadFile con data:", response.data.secure_url);
   };
 
   const deleteFilesHandler = () => {

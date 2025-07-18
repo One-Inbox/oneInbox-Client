@@ -2,7 +2,7 @@ import React from "react";
 
 const AddUserButton = () => {
   const handlerOnClick = () => {
-    console.log("click en add user");
+    //console.log("click en add user");
   };
 
   return (

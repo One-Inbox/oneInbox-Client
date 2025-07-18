@@ -7,7 +7,7 @@ const FilterByActiveUser = () => {
 
   const handlerOnChange = (e) => {
     setSelectedFilter(e.target.value);
-    console.log("elijo a: ", selectedFilter);
+    //console.log("elijo a: ", selectedFilter);
   };
 
   return (

@@ -7,7 +7,7 @@ const CounterInConversation = ({ contact }) => {
     allMsgRecivedByContact.filter((message) => message.state === "Leidos");
 
   return (
-    <div className=" bg-sky-950 text-white text-xs font-['Oswald'] uppercase flex items-center justify-center">
+    <div className=" w-full bg-sky-950 text-white text-xs font-['Oswald'] uppercase flex items-center justify-center">
       <span>
         ESTA CONVERSACION TIENE {newMsgs.length} MENSAJES SIN RESPONDER
       </span>

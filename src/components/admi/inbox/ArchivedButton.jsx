@@ -11,13 +11,13 @@ const ArchivedButton = ({ messageId }) => {
     state.messagesReceived.find((msg) => msg.id === messageId)
   );
   const isArchived = message && message.archived;
-  useEffect(() => {
-    dispatch(getMessageReceivedByIdAction(messageId));
-  }, [isArchived, messageId, dispatch]);
+  // useEffect(() => {
+  //   dispatch(getMessageReceivedByIdAction(messageId));
+  // }, [isArchived, messageId, dispatch]);
 
   const handlerOnClick = () => {
     dispatch(updateArchivedMessageReceivedAction(messageId));
-    console.log("me archivo");
+    //console.log("me archivo");
   };
 
   return (

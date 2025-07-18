@@ -4,7 +4,11 @@ import {
   sweetAlertsSuccessfully,
   sweetAlertsError,
 } from "../../components/utils/alerts/alerts.jsx";
-import { GET_CONTACT_BY_ID, GET_CONTACT_BY_MESSAGE_RECEIVED } from "../types";
+import {
+  GET_CONTACT_BY_ID,
+  GET_CONTACT_BY_MESSAGE_RECEIVED,
+  CLEAR_CONTACT,
+} from "../types";
 
 //LOCALHOST
 //const URL = 'http://localhost:3000';
@@ -13,21 +17,41 @@ import { GET_CONTACT_BY_ID, GET_CONTACT_BY_MESSAGE_RECEIVED } from "../types";
 //SERVER PRODUCCION
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
+// export const getContactByIdAction = (contactId) => {
+//   try {
+//     return async (dispatch) => {
+//       const response = await axios.get(`${URL_API}/contact/${contactId}`);
+//       const contact = response.data;
+//       console.log("contact en action", contact);
+
+//       dispatch({ type: GET_CONTACT_BY_ID, payload: contact });
+//     };
+//   } catch (error) {
+//     sweetAlertsError(
+//       "Intenta de nuevo",
+//       `No podemos mostrar al contacto con ID ${contactId}`,
+//       "Ok"
+//     );
+//   }
+// };
 export const getContactByIdAction = (contactId) => {
-  try {
-    return async (dispatch) => {
+  return async (dispatch) => {
+    try {
       const response = await axios.get(`${URL_API}/contact/${contactId}`);
       const contact = response.data;
+      //console.log("contact en action", contact);
+
       dispatch({ type: GET_CONTACT_BY_ID, payload: contact });
-    };
-  } catch (error) {
-    sweetAlertsError(
-      "Intenta de nuevo",
-      `No podemos mostrar al contacto con ID ${contactId}`,
-      "Ok"
-    );
-  }
+    } catch (error) {
+      sweetAlertsError(
+        "Intenta de nuevo",
+        `No podemos mostrar al contacto con ID ${contactId}`,
+        "Ok"
+      );
+    }
+  };
 };
+
 export const getContactByMessageReceivedAction = (messageId) => {
   try {
     return async (dispatch) => {
@@ -48,4 +72,10 @@ export const getContactByMessageReceivedAction = (messageId) => {
       "Ok"
     );
   }
+};
+
+export const clearContactAction = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAR_CONTACT });
+  };
 };

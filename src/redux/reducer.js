@@ -35,6 +35,7 @@ import {
   AUTH_BUSINESS_BY_ALL_SOCIAL_MEDIA,
   POST_CODE_TO_AUTH_MELI,
   POST_CODE_TO_AUTH_MELI_ERROR,
+  CLEAR_CONTACT,
 } from "./types";
 
 const initialState = {
@@ -204,10 +205,10 @@ const rootReducer = (state = initialState, action) => {
       };
     //update estados
     case UPDATE_STATE_TO_READ_MESSAGE_RECEIVED:
-      console.log(
-        "update to read: entro al reducer con payload",
-        action.payload
-      );
+      //console.log(
+      //   "update to read: entro al reducer con payload",
+      //   action.payload
+      // );
       return {
         ...state,
         messagesReceived: state.messagesReceived.map((message) =>
@@ -260,10 +261,10 @@ const rootReducer = (state = initialState, action) => {
         messagesSent: allMessagesSentFiltered,
       };
     case SET_UPLOAD_FILE:
-      console.log(
-        "entro al reducer setUploadFile con payload:",
-        action.payload
-      );
+      // console.log(
+      //   "entro al reducer setUploadFile con payload:",
+      //   action.payload
+      // );
 
       return {
         ...state,
@@ -281,6 +282,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         messageReceived: action.payload.message,
         contact: action.payload.contact,
+      };
+    case CLEAR_CONTACT:
+      return {
+        ...state,
+        contact: {},
       };
     //FILTROS:
     case FILTER_BY_SOCIAL_MEDIA:
@@ -387,7 +393,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_USER:
-      console.log("entro en el reducer con payload", action.payload);
+      //console.log("entro en el reducer con payload", action.payload);
 
       const allMsgsRecd = state.allMessagesReceived;
       //console.log('mensajes recibidos en filtro', allMsgsRecd);

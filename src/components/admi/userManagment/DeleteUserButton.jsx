@@ -2,7 +2,7 @@ import React from "react";
 
 const DeleteUserButton = () => {
   const handlerOnClick = () => {
-    console.log("click en delete user");
+    //console.log("click en delete user");
   };
 
   return (

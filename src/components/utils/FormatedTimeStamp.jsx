@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
 
 const FormattedTimestamp = ({ timestamp }) => {
+  if (!timestamp || timestamp === null || timestamp === undefined) {
+    return <span>sin fecha</span>;
+  }
   // Convertir el timestamp a un número si es necesario
+
   const timestampNumber = Number(timestamp);
 
   // Verificar si el timestamp es en milisegundos y si cae dentro del rango aceptable

@@ -14,11 +14,11 @@ const MenuProfile = () => {
         nameRoute={"Mis Datos"}
         path={"/dashboardAdmi/profile"}
       />
-      {/* <MenuButton
+      <MenuButton
         route={"/dashboardAdmi/profile/edit"}
         nameRoute={"Editar"}
         path={path}
-      /> */}
+      />
     </div>
   );
 };

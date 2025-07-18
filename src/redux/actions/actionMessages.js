@@ -27,7 +27,7 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllMessagesReceivedAction = () => {
-  console.log("URL_API en getAllMessagesReceived ", URL_API);
+  //console.log("URL_API en getAllMessagesReceived ", URL_API);
 
   return async (dispatch, getState) => {
     try {
@@ -48,7 +48,7 @@ export const getAllMessagesReceivedAction = () => {
         });
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       if (error.response.status !== 400) {
         sweetAlertsError(
           "Intenta de nuevo",
@@ -61,21 +61,21 @@ export const getAllMessagesReceivedAction = () => {
 };
 
 export const getMessageReceivedByIdAction = (messageId) => {
-  try {
-    return async (dispatch) => {
+  return async (dispatch) => {
+    try {
       const response = await axios.get(
         `${URL_API}/message/received/${messageId}`
       );
       const message = response.data;
       dispatch({ type: GET_MESSAGE_RECIVED_BY_ID, payload: message });
-    };
-  } catch (error) {
-    sweetAlertsError(
-      "Intenta de nuevo",
-      `No podemos mostrar el mensaje con ID ${messageId}`,
-      "Ok"
-    );
-  }
+    } catch (error) {
+      sweetAlertsError(
+        "Intenta de nuevo",
+        `No podemos mostrar el mensaje con ID ${messageId}`,
+        "Ok"
+      );
+    }
+  };
 };
 //***UPDATE PARA CAMBIAR LA CONVERSACION A ARCHIVADA-DESARCHIVADA */
 export const updateArchivedMessageReceivedAction = (messageId) => {
@@ -151,7 +151,7 @@ export const setActiveMessageAction = (messageId) => {
 
 //***UPDATE PARA PASAR EL MENSAJE A LEIDO */
 export const updateStateToReadMessageReceivedAction = (messageId) => {
-  console.log("entro en la action de cambio estado a leido:", messageId);
+  //console.log("entro en la action de cambio estado a leido:", messageId);
   try {
     return async (dispatch) => {
       const response = await axios.put(
@@ -209,14 +209,14 @@ export const createMessageSentAction = (input) => {
       //console.log('respusta telegram', response);
       const message = response.data;
       //console.log('mensaje en action', message);
-      console.log("status", response.status);
+      //console.log("status", response.status);
       dispatch({ type: CREATE_MESSAGE_SEND, payload: message });
 
       if (response.status === 200) {
         const messagesUnresponded = await axios.get(
           `${URL_API}/message/received/unresponded/${input.contactId}`
         );
-        console.log("mensajes no respondidos", messagesUnresponded.data);
+        //console.log("mensajes no respondidos", messagesUnresponded.data);
         const messages = messagesUnresponded.data;
 
         messages.length &&
@@ -225,7 +225,7 @@ export const createMessageSentAction = (input) => {
           );
       }
     } catch (error) {
-      console.log("error de action", error);
+      //console.log("error de action", error);
       sweetAlertsError(
         "Intenta de nuevo",
         "No podemos enviar tu respuesta",
@@ -242,13 +242,13 @@ export const getAllMessagesSentAction = () => {
       const messages = response.data;
       dispatch({ type: GET_ALL_MESSAGES_SENT, payload: messages });
     } catch (error) {
-      console.log("messageSent", error);
+      //console.log("messageSent", error);
     }
   };
 };
 
 export const setUploadFileAction = (file) => {
-  console.log("entro en la action setUploadFile con data:", file);
+  //console.log("entro en la action setUploadFile con data:", file);
 
   return {
     type: SET_UPLOAD_FILE,

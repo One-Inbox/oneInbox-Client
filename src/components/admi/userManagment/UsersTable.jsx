@@ -9,7 +9,7 @@ import DeleteUserButton from "./DeleteUserButton";
 
 const UsersTable = () => {
   const allUsers = useSelector((state) => state.users);
-  console.log("usuario", allUsers[0]);
+  //console.log("usuario", allUsers[0]);
 
   const [loading, setLoading] = useState(true);
 
@@ -55,7 +55,7 @@ const UsersTable = () => {
         {loading ? (
           <tr>
             <td colSpan="6" className="text-center py-4 h-[600px]">
-              <Spinner text={'loading...'}/>
+              <Spinner text={"loading..."} />
             </td>
           </tr>
         ) : (

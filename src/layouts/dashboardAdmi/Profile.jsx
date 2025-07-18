@@ -30,14 +30,6 @@ const Profile = () => {
       <div className="w-48 flex-shrink-0">
         <SideBarA user={user} />
       </div>
-      {/* <div className="flex-1 flex justify-center items-center">
-        <img
-          //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
-          src="/pagina en construccion.png"
-          alt="sector en construccion"
-          className="w-auto h-3/4"
-        />
-      </div> */}
       <div className="flex flex-col">
         <MenuProfile />
       </div>

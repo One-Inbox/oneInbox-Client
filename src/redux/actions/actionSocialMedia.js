@@ -29,7 +29,7 @@ export const getAllSocialMediaByBusinessAction = () => {
         payload: socialMedia,
       });
     } catch (error) {
-      console.log(error.message);
+      //console.log(error.message);
     }
   };
 };
@@ -43,7 +43,7 @@ export const updateSocialMediaAction = (socialMediaId, input) => {
       );
       dispatch({ type: UPDATE_SOCIAL_MEDIA });
     } catch (error) {
-      console.log(error.message);
+      //console.log(error.message);
     }
   };
 };
@@ -55,7 +55,7 @@ export const postCodeToAuthMeLiAction = (code, navigate) => {
         `${URL_API}/mercadolibre/auth/callback`,
         code
       );
-      console.log("MELI-AUTH: Tokens guardados con éxito", response.data);
+      //sconsole.log("MELI-AUTH: Tokens guardados con éxito", response.data);
       dispatch({ type: POST_CODE_TO_AUTH_MELI, payload: response.data });
       setTimeout(() => {
         navigate("/");

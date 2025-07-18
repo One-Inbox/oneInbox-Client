@@ -51,11 +51,11 @@ const ConversationActive = () => {
       {/* Contenedor de la conversación */}
       <div className="flex-grow overflow-y-auto">
         {loading ? (
-          <Spinner text={'loading...'}/>
+          <Spinner text={"loading..."} />
         ) : (
           <div className="flex flex-col h-full relative">
             {/* Contador en la conversación */}
-            <div className="w-3/5 h-5 fixed top-16 z-40 ml-6 mt-2">
+            <div className="w-3/5 h-5 fixed top-16 z-40 ml-16 mt-2">
               <CounterInConversation contact={contact} />
             </div>
 
@@ -68,7 +68,7 @@ const ConversationActive = () => {
                   ...contact,
                   id: Number(contact.id), // Convertimos contact.id a número para evitar el warning
                 }}
-                path={'/inbox'}
+                path={"/inbox"}
               />
             </div>
           </div>

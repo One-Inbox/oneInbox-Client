@@ -10,7 +10,14 @@ const SideBarAButton = ({ route, nameRoute }) => {
   const [isActive, setIsActive] = useState(
     route === location.pathname ? true : false
   );
+  //  const [isActive, setIsActive] = useState(false);
+  console.log("ruta comienza con..", location.pathname.startsWith(route));
 
+  //   useEffect(() => {
+  //     // Si la ruta actual empieza con la ruta base del botón
+  //     if ()
+  //     setIsActive(location.pathname.startsWith(route));
+  //   }, [location.pathname, route]);
   const handlerOnclick = () => {
     navigate(route);
     setIsActive(true);

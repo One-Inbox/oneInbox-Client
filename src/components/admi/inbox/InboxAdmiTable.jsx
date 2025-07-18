@@ -9,17 +9,22 @@ import ArchivedButton from "./ArchivedButton";
 import FilterText from "../../utils/filters/FilterText";
 import IconUser from "../../utils/selectUser/IconUser";
 import { Link } from "react-router-dom";
+import {
+  sortedMessagesByTime,
+  selectMessage,
+} from "../../utils/sortedMessages";
 
 const InboxAdmiTable = () => {
   const allMessagesReceived = useSelector((state) => state.messagesReceived);
+  //console.log("allMessagesReceived", allMessagesReceived);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let timeoutId;
-    if (allMessagesReceived.length) {
+    if (allMessagesReceived.length && allMessagesReceived.length > 0) {
       setLoading(false);
     } else {
-      setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setLoading(false);
       }, 7000);
     }
@@ -28,14 +33,15 @@ const InboxAdmiTable = () => {
     };
   }, [allMessagesReceived]);
 
-  const sortedMessages = allMessagesReceived
-    .slice()
-    .sort((a, b) => b.timestamp - a.timestamp);
+  const sortedMessagesReceiveds = sortedMessagesByTime(
+    allMessagesReceived,
+    "lastFirst"
+  );
 
   const messagesByContact = []; //array para almacenar mensajes de contactos únicos.
   const seenContactIds = new Set(); //conjunto (Set) es una colección de valores únicos, no puede contener elementos duplicados.
   //itero sobre cada mensaje de array sortedMessages
-  for (const message of sortedMessages) {
+  for (const message of sortedMessagesReceiveds) {
     if (!seenContactIds.has(message.ContactId)) {
       // este id de contacto  NO existe en el conjunto?
       messagesByContact.push(message); // ==> pusheo el mensaje en messagesByContact
@@ -82,7 +88,7 @@ const InboxAdmiTable = () => {
           </tbody>
         ) : (
           <tbody className="overflow-x-auto">
-            {!allMessagesReceived.length ? (
+            {!allMessagesReceived || !allMessagesReceived.length ? (
               <tr>
                 <td
                   colSpan="7"
@@ -93,13 +99,19 @@ const InboxAdmiTable = () => {
               </tr>
             ) : (
               messagesByContact.map((message, index) => {
-                const lastMsgSent =
-                  message.Contact && message.Contact.MsgSents.length > 0
-                    ? message.Contact.MsgSents.sort(
-                        (a, b) => b.timestamp - a.timestamp
-                      )[0]
-                    : null;
-                //console.log('ultimo mensaje enviado', lastMsgSent);
+                let allMsgSentByContact = message.Contact.MsgSents;
+                let allMsgReceivedByContact = message.Contact.MsgReceiveds;
+                //console.log("allMsgSentByContact", allMsgSentByContact);
+
+                let lastMsgSent = selectMessage(
+                  allMsgSentByContact,
+                  "lastFirst"
+                );
+                //console.log("ultimo mensaje enviado", lastMsgSent);
+                let firstMsgReceived = selectMessage(
+                  allMsgReceivedByContact,
+                  "firstFirst"
+                );
 
                 return (
                   <tr key={index} className="odd:bg-white even:bg-stone-300 ">
@@ -110,16 +122,13 @@ const InboxAdmiTable = () => {
                       />
                     </td>
                     <td className="px-4 py-2 text-center text-[0.65rem] font-normal font-['Inter'] capitalize">
-                      <FormattedTimestamp
-                        timestamp={
-                          message.Contact &&
-                          message.Contact.MsgReceiveds.length > 0
-                            ? message.Contact.MsgReceiveds.sort(
-                                (a, b) => a.timestamp - b.timestamp
-                              )[0].timestamp
-                            : null
-                        }
-                      />
+                      {firstMsgReceived && firstMsgReceived.timestamp ? (
+                        <FormattedTimestamp
+                          timestamp={firstMsgReceived.timestamp}
+                        />
+                      ) : (
+                        <span>sin fecha</span>
+                      )}
                     </td>
                     <td className="px-[1.75rem] py-2 text-center w-5 h-5">
                       <SocialMediaIcons
@@ -150,9 +159,11 @@ const InboxAdmiTable = () => {
                       />
                     </td>
                     <td className="px-4 py-2 text-center text-[0.65rem] font-normal font-['Inter'] capitalize">
-                      <FormattedTimestamp
-                        timestamp={lastMsgSent ? lastMsgSent.timestamp : null}
-                      />
+                      {lastMsgSent && lastMsgSent.timestamp ? (
+                        <FormattedTimestamp timestamp={lastMsgSent.timestamp} />
+                      ) : (
+                        <span>sin fecha</span>
+                      )}
                     </td>
                     <td className="pl-8 pr-4 py-2 text-center ">
                       <ArchivedButton messageId={message.id} />
