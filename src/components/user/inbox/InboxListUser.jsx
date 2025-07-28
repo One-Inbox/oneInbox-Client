@@ -6,13 +6,17 @@ import Spinner from "../../utils/spinners/Spinner";
 
 const InboxListUser = () => {
   const allMessagesReceived = useSelector((state) => state.messagesReceived);
-  //console.log("mensajes", allMessagesReceived);
+  console.log("mensajes", allMessagesReceived.length);
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let timeoutId;
     if (allMessagesReceived.length) {
+      console.log(
+        "📥 Efecto: mensajes actualizados",
+        allMessagesReceived.length
+      );
       setLoading(false);
     } else {
       setTimeout(() => {

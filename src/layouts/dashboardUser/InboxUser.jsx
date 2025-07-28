@@ -34,11 +34,6 @@ const InboxUser = () => {
   const messageActive = useSelector((state) => state.messageActive);
   const msgSent = useSelector((state) => state.messagesSent);
   const msgReceived = useSelector((state) => state.messagesReceived);
-  console.log("🔄 Render de InboxListUser", msgReceived.length);
-
-  useEffect(() => {
-    console.log("📥 Efecto: mensajes actualizados", allMessagesReceived.length);
-  }, [allMessagesReceived]);
 
   useEffect(() => {
     if (businessId) {
