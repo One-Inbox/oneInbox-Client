@@ -13,33 +13,71 @@ const socketMiddleware = (store) => {
 
   return (next) => (action) => {
     switch (action.type) {
-      case CONNECT_SOCKET:
-        if (socket) {
-          socket.disconnect();
-        }
-        socket = io(URL_API, {
-          transports: ["websocket"],
-        });
+      // case CONNECT_SOCKET:
+      //   if (socket) {
+      //     socket.disconnect();
+      //   }
+      //   socket = io(URL_API, {
+      //     transports: ["websocket"],
+      //   });
 
-        // Conectar con el servidor WebSocket
-        socket.on("connect", () => {
-          console.log("Socket conectado");
-        });
-        // socket.on("SE_EMITEN_OTRAS_COSAS", (mensaje) => {
-        //   console.log("Se emiten otras cosas:", mensaje);
-        // });
-        socket.on("NEW_MESSAGE_RECEIVED", (message) => {
-          store.dispatch({
-            type: ADD_NEW_MESSAGE_RECEIVED,
-            payload: message,
+      //   // Conectar con el servidor WebSocket
+      //   socket.on("connect", () => {
+      //     console.log("Socket conectado");
+      //   });
+      //   // socket.on("SE_EMITEN_OTRAS_COSAS", (mensaje) => {
+      //   //   console.log("Se emiten otras cosas:", mensaje);
+      //   // });
+      //   socket.on("NEW_MESSAGE_RECEIVED", (message) => {
+      //     store.dispatch({
+      //       type: ADD_NEW_MESSAGE_RECEIVED,
+      //       payload: message,
+      //     });
+      //   });
+      //   socket.on("ADD_NEW_MESSAGE_SENT", (message) => {
+      //     store.dispatch({
+      //       type: ADD_NEW_MESSAGE_SENT,
+      //       payload: message,
+      //     });
+      //   });
+      //   break;
+      case CONNECT_SOCKET:
+        if (!socket || socket.disconnected) {
+          socket = io(URL_API, {
+            transports: ["websocket"],
+            secure: true,
+            withCredentials: true,
           });
-        });
-        socket.on("ADD_NEW_MESSAGE_SENT", (message) => {
-          store.dispatch({
-            type: ADD_NEW_MESSAGE_SENT,
-            payload: message,
+
+          socket.on("connect", () => {
+            console.log("✅ Socket conectado:", socket.id);
           });
-        });
+
+          socket.on("NEW_MESSAGE_RECEIVED", (message) => {
+            console.log("🔥 Nuevo mensaje recibido vía socket:", message);
+            store.dispatch({
+              type: ADD_NEW_MESSAGE_RECEIVED,
+              payload: message,
+            });
+          });
+
+          socket.on("ADD_NEW_MESSAGE_SENT", (message) => {
+            store.dispatch({
+              type: ADD_NEW_MESSAGE_SENT,
+              payload: message,
+            });
+          });
+
+          socket.on("disconnect", (reason) => {
+            console.warn("🔌 Socket desconectado:", reason);
+          });
+
+          socket.on("connect_error", (error) => {
+            console.error("❌ Error al conectar el socket:", error.message);
+          });
+        } else {
+          console.log("🔁 Ya hay un socket conectado:", socket.id);
+        }
         break;
 
       case DISCONNECT_SOCKET:
