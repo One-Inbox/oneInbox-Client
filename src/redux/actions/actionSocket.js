@@ -18,15 +18,46 @@ import {
 //SERVER PRODUCCION
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
+// export const connectSocket = () => (dispatch) => {
+//   //console.log("URL_API en connectSocket ", URL_API);
+//   try {
+//     // conexión del socket y despacho el socket como payload
+//     const socket = io(URL_API);
+//     console.log("action me conecto con socket", socket.id);
+//     dispatch({
+//       type: CONNECT_SOCKET,
+//       payload: socket,
+//     });
+//   } catch (error) {
+//     sweetAlertsError(
+//       "Intenta de nuevo",
+//       "No pudimos entablar la conexión",
+//       "Ok"
+//     );
+//   }
+// };
 export const connectSocket = () => (dispatch) => {
-  //console.log("URL_API en connectSocket ", URL_API);
   try {
-    // conexión del socket y despacho el socket como payload
-    const socket = io(URL_API);
-    //console.log('action me conecto con socket', socket);
-    dispatch({
-      type: CONNECT_SOCKET,
-      payload: socket,
+    const socket = io(URL_API, {
+      // transports: ["websocket"],
+    });
+
+    socket.on("connect", () => {
+      console.log("✅ Socket conectado, ID:", socket.id);
+
+      dispatch({
+        type: CONNECT_SOCKET,
+        payload: socket,
+      });
+    });
+
+    socket.on("connect_error", (error) => {
+      console.error("❌ Error de conexión con socket:", error.message);
+      sweetAlertsError(
+        "Intenta de nuevo",
+        "No pudimos entablar la conexión",
+        "Ok"
+      );
     });
   } catch (error) {
     sweetAlertsError(

@@ -7,12 +7,6 @@ import {
   ADD_NEW_MESSAGE_SENT,
 } from "../types";
 
-//LOCALHOST
-//const URL = 'http://localhost:3000';
-//SERVER DESARROLLO
-//const URL = 'https://electrica-mosconi-backend.onrender.com';
-//SERVER PRODUCCION
-//const URL ='https://electrica-mosconi-backend-main.onrender.com'
 const socketMiddleware = (store) => {
   //console.log("URL_API en socketMiddleware", URL_API);
   let socket = null;
@@ -29,7 +23,7 @@ const socketMiddleware = (store) => {
 
         // Conectar con el servidor WebSocket
         socket.on("connect", () => {
-          //console.log("Socket conectado");
+          console.log("Socket conectado");
         });
         // socket.on("SE_EMITEN_OTRAS_COSAS", (mensaje) => {
         //   console.log("Se emiten otras cosas:", mensaje);
