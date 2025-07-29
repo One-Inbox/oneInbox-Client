@@ -102,6 +102,13 @@ const InboxListUser = () => {
     console.log("📥 Nuevo contenido en messagesReceived:", allMessagesReceived);
     console.log("📏 Cantidad:", allMessagesReceived.length);
   }, [allMessagesReceived]);
+  const [forceRender, setForceRender] = useState(0);
+
+  // 🔥 FORZAR RE-RENDER cuando cambien los mensajes
+  useEffect(() => {
+    console.log("🔄 Forzando re-render por cambio en mensajes");
+    setForceRender((prev) => prev + 1);
+  }, [allMessagesReceived.length]);
 
   const [loading, setLoading] = useState(true);
 
