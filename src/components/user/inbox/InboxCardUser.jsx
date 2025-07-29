@@ -64,6 +64,17 @@ const InboxCardUser = ({
     );
     return unread;
   }, [allMsgByContact]);
+  // 🔥 CALCULAR EL ESTADO DINÁMICO BASADO EN MENSAJES NO LEÍDOS
+  const dynamicState = useMemo(() => {
+    if (noReadMsg && noReadMsg.length > 0) {
+      return "No Leidos"; // Hay mensajes sin leer
+    }
+    return state;
+  }, [noReadMsg]);
+
+  console.log(
+    `💳 Card ${ContactId} - Estado original: ${state}, Estado dinámico: ${dynamicState}`
+  );
 
   const onClickHandler = (id) => {
     if (msgActive && msgActive !== id) {
@@ -101,7 +112,7 @@ const InboxCardUser = ({
             </div>
             <div className="flex flex-col items-end mr-4 ml-auto">
               <div className="w-8 h-8 bg-white rounded-full mb-1">
-                <StateMessagesIcons state={state} archived={archived} />
+                <StateMessagesIcons state={dynamicState} archived={archived} />
               </div>
               {/* 🔥 CONTADOR DE NO LEÍDOS PARA DEBUG */}
               {noReadMsg && noReadMsg.length > 0 && (
