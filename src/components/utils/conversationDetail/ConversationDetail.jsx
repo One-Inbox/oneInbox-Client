@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 import MsgRecived from "./MsgRecived";
 import MsgSent from "./MsgSent";
 import ClouseConversationButton from "../buttons/ClouseConversationButton";
-import { timestampToISO } from "../timeStampToISO";
 import { sortedMessagesByTime } from "../sortedMessages";
 import Spinner from "../spinners/Spinner";
 
 const ConversationDetail = ({ contact, path }) => {
-  //console.log("conversation detail contact", contact);
   const [loading, setLoading] = useState(false);
   const msgReceiveds =
     contact && contact.MsgReceiveds && contact.MsgReceiveds.length
@@ -51,27 +49,12 @@ const ConversationDetail = ({ contact, path }) => {
     };
   }, [contact]);
 
-  // if (!contact) {
-  //   return null;
-  // }
-  // //termina el auto scroll
-
-  // const concatMessages = [...contact.MsgReceiveds, ...contact.MsgSents];
-
-  // const sortedMessages = sortedMessagesByTime(concatMessages, "firstFirst");
   const sortedMessages = sortedMessagesByTime(messages, "firstFirst");
-
-  // const formattedMessages = concatMessages.map((message) => {
-  //   return {
-  //     ...message,
-  //     timestamp: timestampToISO(message.timestamp),
-  //   };
-  // });
-
-  // const sortedMessages = formattedMessages.sort((a, b) =>
-  //   a.timestamp.localeCompare(b.timestamp)
-  // );
-  // console.log("mensajes ordenados", sortedMessages);
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [sortedMessages]);
 
   return (
     <div className="w-full h-full relative flex flex-col overflow-y-auto overflow-x-hidden">
