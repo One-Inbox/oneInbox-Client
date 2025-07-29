@@ -1,6 +1,6 @@
 import InboxCardUser from "./InboxCardUser";
 import { useSelector } from "react-redux";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import FilterText from "../../utils/filters/FilterText";
 import Spinner from "../../utils/spinners/Spinner";
 import timeStampToISO from "../../utils/timeStampToISO";
