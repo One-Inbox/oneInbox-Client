@@ -230,7 +230,8 @@ const InboxListUser = () => {
           const { id, name, timestamp, state, SocialMedium, ContactId } =
             message;
           return (
-            <div key={`${ContactId}-${id}-${index}- ${renderKey}`}>
+            // <div key={`${ContactId}-${id}-${index}- ${renderKey}`}>
+            <div key={`${ContactId}-${id}-${state}-${renderKey}`}>
               <InboxCardUser
                 id={id}
                 name={name}

@@ -70,7 +70,7 @@ const InboxCardUser = ({
       return "No Leidos"; // Hay mensajes sin leer
     }
     return state;
-  }, [noReadMsg]);
+  }, [noReadMsg, state]);
 
   console.log(
     `💳 Card ${ContactId} - Estado original: ${state}, Estado dinámico: ${dynamicState}`
@@ -112,7 +112,7 @@ const InboxCardUser = ({
             </div>
             <div className="flex flex-col items-end mr-4 ml-auto">
               <div className="w-8 h-8 bg-white rounded-full mb-1">
-                <StateMessagesIcons state={dynamicState} archived={archived} />
+                <StateMessagesIcons state={state} archived={archived} />
               </div>
               {/* 🔥 CONTADOR DE NO LEÍDOS PARA DEBUG */}
               {noReadMsg && noReadMsg.length > 0 && (
