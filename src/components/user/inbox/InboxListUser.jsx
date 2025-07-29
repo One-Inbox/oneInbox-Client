@@ -159,7 +159,7 @@ const InboxListUser = () => {
     }
 
     return Object.values(grouped);
-  }, [allMessagesReceived, forceRender]);
+  }, [allMessagesReceived, renderKey]);
 
   // Optimización con useMemo - evita recalcular en cada render
   // const messagesByContact = useMemo(() => {
