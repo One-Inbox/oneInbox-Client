@@ -128,37 +128,98 @@ const InboxListUser = () => {
     console.log("🔍 Mensajes actuales:", allMessagesReceived.length);
   }, [allMessagesReceived]);
 
-  // Optimización con useMemo - evita recalcular en cada render
-  const messagesByContact = useMemo(() => {
-    const notArchivedMessages = allMessagesReceived.filter(
-      (message) => message.archived === false
+  const finalMessages = useMemo(() => {
+    const notArchived = allMessagesReceived.filter(
+      (msg) => msg.archived === false
     );
 
-    const sortedMessages = notArchivedMessages.slice().sort((a, b) => {
+    const sorted = notArchived.slice().sort((a, b) => {
       const timeA = timeStampToISO(a.timestamp);
       const timeB = timeStampToISO(b.timestamp);
-      return timeB.localeCompare(timeA);
+      return timeB.localeCompare(timeA); // Más reciente primero
     });
 
-    const messagesByContact = [];
-    const seenContactIds = new Set();
-
-    for (const message of sortedMessages) {
-      if (!seenContactIds.has(message.ContactId)) {
-        messagesByContact.push(message);
-        seenContactIds.add(message.ContactId);
+    const grouped = {};
+    for (const msg of sorted) {
+      const contactId = msg.ContactId;
+      if (
+        !grouped[contactId] ||
+        timeStampToISO(msg.timestamp) >
+          timeStampToISO(grouped[contactId].timestamp)
+      ) {
+        grouped[contactId] = msg;
       }
     }
 
-    return messagesByContact;
-  }, [allMessagesReceived]); // Solo recalcula cuando cambian los mensajes
+    return Object.values(grouped);
+  }, [allMessagesReceived]);
+
+  // Optimización con useMemo - evita recalcular en cada render
+  // const messagesByContact = useMemo(() => {
+  //   const notArchivedMessages = allMessagesReceived.filter(
+  //     (message) => message.archived === false
+  //   );
+
+  //   const sortedMessages = notArchivedMessages.slice().sort((a, b) => {
+  //     const timeA = timeStampToISO(a.timestamp);
+  //     const timeB = timeStampToISO(b.timestamp);
+  //     return timeB.localeCompare(timeA);
+  //   });
+
+  //   const messagesByContact = [];
+  //   const seenContactIds = new Set();
+
+  //   for (const message of sortedMessages) {
+  //     if (!seenContactIds.has(message.ContactId)) {
+  //       messagesByContact.push(message);
+  //       seenContactIds.add(message.ContactId);
+  //     }
+  //   }
+
+  //   return messagesByContact;
+  // }, [allMessagesReceived]); // Solo recalcula cuando cambian los mensajes
+  // const notArchivedMessages = allMessagesReceived.filter(
+  //   (message) => message.archived === false
+  // );
+
+  // const sortedMessages = notArchivedMessages.slice().sort((a, b) => {
+  //   const timeA = timeStampToISO(a.timestamp);
+  //   const timeB = timeStampToISO(b.timestamp);
+  //   return timeB.localeCompare(timeA); // más recientes arriba
+  // });
+
+  // // const messagesByContact = [];
+  // // const seenContactIds = new Set();
+
+  // // for (const message of sortedMessages) {
+  // //   if (!seenContactIds.has(message.ContactId)) {
+  // //     messagesByContact.push(message);
+  // //     seenContactIds.add(message.ContactId);
+  // //   }
+  // // }
+  // const messagesByContact = {};
+
+  // for (const message of sortedMessages) {
+  //   const contactId = message.ContactId;
+  //   // Solo guarda el mensaje si es el primero o más reciente
+  //   if (
+  //     !messagesByContact[contactId] ||
+  //     timeStampToISO(message.timestamp) >
+  //       timeStampToISO(messagesByContact[contactId].timestamp)
+  //   ) {
+  //     messagesByContact[contactId] = message;
+  //   }
+  // }
+
+  // const finalMessages = Object.values(messagesByContact);
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-green-400">
       {loading ? (
         <Spinner text={"loading..."} />
       ) : allMessagesReceived.length ? (
-        messagesByContact.map((message, index) => {
+        finalMessages.map((message, index) => {
+          // messagesByContact.map((message, index) => {
           const { id, name, timestamp, state, SocialMedium, ContactId } =
             message;
           return (
