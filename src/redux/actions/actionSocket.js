@@ -36,59 +36,19 @@ import {
 //     );
 //   }
 // };
-export const connectSocket = () => (dispatch) => {
-  try {
-    const socket = io(URL_API, {
-      // transports: ["websocket"],
-    });
+// // socketActions.js
 
-    socket.on("connect", () => {
-      console.log("✅ Socket conectado, ID:", socket.id);
+// Simplificadas - solo disparan el middleware
+export const connectSocket = () => ({
+  type: CONNECT_SOCKET,
+});
 
-      dispatch({
-        type: CONNECT_SOCKET,
-        payload: socket,
-      });
-    });
-
-    socket.on("connect_error", (error) => {
-      console.error("❌ Error de conexión con socket:", error.message);
-      sweetAlertsError(
-        "Intenta de nuevo",
-        "No pudimos entablar la conexión",
-        "Ok"
-      );
-    });
-  } catch (error) {
-    sweetAlertsError(
-      "Intenta de nuevo",
-      "No pudimos entablar la conexión",
-      "Ok"
-    );
-  }
-};
-
-export const disconnectSocket = () => (dispatch) => {
-  try {
-    socket.disconnect();
-    //console.log("desconexion socket por action");
-
-    dispatch({
-      type: DISCONNECT_SOCKET,
-    });
-  } catch (error) {
-    sweetAlertsError(
-      "Intenta de nuevo",
-      "No pudimos detener la conexión",
-      "Ok"
-    );
-  }
-};
+export const disconnectSocket = () => ({
+  type: DISCONNECT_SOCKET,
+});
 
 export const addNewMessageReceivedAction = (message) => {
   try {
-    //console.log("Mensaje agregado a la store:", message);
-
     sweetAlertsWarning("Atención", "Has recibido un nuevo mensaje", "OK");
     return {
       type: ADD_NEW_MESSAGE_RECEIVED,

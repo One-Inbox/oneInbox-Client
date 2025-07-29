@@ -27,11 +27,28 @@ const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
+  // useEffect(() => {
+  //   Conectar el socket cuando el componente se monta
+  //   dispatch(connectSocket());
+  //   return () => {
+  //     Desconectar el socket cuando el componente se desmonta
+  //     dispatch(disconnectSocket());
+  //   };
+  // }, [dispatch]);
   useEffect(() => {
-    // Conectar el socket cuando el componente se monta
-    dispatch(connectSocket());
+    console.log("🔌 App montada - conectando socket...");
+    dispatch(connectSocket()); // ✅ Ahora está bien, solo activa el middleware
+
+    const handleBeforeUnload = () => {
+      console.log("🔌 Cerrando aplicación - desconectando socket...");
+      dispatch(disconnectSocket());
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
     return () => {
-      // Desconectar el socket cuando el componente se desmonta
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      console.log("🔌 App desmontada - desconectando socket...");
       dispatch(disconnectSocket());
     };
   }, [dispatch]);

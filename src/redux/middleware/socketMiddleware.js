@@ -7,8 +7,8 @@ import {
   ADD_NEW_MESSAGE_SENT,
 } from "../types";
 
+// // socketMiddleware.js
 const socketMiddleware = (store) => {
-  //console.log("URL_API en socketMiddleware", URL_API);
   let socket = null;
 
   return (next) => (action) => {
@@ -23,6 +23,11 @@ const socketMiddleware = (store) => {
 
           socket.on("connect", () => {
             console.log("✅ Socket conectado:", socket.id);
+            // Dispatch successful connection
+            store.dispatch({
+              type: SOCKET_CONNECTED,
+              payload: socket.id,
+            });
           });
 
           socket.on("NEW_MESSAGE_RECEIVED", (message) => {
@@ -42,19 +47,25 @@ const socketMiddleware = (store) => {
 
           socket.on("disconnect", (reason) => {
             console.warn("🔌 Socket desconectado:", reason);
+            store.dispatch({
+              type: SOCKET_DISCONNECTED,
+            });
           });
 
           socket.on("connect_error", (error) => {
             console.error("❌ Error al conectar el socket:", error.message);
+            store.dispatch({
+              type: SOCKET_ERROR,
+              payload: error.message,
+            });
           });
-        } else {
-          console.log("🔁 Ya hay un socket conectado:", socket.id);
         }
         break;
 
       case DISCONNECT_SOCKET:
         if (socket) {
           socket.disconnect();
+          socket = null;
         }
         break;
 

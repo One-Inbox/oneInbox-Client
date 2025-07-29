@@ -77,6 +77,7 @@ const initialState = {
 
   //**--SOCKET--**//
   socket: null,
+  socketConnected: false,
   //para carga de imagen y archivos
   uploadedFile: "",
   //**--AUTH--**//
@@ -421,29 +422,70 @@ const rootReducer = (state = initialState, action) => {
       }
 
     // CASOS PARA socket
+    // case CONNECT_SOCKET:
+    //   return {
+    //     ...state,
+    //     socket: action.payload,
+    //   };
+
+    // case DISCONNECT_SOCKET:
+    //   return {
+    //     ...state,
+    //     socket: null,
+    //   };
+
+    // case ADD_NEW_MESSAGE_RECEIVED:
+    //   return {
+    //     ...state,
+    //     messagesReceived: [...state.messagesReceived, action.payload],
+    //     allMessagesReceived: [...state.allMessagesReceived, action.payload],
+    //   };
+    // case ADD_NEW_MESSAGE_SENT:
+    //   return {
+    //     ...state,
+    //     messagesSent: [...state.messagesSent, action.payload],
+    //   };
     case CONNECT_SOCKET:
       return {
         ...state,
-        socket: action.payload,
+        // No guardamos el socket aquí, solo indicamos que se está conectando
+      };
+
+    case SOCKET_CONNECTED:
+      return {
+        ...state,
+        socketConnected: true,
+      };
+
+    case SOCKET_DISCONNECTED:
+      return {
+        ...state,
+        socketConnected: false,
       };
 
     case DISCONNECT_SOCKET:
       return {
         ...state,
-        socket: null,
+        socketConnected: false,
       };
 
     case ADD_NEW_MESSAGE_RECEIVED:
+      console.log(
+        "🔄 Reducer: Agregando nuevo mensaje recibido",
+        action.payload
+      );
       return {
         ...state,
         messagesReceived: [...state.messagesReceived, action.payload],
         allMessagesReceived: [...state.allMessagesReceived, action.payload],
       };
+
     case ADD_NEW_MESSAGE_SENT:
       return {
         ...state,
         messagesSent: [...state.messagesSent, action.payload],
       };
+
     //** REDUCER DE REDES SOCIALES */
     case GET_ALL_SOCIAL_MEDIA_BY_BUSINESS:
       let allSocialMedia = action.payload;
