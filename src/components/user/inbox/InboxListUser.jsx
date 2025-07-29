@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect, useMemo } from "react";
 import FilterText from "../../utils/filters/FilterText";
 import Spinner from "../../utils/spinners/Spinner";
+import timeStampToISO from "../../utils/timeStampToISO";
 
 // const InboxListUser = () => {
 //   const allMessagesReceived = useSelector((state) => state.messagesReceived);
@@ -105,6 +106,20 @@ const InboxListUser = () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, [allMessagesReceived.length]); // Dependencia más específica
+  useEffect(() => {
+    console.log("🔍 InboxListUser re-render:", {
+      messagesLength: allMessagesReceived?.length,
+      messages: allMessagesReceived,
+    });
+  }, [allMessagesReceived]);
+
+  useEffect(() => {
+    console.log("🔄 COMPONENTE: messagesReceived cambió", {
+      length: allMessagesReceived?.length,
+      ultimoMensaje: allMessagesReceived?.slice(-1)[0],
+      messagesByContactLength: messagesByContact.length,
+    });
+  }, [allMessagesReceived, messagesByContact]);
 
   // Optimización con useMemo - evita recalcular en cada render
   const messagesByContact = useMemo(() => {
@@ -112,9 +127,11 @@ const InboxListUser = () => {
       (message) => message.archived === false
     );
 
-    const sortedMessages = notArchivedMessages
-      .slice()
-      .sort((a, b) => b.timestamp - a.timestamp);
+    const sortedMessages = notArchivedMessages.slice().sort((a, b) => {
+      const timeA = timeStampToISO(a.timestamp);
+      const timeB = timeStampToISO(b.timestamp);
+      return timeB.localeCompare(timeA);
+    });
 
     const messagesByContact = [];
     const seenContactIds = new Set();

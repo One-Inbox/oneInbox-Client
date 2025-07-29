@@ -1,42 +1,18 @@
 import { io } from "socket.io-client";
-import { URL_API } from "../../config.js";
+import { URL_API } from "../../config"; // Quita el .js
 import {
   ADD_NEW_MESSAGE_RECEIVED,
   CONNECT_SOCKET,
   DISCONNECT_SOCKET,
   ADD_NEW_MESSAGE_SENT,
+  SOCKET_CONNECTED, // Agrega estos
+  SOCKET_DISCONNECTED, // Agrega estos
+  SOCKET_ERROR, // Agrega estos
 } from "../types";
 import {
   sweetAlertsError,
   sweetAlertsWarning,
 } from "../../components/utils/alerts/alerts";
-
-//LOCALHOST
-//const URL = 'http://localhost:3000';
-//SERVER DESARROLLO
-//const URL = 'https://electrica-mosconi-backend.onrender.com';
-//SERVER PRODUCCION
-//const URL ='https://electrica-mosconi-backend-main.onrender.com'
-
-// export const connectSocket = () => (dispatch) => {
-//   //console.log("URL_API en connectSocket ", URL_API);
-//   try {
-//     // conexión del socket y despacho el socket como payload
-//     const socket = io(URL_API);
-//     console.log("action me conecto con socket", socket.id);
-//     dispatch({
-//       type: CONNECT_SOCKET,
-//       payload: socket,
-//     });
-//   } catch (error) {
-//     sweetAlertsError(
-//       "Intenta de nuevo",
-//       "No pudimos entablar la conexión",
-//       "Ok"
-//     );
-//   }
-// };
-// // socketActions.js
 
 // Simplificadas - solo disparan el middleware
 export const connectSocket = () => ({

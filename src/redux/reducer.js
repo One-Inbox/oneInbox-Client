@@ -472,16 +472,38 @@ const rootReducer = (state = initialState, action) => {
         socketConnected: false,
       };
 
+    // case ADD_NEW_MESSAGE_RECEIVED:
+    //   console.log(
+    //     "🔄 Reducer: Agregando nuevo mensaje recibido",
+    //     action.payload
+    //   );
+    //   return {
+    //     ...state,
+    //     messagesReceived: [...state.messagesReceived, action.payload],
+    //     allMessagesReceived: [...state.allMessagesReceived, action.payload],
+    //   };
     case ADD_NEW_MESSAGE_RECEIVED:
       console.log(
         "🔄 Reducer: Agregando nuevo mensaje recibido",
         action.payload
       );
-      return {
+      console.log("📊 Estado actual de mensajes:", {
+        messagesReceived: state.messagesReceived.length,
+        allMessagesReceived: state.allMessagesReceived.length,
+      });
+
+      const newState = {
         ...state,
         messagesReceived: [...state.messagesReceived, action.payload],
         allMessagesReceived: [...state.allMessagesReceived, action.payload],
       };
+
+      console.log("📊 Nuevo estado de mensajes:", {
+        messagesReceived: newState.messagesReceived.length,
+        allMessagesReceived: newState.allMessagesReceived.length,
+      });
+      console.log("🆕 Nuevo mensaje agregado:", action.payload);
+      return newState;
 
     case ADD_NEW_MESSAGE_SENT:
       return {

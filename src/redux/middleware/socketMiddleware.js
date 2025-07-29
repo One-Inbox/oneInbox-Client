@@ -39,6 +39,15 @@ const socketMiddleware = (store) => {
               type: ADD_NEW_MESSAGE_RECEIVED,
               payload: message,
             });
+
+            setTimeout(() => {
+              const currentState = store.getState();
+              console.log("📊 Estado Redux después del dispatch:", {
+                messagesReceived: currentState.messagesReceived?.length,
+                allMessagesReceived: currentState.allMessagesReceived?.length,
+                ultimoMensaje: currentState.messagesReceived?.slice(-1)[0],
+              });
+            }, 100);
           });
 
           socket.on("ADD_NEW_MESSAGE_SENT", (message) => {
