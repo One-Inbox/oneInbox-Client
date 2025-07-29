@@ -13,34 +13,6 @@ const socketMiddleware = (store) => {
 
   return (next) => (action) => {
     switch (action.type) {
-      // case CONNECT_SOCKET:
-      //   if (socket) {
-      //     socket.disconnect();
-      //   }
-      //   socket = io(URL_API, {
-      //     transports: ["websocket"],
-      //   });
-
-      //   // Conectar con el servidor WebSocket
-      //   socket.on("connect", () => {
-      //     console.log("Socket conectado");
-      //   });
-      //   // socket.on("SE_EMITEN_OTRAS_COSAS", (mensaje) => {
-      //   //   console.log("Se emiten otras cosas:", mensaje);
-      //   // });
-      //   socket.on("NEW_MESSAGE_RECEIVED", (message) => {
-      //     store.dispatch({
-      //       type: ADD_NEW_MESSAGE_RECEIVED,
-      //       payload: message,
-      //     });
-      //   });
-      //   socket.on("ADD_NEW_MESSAGE_SENT", (message) => {
-      //     store.dispatch({
-      //       type: ADD_NEW_MESSAGE_SENT,
-      //       payload: message,
-      //     });
-      //   });
-      //   break;
       case CONNECT_SOCKET:
         if (!socket || socket.disconnected) {
           socket = io(URL_API, {
