@@ -1,3 +1,4 @@
+import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import StateMessagesIcons from "../../utils/icons/StateMessagesIcons";
 import SocialMediaIcons from "../../utils/icons/socialMediaIcons";
@@ -15,9 +16,16 @@ const InboxCardUser = ({
   SocialMedium,
   ContactId,
   messagesReceived,
+  messagesCount, // 👈 Nueva prop para detectar cambios
+  renderKey,
   archived,
 }) => {
   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log(
+      `💳 Card ${ContactId} actualizada - Total mensajes: ${messagesCount}, RenderKey: ${renderKey}`
+    );
+  }, [messagesCount, renderKey, ContactId]);
 
   const socialMediaName =
     SocialMedium && SocialMedium.name
@@ -28,13 +36,34 @@ const InboxCardUser = ({
 
   const msgActive = useSelector((state) => state.messageActive);
 
-  const allMsgByContact =
-    messagesReceived &&
-    messagesReceived.filter((message) => message.ContactId === ContactId);
-  const noReadMsg =
-    allMsgByContact &&
-    allMsgByContact.filter((message) => message.state === "No Leidos");
+  // const allMsgByContact =
+  //   messagesReceived &&
+  //   messagesReceived.filter((message) => message.ContactId === ContactId);
+  // const noReadMsg =
+  //   allMsgByContact &&
+  //   allMsgByContact.filter((message) => message.state === "No Leidos");
   //console.log("mensajes", allMsgByContact);
+  const allMsgByContact = useMemo(() => {
+    const filtered = messagesReceived?.filter(
+      (message) => message.ContactId === ContactId
+    );
+    console.log(
+      `💳 Card ${ContactId}: ${
+        filtered?.length || 0
+      } mensajes del contacto (renderKey: ${renderKey})`
+    );
+    return filtered;
+  }, [messagesReceived, ContactId, messagesCount, renderKey]);
+
+  const noReadMsg = useMemo(() => {
+    const unread = allMsgByContact?.filter(
+      (message) => message.state === "No Leidos"
+    );
+    console.log(
+      `💳 Card ${ContactId}: ${unread?.length || 0} mensajes no leídos`
+    );
+    return unread;
+  }, [allMsgByContact]);
 
   const onClickHandler = (id) => {
     if (msgActive && msgActive !== id) {
@@ -74,6 +103,12 @@ const InboxCardUser = ({
               <div className="w-8 h-8 bg-white rounded-full mb-1">
                 <StateMessagesIcons state={state} archived={archived} />
               </div>
+              {/* 🔥 CONTADOR DE NO LEÍDOS PARA DEBUG */}
+              {noReadMsg && noReadMsg.length > 0 && (
+                <div className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {noReadMsg.length}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -95,6 +130,12 @@ const InboxCardUser = ({
             <div className="w-8 h-8 bg-white rounded-full mb-1">
               <StateMessagesIcons state={state} archived={archived} />
             </div>
+            {/* 🔥 CONTADOR DE NO LEÍDOS PARA DEBUG */}
+            {noReadMsg && noReadMsg.length > 0 && (
+              <div className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {noReadMsg.length}
+              </div>
+            )}
           </div>
         </div>
       )}

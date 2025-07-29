@@ -102,12 +102,12 @@ const InboxListUser = () => {
     console.log("📥 Nuevo contenido en messagesReceived:", allMessagesReceived);
     console.log("📏 Cantidad:", allMessagesReceived.length);
   }, [allMessagesReceived]);
-  const [forceRender, setForceRender] = useState(0);
+  const [renderKey, setRenderKey] = useState(0);
 
   // 🔥 FORZAR RE-RENDER cuando cambien los mensajes
   useEffect(() => {
     console.log("🔄 Forzando re-render por cambio en mensajes");
-    setForceRender((prev) => prev + 1);
+    setRenderKey((prev) => prev + 1);
   }, [allMessagesReceived.length]);
 
   const [loading, setLoading] = useState(true);
@@ -230,7 +230,7 @@ const InboxListUser = () => {
           const { id, name, timestamp, state, SocialMedium, ContactId } =
             message;
           return (
-            <div key={`${ContactId}-${id}-${index}`}>
+            <div key={`${ContactId}-${id}-${index}- ${renderKey}`}>
               <InboxCardUser
                 id={id}
                 name={name}
@@ -239,6 +239,8 @@ const InboxListUser = () => {
                 SocialMedium={SocialMedium}
                 ContactId={ContactId}
                 messagesReceived={allMessagesReceived}
+                messagesCount={allMessagesReceived.length} // 👈 Prop adicional para forzar cambio
+                renderKey={renderKey}
               />
             </div>
           );
