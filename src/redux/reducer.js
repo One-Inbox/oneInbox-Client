@@ -489,6 +489,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         messagesSent: [...state.messagesSent, action.payload],
       };
+    case SOCKET_ERROR:
+      console.log("🔄 REDUCER: Error en socket", action.payload);
+      return {
+        ...state,
+        socketConnected: false,
+        // Podrías agregar un campo socketError si quieres mostrar errores
+        // socketError: action.payload,
+      };
 
     //** REDUCER DE REDES SOCIALES */
     case GET_ALL_SOCIAL_MEDIA_BY_BUSINESS:
