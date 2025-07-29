@@ -40,6 +40,7 @@ import {
   DISCONNECT_SOCKET,
   SOCKET_CONNECTED,
   SOCKET_DISCONNECTED,
+  SOCKET_ERROR,
 } from "./types";
 
 const initialState = {
