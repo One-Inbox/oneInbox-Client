@@ -86,6 +86,22 @@ const InboxListUser = () => {
   // Tu selector actual - sin cambios
   const allMessagesReceived = useSelector((state) => state.messagesReceived);
   console.log("mensajes", allMessagesReceived.length);
+  // 🧠 DEBUG 1: detectar cambio de referencia
+  const prevRef = useRef();
+
+  useEffect(() => {
+    console.log(
+      "📦 ¿Cambio de referencia en messagesReceived?",
+      prevRef.current !== allMessagesReceived
+    );
+    prevRef.current = allMessagesReceived;
+  }, [allMessagesReceived]);
+
+  // 🧠 DEBUG 2: loguear contenido completo
+  useEffect(() => {
+    console.log("📥 Nuevo contenido en messagesReceived:", allMessagesReceived);
+    console.log("📏 Cantidad:", allMessagesReceived.length);
+  }, [allMessagesReceived]);
 
   const [loading, setLoading] = useState(true);
 
