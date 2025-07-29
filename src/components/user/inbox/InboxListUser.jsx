@@ -106,20 +106,11 @@ const InboxListUser = () => {
       if (timeoutId) clearTimeout(timeoutId);
     };
   }, [allMessagesReceived.length]); // Dependencia más específica
-  useEffect(() => {
-    console.log("🔍 InboxListUser re-render:", {
-      messagesLength: allMessagesReceived?.length,
-      messages: allMessagesReceived,
-    });
-  }, [allMessagesReceived]);
 
+  // 🔥 SOLO ESTE LOG SIMPLE PARA DEBUG
   useEffect(() => {
-    console.log("🔄 COMPONENTE: messagesReceived cambió", {
-      length: allMessagesReceived?.length,
-      ultimoMensaje: allMessagesReceived?.slice(-1)[0],
-      messagesByContactLength: messagesByContact.length,
-    });
-  }, [allMessagesReceived, messagesByContact]);
+    console.log("🔍 Mensajes actuales:", allMessagesReceived.length);
+  }, [allMessagesReceived]);
 
   // Optimización con useMemo - evita recalcular en cada render
   const messagesByContact = useMemo(() => {
@@ -156,8 +147,6 @@ const InboxListUser = () => {
             message;
           return (
             <div key={`${ContactId}-${id}-${index}`}>
-              {" "}
-              {/* Key más específica */}
               <InboxCardUser
                 id={id}
                 name={name}
