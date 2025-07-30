@@ -78,67 +78,127 @@ export const getMessageReceivedByIdAction = (messageId) => {
   };
 };
 //***UPDATE PARA CAMBIAR LA CONVERSACION A ARCHIVADA-DESARCHIVADA */
+// export const updateArchivedMessageReceivedAction = (messageId) => {
+//   try {
+//     return async (dispatch) => {
+//       const responseMessage = await axios.get(
+//         `${URL_API}/message/received/${messageId}`
+//       );
+//       const message = responseMessage.data;
+//       const contactId = message.ContactId;
+
+//       const responseContact = await axios.get(
+//         `${URL_API}/contact/${contactId}`
+//       );
+//       const contact = responseContact.data;
+//       const messagesByContact = contact.MsgReceiveds;
+
+//       const areAllArchived = messagesByContact.every((msg) => msg.archived);
+
+//       if (messagesByContact.length === 1) {
+//         const response = await axios.put(
+//           `${URL_API}/message/received/archived/${messageId}`
+//         );
+//         const updated = response.data.message;
+//         dispatch({ type: UPDATE_ARCHIVED_MESSAGE_RECEIVED, payload: updated });
+//       } else {
+//         // for (const msg of messagesByContact) {
+//         //   const response = await axios.put(
+//         //     `${URL_API}/message/received/archived/${msg.id}`
+//         //   );
+//         //   const updated = response.data.message;
+//         //   dispatch({
+//         //     type: UPDATE_ARCHIVED_MESSAGE_RECEIVED,
+//         //     payload: updated,
+//         //   });
+//         // }
+//         const updates = await Promise.all(
+//           messagesByContact.map((msg) =>
+//             axios.put(`${URL_API}/message/received/archived/${msg.id}`)
+//           )
+//         );
+
+//         updates.forEach((res) => {
+//           dispatch({
+//             type: UPDATE_ARCHIVED_MESSAGE_RECEIVED,
+//             payload: res.data.message,
+//           });
+//         });
+//       }
+//       console.log("Despachado updatedMessages:", payload);
+//       areAllArchived
+//         ? sweetAlertsSuccessfully(
+//             "Éxito",
+//             "La conversación ha sido desarchivada correctamente",
+//             "Ok"
+//           )
+//         : sweetAlertsSuccessfully(
+//             "Éxito",
+//             "La conversación ha sido archivada correctamente",
+//             "Ok"
+//           );
+//     };
+//   } catch (error) {
+//     areAllArchived
+//       ? sweetAlertsError(
+//           "Intenta de nuevo",
+//           "No podemos desarchivar la conversacion seleccionada",
+//           "Ok"
+//         )
+//       : sweetAlertsError(
+//           "Intenta de nuevo",
+//           "No podemos archivar la conversacion seleccionada",
+//           "Ok"
+//         );
+//   }
+// };
 export const updateArchivedMessageReceivedAction = (messageId) => {
-  try {
-    return async (dispatch) => {
-      const responseMessage = await axios.get(
-        `${URL_API}/message/received/${messageId}`
+  return async (dispatch) => {
+    try {
+      // ✅ Una sola llamada que maneja toda la conversación
+      const response = await axios.put(
+        `${URL_API}/message/received/archived/${messageId}`
       );
-      const message = responseMessage.data;
-      const contactId = message.ContactId;
 
-      const responseContact = await axios.get(
-        `${URL_API}/contact/${contactId}`
+      const { messages, newState, conversationId } = response.data;
+
+      console.log(
+        `Conversación ${conversationId} ${
+          newState ? "archivada" : "desarchivada"
+        }`
       );
-      const contact = responseContact.data;
-      const messagesByContact = contact.MsgReceiveds;
+      console.log(`${messages.length} mensajes actualizados`);
 
-      const areAllArchived = messagesByContact.every((msg) => msg.archived);
+      // ✅ Despachar TODOS los mensajes de la conversación de una vez
+      dispatch({
+        type: UPDATE_ARCHIVED_MESSAGE_RECEIVED,
+        payload: messages, // 👈 Array completo, no mensaje por mensaje
+      });
 
-      if (messagesByContact.length === 1) {
-        const response = await axios.put(
-          `${URL_API}/message/received/archived/${messageId}`
+      // ✅ Mensaje de éxito basado en el nuevo estado
+      if (newState) {
+        sweetAlertsSuccessfully(
+          "Éxito",
+          "La conversación ha sido archivada correctamente",
+          "Ok"
         );
-        const updated = response.data.message;
-        dispatch({ type: UPDATE_ARCHIVED_MESSAGE_RECEIVED, payload: updated });
       } else {
-        for (const msg of messagesByContact) {
-          const response = await axios.put(
-            `${URL_API}/message/received/archived/${msg.id}`
-          );
-          const updated = response.data.message;
-          dispatch({
-            type: UPDATE_ARCHIVED_MESSAGE_RECEIVED,
-            payload: updated,
-          });
-        }
-      }
-
-      areAllArchived
-        ? sweetAlertsSuccessfully(
-            "Éxito",
-            "La conversación ha sido desarchivada correctamente",
-            "Ok"
-          )
-        : sweetAlertsSuccessfully(
-            "Éxito",
-            "La conversación ha sido archivada correctamente",
-            "Ok"
-          );
-    };
-  } catch (error) {
-    areAllArchived
-      ? sweetAlertsError(
-          "Intenta de nuevo",
-          "No podemos desarchivar la conversacion seleccionada",
-          "Ok"
-        )
-      : sweetAlertsError(
-          "Intenta de nuevo",
-          "No podemos archivar la conversacion seleccionada",
+        sweetAlertsSuccessfully(
+          "Éxito",
+          "La conversación ha sido desarchivada correctamente",
           "Ok"
         );
-  }
+      }
+    } catch (error) {
+      console.error("Error en updateArchivedMessageReceivedAction:", error);
+
+      sweetAlertsError(
+        "Intenta de nuevo",
+        "No podemos procesar la conversación seleccionada",
+        "Ok"
+      );
+    }
+  };
 };
 
 //*** PARA CAMBIAR ESTILOS DE CONVERSACION ABIERTA */

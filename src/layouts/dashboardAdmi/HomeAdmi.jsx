@@ -11,17 +11,17 @@ const HomeAdmi = () => {
   const businessId = businessRedux || sessionStorage.getItem("businessId");
   const userRedux = useSelector((state) => state.user.id);
   const userId = userRedux || sessionStorage.getItem("userId");
-  const socialMedia = useSelector((state) => state.socialMedia)
-  
+  const socialMedia = useSelector((state) => state.socialMedia);
+
   useEffect(() => {
     if (businessId) {
-      dispatch(getBusinessByIdAction(businessId));
-      sessionStorage.setItem('SocialMedia', JSON.stringify(socialMedia))
-      if (userId) {
-        dispatch(getUserByIdAction(userId));
-      }
+      // dispatch(getBusinessByIdAction(businessId));
+      sessionStorage.setItem("SocialMedia", JSON.stringify(socialMedia));
+      // if (userId) {
+      //   dispatch(getUserByIdAction(userId));
+      // }
     }
-  }, [dispatch, businessId, userId]);
+  }, [dispatch, businessId]);
 
   const user = useSelector((state) => state.user);
 

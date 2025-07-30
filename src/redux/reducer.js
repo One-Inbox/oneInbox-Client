@@ -193,19 +193,78 @@ const rootReducer = (state = initialState, action) => {
         messageActive: action.payload,
       };
     //archivar - desarchivar mensajes
+    // case UPDATE_ARCHIVED_MESSAGE_RECEIVED:
+    //   return {
+    //     ...state,
+    //     messagesReceived: state.messagesReceived.map((message) =>
+    //       action.payload !== null && message && message.id === action.payload.id
+    //         ? { ...message, archived: action.payload.archived }
+    //         : message
+    //     ),
+    //     allMessagesReceived: state.allMessagesReceived.map((message) =>
+    //       action.payload !== null && message && message.id === action.payload.id
+    //         ? { ...message, archived: action.payload.archived }
+    //         : message
+    //     ),
+    //   };
+    // case UPDATE_ARCHIVED_MESSAGE_RECEIVED:
+    //   const updatedMessagesArray = Array.isArray(action.payload)
+    //     ? action.payload
+    //     : [action.payload];
+    //   console.log("RECEIVED IN REDUCER:", updatedMessagesArray);
+
+    //   return {
+    //     ...state,
+    //     messagesReceived: state.messagesReceived.map((message) => {
+    //       const updated = updatedMessagesArray.find((m) => m.id === message.id);
+    //       if (updated) {
+    //         console.log(
+    //           "Actualizando mensaje:",
+    //           updated.id,
+    //           "->",
+    //           updated.archived
+    //         );
+    //       }
+    //       return updated ? { ...message, archived: updated.archived } : message;
+    //     }),
+    //     allMessagesReceived: state.allMessagesReceived.map((message) => {
+    //       const updated = updatedMessagesArray.find((m) => m.id === message.id);
+    //       return updated ? { ...message, archived: updated.archived } : message;
+    //     }),
+    //   };
     case UPDATE_ARCHIVED_MESSAGE_RECEIVED:
+      // ✅ El payload siempre es un array de mensajes de la conversación
+      const updatedMessagesArray = action.payload;
+
+      console.log(
+        "RECEIVED IN REDUCER - Conversación actualizada:",
+        updatedMessagesArray.length,
+        "mensajes"
+      );
+
+      // ✅ Función helper para actualizar un array de mensajes
+      const updateMessagesArray = (messagesArray) => {
+        return messagesArray.map((message) => {
+          const updated = updatedMessagesArray.find((m) => m.id === message.id);
+          if (updated) {
+            console.log(
+              "Actualizando mensaje:",
+              updated.id,
+              "archived:",
+              message.archived,
+              "->",
+              updated.archived
+            );
+            return { ...message, archived: updated.archived };
+          }
+          return message;
+        });
+      };
+
       return {
         ...state,
-        messagesReceived: state.messagesReceived.map((message) =>
-          action.payload !== null && message && message.id === action.payload.id
-            ? { ...message, archived: action.payload.archived }
-            : message
-        ),
-        allMessagesReceived: state.allMessagesReceived.map((message) =>
-          action.payload !== null && message && message.id === action.payload.id
-            ? { ...message, archived: action.payload.archived }
-            : message
-        ),
+        messagesReceived: updateMessagesArray(state.messagesReceived),
+        allMessagesReceived: updateMessagesArray(state.allMessagesReceived),
       };
     //update estados
     case UPDATE_STATE_TO_READ_MESSAGE_RECEIVED:

@@ -13,7 +13,7 @@ const InboxListUser = () => {
   // 🔥 FORZAR RE-RENDER cuando cambien los mensajes
   useEffect(() => {
     setRenderKey((prev) => prev + 1);
-  }, [allMessagesReceived.length]);
+  }, [allMessagesReceived]);
 
   const [loading, setLoading] = useState(true);
 
@@ -32,9 +32,14 @@ const InboxListUser = () => {
   }, [allMessagesReceived.length]);
 
   const finalMessages = useMemo(() => {
+    console.log("todos los mensajes", allMessagesReceived.length);
     const notArchived = allMessagesReceived.filter(
-      (msg) => msg.archived === false
+      (msg) =>
+        msg.archived === false ||
+        msg.archived === undefined ||
+        msg.archived === null
     );
+    console.log("mensajes no archivados", notArchived.length);
 
     const sorted = notArchived.slice().sort((a, b) => {
       const timeA = timeStampToISO(a.timestamp);
@@ -56,12 +61,15 @@ const InboxListUser = () => {
 
     return Object.values(grouped);
   }, [allMessagesReceived, renderKey]);
+  console.log("mensajes finales-todos", finalMessages);
+  const archivados = finalMessages.filter((m) => m.archived === true);
+  console.log("mensajes finales-archivados", archivados);
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-green-400">
       {loading ? (
         <Spinner text={"loading..."} />
-      ) : allMessagesReceived.length ? (
+      ) : finalMessages.length ? (
         finalMessages.map((message) => {
           const {
             id,
