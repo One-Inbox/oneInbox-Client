@@ -16,41 +16,22 @@ const InboxCardUser = ({
   SocialMedium,
   ContactId,
   messagesReceived,
-  messagesCount, // 👈 Nueva prop para detectar cambios
+  messagesCount,
   renderKey,
   archived,
 }) => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(
-      `💳 Card ${ContactId} actualizada - Total mensajes: ${messagesCount}, RenderKey: ${renderKey}`
-    );
-  }, [messagesCount, renderKey, ContactId]);
 
   const socialMediaName =
     SocialMedium && SocialMedium.name
       ? SocialMedium.name.toUpperCase()
       : "RED SOCIAL";
-  //const upperSMName = socialMediaName && socialMediaName.toUpperCase();
-  // console.log("inboxUser", socialMediaName);
 
   const msgActive = useSelector((state) => state.messageActive);
 
-  // const allMsgByContact =
-  //   messagesReceived &&
-  //   messagesReceived.filter((message) => message.ContactId === ContactId);
-  // const noReadMsg =
-  //   allMsgByContact &&
-  //   allMsgByContact.filter((message) => message.state === "No Leidos");
-  //console.log("mensajes", allMsgByContact);
   const allMsgByContact = useMemo(() => {
     const filtered = messagesReceived?.filter(
       (message) => message.ContactId === ContactId
-    );
-    console.log(
-      `💳 Card ${ContactId}: ${
-        filtered?.length || 0
-      } mensajes del contacto (renderKey: ${renderKey})`
     );
     return filtered;
   }, [messagesReceived, ContactId, messagesCount, renderKey]);
@@ -59,22 +40,15 @@ const InboxCardUser = ({
     const unread = allMsgByContact?.filter(
       (message) => message.state === "No Leidos"
     );
-    console.log(
-      `💳 Card ${ContactId}: ${unread?.length || 0} mensajes no leídos`
-    );
     return unread;
-  }, [allMsgByContact]);
+  }, [allMsgByContact, state]);
   // 🔥 CALCULAR EL ESTADO DINÁMICO BASADO EN MENSAJES NO LEÍDOS
   const dynamicState = useMemo(() => {
     if (noReadMsg && noReadMsg.length > 0) {
-      return "No Leidos"; // Hay mensajes sin leer
+      return "No Leidos";
     }
     return state;
   }, [noReadMsg, state]);
-
-  console.log(
-    `💳 Card ${ContactId} - Estado original: ${state}, Estado dinámico: ${dynamicState}`
-  );
 
   const onClickHandler = (id) => {
     if (msgActive && msgActive !== id) {
@@ -84,8 +58,6 @@ const InboxCardUser = ({
     dispatch(setActiveMessageAction(id));
 
     if (noReadMsg) {
-      //console.log('depacho la action para mensajes nuevos:', noReadMsg);
-      //noReadMsg.forEach((message) => message && message.status && console.log(message.status));
       noReadMsg.forEach((message) =>
         dispatch(updateStateToReadMessageReceivedAction(message.id))
       );
@@ -112,14 +84,12 @@ const InboxCardUser = ({
             </div>
             <div className="flex flex-col items-end mr-4 ml-auto">
               <div className="w-8 h-8 bg-white rounded-full mb-1">
-                <StateMessagesIcons state={state} archived={archived} />
+                <StateMessagesIcons
+                  id={id}
+                  state={dynamicState}
+                  archived={archived ?? false}
+                />
               </div>
-              {/* 🔥 CONTADOR DE NO LEÍDOS PARA DEBUG */}
-              {noReadMsg && noReadMsg.length > 0 && (
-                <div className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {noReadMsg.length}
-                </div>
-              )}
             </div>
           </div>
         </div>
@@ -139,14 +109,12 @@ const InboxCardUser = ({
           </div>
           <div className="flex flex-col items-end mr-6 ml-auto">
             <div className="w-8 h-8 bg-white rounded-full mb-1">
-              <StateMessagesIcons state={state} archived={archived} />
+              <StateMessagesIcons
+                id={id}
+                state={dynamicState}
+                archived={archived ?? false}
+              />
             </div>
-            {/* 🔥 CONTADOR DE NO LEÍDOS PARA DEBUG */}
-            {noReadMsg && noReadMsg.length > 0 && (
-              <div className="bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {noReadMsg.length}
-              </div>
-            )}
           </div>
         </div>
       )}
