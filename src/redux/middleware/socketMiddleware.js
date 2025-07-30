@@ -9,6 +9,7 @@ import {
   SOCKET_DISCONNECTED, // ← AGREGAR ESTE IMPORT
   SOCKET_ERROR,
 } from "../types";
+import { sweetAlertsMessage } from "../../components/utils/alerts/alerts";
 
 // // socketMiddleware.js
 const socketMiddleware = (store) => {
@@ -26,7 +27,6 @@ const socketMiddleware = (store) => {
 
           socket.on("connect", () => {
             console.log("✅ Socket conectado:", socket.id);
-            // Dispatch successful connection
             store.dispatch({
               type: SOCKET_CONNECTED,
               payload: socket.id,
@@ -34,7 +34,11 @@ const socketMiddleware = (store) => {
           });
 
           socket.on("NEW_MESSAGE_RECEIVED", (message) => {
-            console.log("🔥 Nuevo mensaje recibido vía socket:", message);
+            sweetAlertsMessage(
+              "Atención",
+              "Has recibido un nuevo mensaje",
+              "OK"
+            );
             store.dispatch({
               type: ADD_NEW_MESSAGE_RECEIVED,
               payload: message,

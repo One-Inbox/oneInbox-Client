@@ -9,10 +9,7 @@ import {
   SOCKET_DISCONNECTED, // Agrega estos
   SOCKET_ERROR, // Agrega estos
 } from "../types";
-import {
-  sweetAlertsError,
-  sweetAlertsWarning,
-} from "../../components/utils/alerts/alerts";
+import { sweetAlertsError } from "../../components/utils/alerts/alerts";
 
 // Simplificadas - solo disparan el middleware
 export const connectSocket = () => ({
@@ -25,7 +22,6 @@ export const disconnectSocket = () => ({
 
 export const addNewMessageReceivedAction = (message) => {
   try {
-    sweetAlertsWarning("Atención", "Has recibido un nuevo mensaje", "OK");
     return {
       type: ADD_NEW_MESSAGE_RECEIVED,
       payload: message,

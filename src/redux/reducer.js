@@ -471,22 +471,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         socketConnected: false,
       };
-
-    // case ADD_NEW_MESSAGE_RECEIVED:
-    //   console.log(
-    //     "🔄 Reducer: Agregando nuevo mensaje recibido",
-    //     action.payload
-    //   );
-    //   return {
-    //     ...state,
-    //     messagesReceived: [...state.messagesReceived, action.payload],
-    //     allMessagesReceived: [...state.allMessagesReceived, action.payload],
-    //   };
     case ADD_NEW_MESSAGE_RECEIVED:
-      console.log(
-        "🔄 Reducer: Agregando nuevo mensaje recibido",
-        action.payload
-      );
       return {
         ...state,
         messagesReceived: [...state.messagesReceived, action.payload],
