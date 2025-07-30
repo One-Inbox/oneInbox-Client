@@ -2,7 +2,6 @@ import React from "react";
 
 const StateMessagesIcons = ({ id, state, archived = false }) => {
   let iconPath = "/iconoLogoBlanco.svg";
-  console.log("props recibidas", state, archived);
 
   if (archived) {
     iconPath = "/states/archivados.svg";
