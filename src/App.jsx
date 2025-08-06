@@ -15,6 +15,8 @@ import {
   InboxAdmi,
   InboxDetailAdmi,
   UsersManagement,
+  AddUser,
+  EditUser,
   MetricsAnalysis,
   MercadoLibreAuth,
 } from "./layouts";
@@ -61,6 +63,8 @@ const App = () => {
       location.pathname === "/dashboardAdmi/profile/edit" ||
       location.pathname === "/dashboardAdmi/profile/edit-business" ||
       location.pathname === "/dashboardAdmi/profile/edit-socialMedia" ||
+      location.pathname === "/dashboardAdmi/usersManagement/addUser" ||
+      location.pathname.includes("/dashboardAdmi/usersManagement/edit/") ||
       location.pathname.includes("/MeLi_auth") ? null : (
         <div>
           <NavBar />
@@ -98,6 +102,14 @@ const App = () => {
             <Route
               path="/dashboardAdmi/usersManagement"
               element={<UsersManagement />}
+            />
+            <Route
+              path="/dashboardAdmi/usersManagement/addUser"
+              element={<AddUser />}
+            />
+            <Route
+              path="/dashboardAdmi/usersManagement/edit/:userId"
+              element={<EditUser />}
             />
             <Route
               path="/dashboardAdmi/metrics"

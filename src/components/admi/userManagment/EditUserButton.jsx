@@ -1,8 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUserByAdmiAction } from "../../../redux/actions/actionsUsers";
 
-const EditUserButton = () => {
-  const handlerOnClick = () => {
-    // console.log("click en edit user");
+const EditUserButton = ({ userId }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handlerOnClick = async () => {
+    await dispatch(getUserByAdmiAction(userId));
+    navigate(`/dashboardAdmi/usersManagement/edit/${userId}`);
   };
 
   return (

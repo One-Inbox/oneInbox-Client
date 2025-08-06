@@ -35,25 +35,25 @@ const UserManagment = () => {
       <div className="w-48 flex-shrink-0">
         <SideBarA user={user} />
       </div>
-      <div className="flex-1 flex justify-center items-center">
+      {/* <div className="flex-1 flex justify-center items-center">
         <img
           //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
           src="/pagina en construccion.png"
           alt="sector en construccion"
           className="w-auto h-3/4"
         />
-      </div>
+      </div> */}
 
       {/* Contenedor del menú y tabla */}
-      {/* <div className="flex flex-row flex-grow overflow-hidden">
+      <div className="flex flex-row flex-grow overflow-hidden">
         <div className="w-56 flex-shrink-0 bg-white shadow-md h-full relative z-20">
           <MenuUserManagment />
-        </div> */}
-      {/* Tabla que ocupa el resto del espacio */}
-      {/* <div className="flex-grow overflow-auto">
+        </div>
+        {/* Tabla que ocupa el resto del espacio */}
+        <div className="flex-grow overflow-auto">
           <UsersTable />
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

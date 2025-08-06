@@ -6,12 +6,20 @@ import IconUser from "../../utils/selectUser/IconUser";
 import PrivilegeIcons from "./PrivilegeIcons";
 import EditUserButton from "./EditUserButton";
 import DeleteUserButton from "./DeleteUserButton";
+import FormattedTimestamp from "../../utils/FormatedTimeStamp";
+import timeStampToISO from "../../utils/timeStampToISO";
 
 const UsersTable = () => {
   const allUsers = useSelector((state) => state.users);
-  //console.log("usuario", allUsers[0]);
+  console.log("usuario", allUsers);
 
   const [loading, setLoading] = useState(true);
+
+  const onlyDate = (date) => {
+    const cleanDate = date.includes("T") ? date.split("T")[0] : date;
+    const [year, month, day] = cleanDate.split("-");
+    return `${day}-${month}-${year}`;
+  };
 
   useEffect(() => {
     let timeoutId;
@@ -35,8 +43,14 @@ const UsersTable = () => {
             <th className="py-2 text-xs text-center text-normal font-['Oswald']">
               USUARIO
             </th>
+            <th className="py-2 text-xs text-center text-normal font-['Oswald']">
+              FECHA ALTA
+            </th>
             <th className=" pr-4 py-2 text-xs text-center text-normal font-['Oswald']">
               ACTIVO
+            </th>
+            <th className=" pr-4 py-2 text-xs text-center text-normal font-['Oswald']">
+              FECHA BAJA
             </th>
             <th className=" px-4 py-2 text-xs text-center text-normal font-['Oswald']">
               TELEFONO
@@ -83,11 +97,24 @@ const UsersTable = () => {
                         <span>{user.name.toUpperCase()}</span>
                       </div>
                     </td>
+                    <td className=" px-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize">
+                      {onlyDate(user.admissionDate)}
+                    </td>
                     <td className=" pr-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize w-6 h-auto">
-                      <img
-                        src={"/managmentIcons/userActive-icon.svg"}
-                        alt="activo"
-                      />
+                      {user.active ? (
+                        <img
+                          src={"/managmentIcons/userActive-icon.svg"}
+                          alt="activo"
+                        />
+                      ) : (
+                        <img
+                          src={"/managmentIcons/userUnactive-icon.svg"}
+                          alt="inactivo"
+                        />
+                      )}
+                    </td>
+                    <td className=" px-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize">
+                      {user.dischargeDate ? onlyDate(user.dischargeDate) : "-"}
                     </td>
                     <td className=" px-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize">
                       {user.phone}
@@ -95,13 +122,13 @@ const UsersTable = () => {
                     <td className=" px-4 py-2 text-center text-xs font-normal font-['Inter'] ">
                       {user.email}
                     </td>
-                    <td className=" pl-12 py-2 text-center ">
+                    <td className=" pl-12 py-2 text-center">
                       <PrivilegeIcons privilege={user.privilege} />
                     </td>
                     <td className="px-4 py-2 text-center text-xs font-normal font-['Inter'] capitalize mx-4">
                       <div className="flex items-center justify-center space-x-6">
-                        <EditUserButton />
-                        <DeleteUserButton />
+                        <EditUserButton userId={user.id} />
+                        <DeleteUserButton user={user} />
                       </div>
                     </td>
                   </tr>

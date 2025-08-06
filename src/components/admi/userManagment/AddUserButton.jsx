@@ -1,8 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddUserButton = () => {
+  const navigate = useNavigate();
   const handlerOnClick = () => {
-    //console.log("click en add user");
+    navigate("/dashboardAdmi/usersManagement/addUser");
   };
 
   return (

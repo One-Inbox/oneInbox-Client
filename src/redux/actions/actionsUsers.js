@@ -11,6 +11,7 @@ import {
   UPDATE_USER,
   ADMI_LOGIN,
   GET_USER_BY_ADMI,
+  CREATE_USER,
 } from "../types.js";
 
 //LOCALHOST
@@ -31,11 +32,7 @@ export const getAllUsersAction = () => {
       dispatch({ type: GET_ALL_USERS, payload: users });
       //console.log("voy al reducer de getAllUsers");
     } catch (error) {
-      sweetAlertsError(
-        "Intenta de nuevo",
-        "No podemos mostrar a los miembros de tu equipo",
-        "Ok"
-      );
+      throw error;
     }
   };
 };
@@ -48,13 +45,7 @@ export const getUserByIdAction = (userId) => {
       const user = response.data;
       dispatch({ type: GET_USER_BY_ID, payload: user });
     } catch (error) {
-      if (!userId) {
-        sweetAlertsError(
-          "Intenta de nuevo",
-          "No encontramos el usuario solicitado",
-          "Ok"
-        );
-      }
+      throw error;
     }
   };
 };
@@ -74,7 +65,7 @@ export const updateUserAction = (userId, input) => {
       dispatch({ type: UPDATE_USER });
       //console.log("salgo al reducer");
     } catch (error) {
-      //console.log(error.message);
+      throw error;
     }
   };
 };
@@ -93,11 +84,21 @@ export const getUserByAdmiAction = (userId) => {
       const user = response.data;
       dispatch({ type: GET_USER_BY_ADMI, payload: user });
     } catch (error) {
-      sweetAlertsError(
-        "Intenta de nuevo",
-        "No encontramos el usuario solicitado",
-        "Ok"
-      );
+      throw error;
+    }
+  };
+};
+
+export const createUser = (input) => {
+  return async (dispatch) => {
+    try {
+      console.log("ENVIANDO A BACKEND:", input);
+      const response = await axios.post(`${URL_API}/user/create`, input);
+      console.log("RESPUESTA BACKEND:", response.data);
+      const user = response.data;
+      dispatch({ type: CREATE_USER, payload: user });
+    } catch (error) {
+      throw error;
     }
   };
 };

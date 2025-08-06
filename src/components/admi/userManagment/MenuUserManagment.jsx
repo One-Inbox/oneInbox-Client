@@ -1,5 +1,5 @@
 import React from "react";
-import FilterByUser from "../FilterByUser";
+import SearchUser from "./SearchUser";
 import FilterByPrivilege from "./FilterByPrivilege";
 import FilterByActiveUser from "./FilterByActiveUser";
 import ResetButton from "../../utils/buttons/ResetButton";
@@ -9,7 +9,7 @@ const MenuUserManagment = () => {
   return (
     <div className="sticky w-56 h-screen overflow-y-auto overflow-x-hidden bg-green-400 flex flex-col py-4">
       <div className="flex flex-col justify-between mt-6">
-        <FilterByUser />
+        <SearchUser />
       </div>
       <div className="mt-10">
         <FilterByPrivilege />

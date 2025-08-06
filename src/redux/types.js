@@ -4,6 +4,7 @@ export const CLEAN_USER_BY_ID = "CLEAN_USER_BY_ID";
 export const ADMI_LOGIN = "ADMI_LOGIN";
 export const UPDATE_USER = "UPDATE_USER";
 export const GET_USER_BY_ADMI = "GET_USER_BY_ADMI";
+export const CREATE_USER = "CREATE_USER";
 
 //filtros
 export const FILTER_BY_SOCIAL_MEDIA = "FILTER_BY_SOCIAL_MEDIA";

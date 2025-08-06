@@ -6,15 +6,16 @@ import LoginAdmi from "../components/login/LoginAdmi";
 import HomeAdmi from "./dashboardAdmi/HomeAdmi";
 import Profile from "./dashboardAdmi/Profile";
 import EditProfile from "../components/admi/profile/formsEdit/EditProfile";
-import EditBusiness from "../components/admi/profile/formsEdit/EditBusiness"
+import EditBusiness from "../components/admi/profile/formsEdit/EditBusiness";
 import EditSocialMedia from "../components/admi/profile/formsEdit/EditSocialMedia";
 import InboxAdmi from "./dashboardAdmi/InboxAdmi";
 import InboxDetailAdmi from "./dashboardAdmi/InboxDetailAdmi";
 import UsersManagement from "./dashboardAdmi/UsersManagement";
+import AddUser from "../components/admi/userManagment/AddUser";
+import EditUser from "../components/admi/userManagment/EditUser";
 import MetricsAnalysis from "./dashboardAdmi/MetricsAnalysis";
 import BusinessLogin from "../components/login/BusinessLogin";
 import MercadoLibreAuth from "./auth/MercadoLibreAuth";
-
 
 export {
   LandingPage,
@@ -31,6 +32,8 @@ export {
   InboxAdmi,
   InboxDetailAdmi,
   UsersManagement,
+  AddUser,
+  EditUser,
   MetricsAnalysis,
   MercadoLibreAuth,
 };

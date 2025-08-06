@@ -39,6 +39,7 @@ import {
   SOCKET_CONNECTED,
   SOCKET_DISCONNECTED,
   SOCKET_ERROR,
+  CREATE_USER,
 } from "./types";
 
 const initialState = {
@@ -157,6 +158,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         userByAdmi: action.payload,
       };
+    case CREATE_USER: {
+      return {
+        ...state,
+      };
+    }
     //**login logout Administrador **/
     case ADMI_LOGIN:
       return {
