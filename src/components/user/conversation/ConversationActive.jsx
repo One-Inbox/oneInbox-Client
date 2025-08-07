@@ -9,7 +9,6 @@ const ConversationActive = () => {
   const [isActive, setIsActive] = useState(false);
   const [loading, setLoading] = useState(true);
   const contact = useSelector((state) => state.contact);
-  //console.log("contacto", contact);
 
   useEffect(() => {
     if (contact.id) {

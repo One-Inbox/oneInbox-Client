@@ -16,7 +16,7 @@ import {
 
 const InboxAdmiTable = () => {
   const allMessagesReceived = useSelector((state) => state.messagesReceived);
-  //console.log("allMessagesReceived", allMessagesReceived);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -48,7 +48,6 @@ const InboxAdmiTable = () => {
       seenContactIds.add(message.ContactId); // ==> agrego el contacto en el conjunto
     }
   }
-  //console.log("messagesByContact", messagesByContact);
 
   return (
     <div>
@@ -101,13 +100,12 @@ const InboxAdmiTable = () => {
               messagesByContact.map((message, index) => {
                 let allMsgSentByContact = message.Contact.MsgSents;
                 let allMsgReceivedByContact = message.Contact.MsgReceiveds;
-                //console.log("allMsgSentByContact", allMsgSentByContact);
 
                 let lastMsgSent = selectMessage(
                   allMsgSentByContact,
                   "lastFirst"
                 );
-                //console.log("ultimo mensaje enviado", lastMsgSent);
+
                 let firstMsgReceived = selectMessage(
                   allMsgReceivedByContact,
                   "firstFirst"

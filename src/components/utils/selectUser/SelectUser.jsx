@@ -10,7 +10,7 @@ import IconUser from "./IconUser";
 const SelectUser = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
-  //console.log("usuarios", users);
+  const usersActive = users && users.filter((u) => u.active === true);
 
   const user = useSelector((state) => state.user);
 
@@ -46,8 +46,8 @@ const SelectUser = () => {
           <option value="" hidden={!user}>
             usuario...
           </option>
-          {users &&
-            users.map((user, index) => {
+          {usersActive &&
+            usersActive.map((user, index) => {
               return (
                 <option key={index} value={user.id}>
                   {user.name.toUpperCase()}

@@ -23,13 +23,12 @@ export const getAllSocialMediaByBusinessAction = () => {
     try {
       const response = await axios.get(`${URL_API}/socialMedia/active`);
       const socialMedia = response.data;
-      //console.log('socialMedia:', socialMedia);
       dispatch({
         type: GET_ALL_SOCIAL_MEDIA_BY_BUSINESS,
         payload: socialMedia,
       });
     } catch (error) {
-      //console.log(error.message);
+      throw error;
     }
   };
 };
@@ -43,7 +42,7 @@ export const updateSocialMediaAction = (socialMediaId, input) => {
       );
       dispatch({ type: UPDATE_SOCIAL_MEDIA });
     } catch (error) {
-      //console.log(error.message);
+      throw error;
     }
   };
 };
@@ -55,7 +54,6 @@ export const postCodeToAuthMeLiAction = (code, navigate) => {
         `${URL_API}/mercadolibre/auth/callback`,
         code
       );
-      //sconsole.log("MELI-AUTH: Tokens guardados con éxito", response.data);
       dispatch({ type: POST_CODE_TO_AUTH_MELI, payload: response.data });
       setTimeout(() => {
         navigate("/");

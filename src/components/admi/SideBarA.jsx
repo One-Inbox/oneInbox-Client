@@ -4,8 +4,6 @@ import SideBarAButton from "../utils/buttons/SideBarAButton";
 import routes from "../../../public/json/routes";
 
 const SideBarA = ({ user }) => {
-  //const user = useSelector((state) => state.user);
-  //   console.log("user", user);
   return (
     <div className="w-48 h-screen bg-sky-950 fixed top-0">
       <img

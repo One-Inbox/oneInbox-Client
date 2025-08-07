@@ -16,21 +16,20 @@ const EditSocialMedia = () => {
   //logica para ordenar las redes sociales activas
   //ver de refactorizar y pasar esta logica a un archivo aparte
   const socialMedia = useSelector((state) => state.socialMedia);
-  //console.log("redes sociales", socialMedia);
+
   const socialMediaUserNotNull = socialMedia.filter(
     (sm) => sm.dataUser !== "null"
   );
-  //console.log("socialMediaUserNotNull", socialMediaUserNotNull);
+
   const socialMediaNotNull = socialMediaUserNotNull.filter(
     (sm) => sm.SocialMedia.length >= 1
   );
-  //console.log("socialMediaNotNull", socialMediaNotNull);
+
   const socialMediaSortered = socialMediaNotNull
     ? socialMediaNotNull.sort((a, b) => {
         return a.SocialMedia[0].name.localeCompare(b.SocialMedia[0].name);
       })
     : socialMediaNotNull;
-  //console.log("sortered", socialMediaSortered);
 
   const half = Math.ceil(socialMediaSortered.length / 2);
   const groupA =
@@ -66,7 +65,7 @@ const EditSocialMedia = () => {
       dataUser: input[id], // El valor modificado por el usuario
     }));
     try {
-      if(previewData === input) {
+      if (previewData === input) {
         navigate("/dashboardAdmi/profile");
       } else {
         updatedSocialMedia.map((sm) =>

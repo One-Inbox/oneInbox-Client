@@ -11,7 +11,6 @@ import timeStampToISO from "../../utils/timeStampToISO";
 
 const UsersTable = () => {
   const allUsers = useSelector((state) => state.users);
-  console.log("usuario", allUsers);
 
   const [loading, setLoading] = useState(true);
 

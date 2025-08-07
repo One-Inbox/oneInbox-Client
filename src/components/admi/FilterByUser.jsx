@@ -10,14 +10,12 @@ const FilterByUser = () => {
 
   const selectHandler = async (e) => {
     const value = e.target.value;
-    //console.log("value en filter", value);
 
     if (value === "") {
       sessionStorage.removeItem("filterUser");
     } else {
       sessionStorage.setItem("filterUser", value);
       dispatch(filterByUserAction(value));
-      //console.log("despacho filter con value", value);
     }
   };
 

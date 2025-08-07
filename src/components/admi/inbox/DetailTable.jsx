@@ -16,19 +16,18 @@ import { selectMessage } from "../../utils/sortedMessages";
 const DetailTable = ({ state }) => {
   const { contactId } = useParams();
   const dispatch = useDispatch();
-  //console.log("contactId", contactId);
   const contact = useSelector((state) => state.contact);
-  console.log("contact", contact);
+
   const msgReceiveds =
     contact && contact.MsgReceiveds && contact.MsgReceiveds.length
       ? contact.MsgReceiveds
       : [];
-  console.log("msgReceiveds", msgReceiveds);
+
   const msgSents =
     contact && contact.MsgSents && contact.MsgSents.length
       ? contact.MsgSents
       : [];
-  console.log("msgSents", msgSents);
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -50,24 +49,10 @@ const DetailTable = ({ state }) => {
     };
   }, [contactId]);
   const lastMsgReceived = selectMessage(msgReceiveds, "lastFirst");
-  console.log("ultimo mensaje recibido", lastMsgReceived);
+
   const firstMsgReceived = selectMessage(msgReceiveds, "firstFirst");
-  console.log("primer mensaje recibido", firstMsgReceived);
+
   const lastMsgSent = selectMessage(msgSents, "lastFirst");
-  // const sortMsgReceiveds =
-  //   msgReceiveds && msgReceiveds.length > 1
-  //     ? [...msgReceiveds].sort((a, b) => b.timestamp - a.timestamp)
-  //     : msgReceiveds;
-  // const lastMsgReceived = sortMsgReceiveds ? sortMsgReceiveds[0] : null;
-  // console.log("ultimo mensaje recibido", lastMsgReceived);
-  // const msgSents = contact && contact.MsgSents ? contact.MsgSents : [];
-  // const sortMsgSents =
-  //   msgSents && msgSents.length > 1
-  //     ? [...msgSents].sort((a, b) => b.timestamp - a.timestamp)
-  //     : msgSents;
-  // const lastMsgSent = sortMsgSents ? sortMsgSents[0] : null;
-  // console.log("ultimo mensaje enviado", lastMsgSent);
-  // console.log("estado", state);
 
   return (
     <div>

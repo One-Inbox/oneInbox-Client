@@ -32,14 +32,12 @@ const InboxListUser = () => {
   }, [allMessagesReceived.length]);
 
   const finalMessages = useMemo(() => {
-    console.log("todos los mensajes", allMessagesReceived.length);
     const notArchived = allMessagesReceived.filter(
       (msg) =>
         msg.archived === false ||
         msg.archived === undefined ||
         msg.archived === null
     );
-    console.log("mensajes no archivados", notArchived.length);
 
     const sorted = notArchived.slice().sort((a, b) => {
       const timeA = timeStampToISO(a.timestamp);
@@ -61,9 +59,7 @@ const InboxListUser = () => {
 
     return Object.values(grouped);
   }, [allMessagesReceived, renderKey]);
-  console.log("mensajes finales-todos", finalMessages);
   const archivados = finalMessages.filter((m) => m.archived === true);
-  console.log("mensajes finales-archivados", archivados);
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-green-400">

@@ -11,7 +11,7 @@ import { getContactByIdAction } from "../../redux/actions/actionContact";
 const InboxDetailAdmi = () => {
   const dispatch = useDispatch();
   const { contactId } = useParams();
-  //console.log("contacto por params", contactId);
+
   //chequeo que la ubicacion del link sea impar
   const location = useLocation();
   const isOdd = location.state?.isOdd;

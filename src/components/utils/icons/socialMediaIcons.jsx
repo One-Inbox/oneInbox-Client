@@ -4,7 +4,6 @@ const SocialMediaIcons = ({ socialMedia }) => {
   const socialMediaName = Array.isArray(socialMedia)
     ? socialMedia[0]
     : socialMedia;
-  //console.log("socialMediaName recibido:", socialMediaName);
 
   return (
     <div>

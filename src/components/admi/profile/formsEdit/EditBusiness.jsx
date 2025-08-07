@@ -11,7 +11,7 @@ import FormExitButton from "../../../utils/buttons/FormExitButton";
 
 const EditBusiness = () => {
   const business = useSelector((state) => state.business);
-  //   console.log(business);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

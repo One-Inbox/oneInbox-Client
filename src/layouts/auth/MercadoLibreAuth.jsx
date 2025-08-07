@@ -7,13 +7,12 @@ import Spinner from "../../components/utils/spinners/Spinner";
 const MercadoLibreAuth = () => {
   const [searchParams] = useSearchParams();
   const code = { code: searchParams.get("code") };
-  //console.log('respuesta del search:', code);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector((state) => state.meliAuthError);
 
   useEffect(() => {
-    //console.log('MercadoLibreAuth montado');
+    console.log("MercadoLibreAuth montado");
   }, []);
 
   useEffect(() => {

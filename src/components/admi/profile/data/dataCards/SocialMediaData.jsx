@@ -6,7 +6,7 @@ const SocialMediaData = () => {
   const business = useSelector((state) => state.business);
   const socialMediabyRedux = useSelector((state) => state.socialMedia);
   // Recuperar y parsear datos del sessionStorage
-  const socialMediabyStorage = sessionStorage.getItem('SocialMedia');
+  const socialMediabyStorage = sessionStorage.getItem("SocialMedia");
   const parsedSocialMedia = socialMediabyStorage
     ? JSON.parse(socialMediabyStorage)
     : [];
@@ -16,22 +16,20 @@ const SocialMediaData = () => {
     socialMediabyRedux && socialMediabyRedux.length > 0
       ? socialMediabyRedux
       : parsedSocialMedia;
-  //console.log("redes sociales", socialMedia);
+
   const socialMediaUserNotNull = socialMedia.filter(
     (sm) => sm.dataUser !== "null"
   );
-  //console.log("socialMediaUserNotNull", socialMediaUserNotNull);
 
   const socialMediaNotNull = socialMediaUserNotNull.filter(
     (sm) => sm.SocialMedia.length >= 1
   );
-  console.log("socialMediaNotNull", socialMediaNotNull);
+
   const socialMediaSortered = socialMediaNotNull
     ? socialMediaNotNull.sort((a, b) => {
         return a.SocialMedia[0].name.localeCompare(b.SocialMedia[0].name);
       })
     : socialMediaNotNull;
-  //console.log("sortered", socialMediaSortered);
 
   const half = Math.ceil(socialMediaSortered.length / 2);
   const groupA =
@@ -41,8 +39,6 @@ const SocialMediaData = () => {
 
   const groupB =
     socialMedia.length > 1 ? socialMediaSortered.slice(half) : false;
-  // console.log("grupoA", groupA);
-  // console.log("grupoB", groupB);
 
   return (
     <div className="w-[48.5rem] h-auto bg-neutral-200 rounded-br-[50px] rounded-tr-[50px] rounded-bl-[50px] relative">

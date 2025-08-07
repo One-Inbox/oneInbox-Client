@@ -4,8 +4,6 @@ import { useState } from "react";
 import { filterByStateAction } from "../../../redux/actions/actionFilters";
 
 const FilterByState = ({ statesList }) => {
-  //console.log("statesList", statesList);
-
   const dispatch = useDispatch();
 
   // Estado para almacenar el filtro seleccionado
@@ -18,7 +16,6 @@ const FilterByState = ({ statesList }) => {
     setSelectedFilter(e.target.value);
     dispatch(filterByStateAction(e.target.value));
     sessionStorage.setItem("state", e.target.value);
-    //console.log("despacho el filtro por state con payload", e.target.value);
   };
 
   return (
@@ -29,7 +26,6 @@ const FilterByState = ({ statesList }) => {
             <div key={index} className="flex items-center m-2">
               <img src={state.icon} className="w-8 h-8" />
               <label className=" text-white text-xs font-normal font-['Oswald'] capitalize ml-3 ">
-                {/* {console.log("nombre", state.name)} */}
                 {state.name.toUpperCase()}
                 <input
                   type="radio"

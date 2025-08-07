@@ -11,8 +11,6 @@ import {
 } from "../../../redux/actions/actionsUsers";
 
 const DeleteUserButton = ({ user }) => {
-  console.log("user en delete", user);
-
   const dispatch = useDispatch();
 
   const handlerOnClick = async () => {

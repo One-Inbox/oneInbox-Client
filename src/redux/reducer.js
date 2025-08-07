@@ -102,8 +102,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
       };
     case LOGIN_BUSINESS:
-      //console.log('entro en el reducer del login con payload', action.payload);
-
       return {
         ...state,
         business: action.payload,
@@ -121,24 +119,19 @@ const rootReducer = (state = initialState, action) => {
       };
     //***--REDUCER DE USUARIOS-- */
     case GET_ALL_USERS:
-      //console.log('entro al reducer de getAllUser con payload:', action.payload);
       let allBusinessUsers = action.payload;
-      //console.log('payload', allBusinessUsers);
-      //console.log('business Id', state.business.id);
       let businessId =
         state.business.id || sessionStorage.getItem("businessId");
 
       const usersFiltered = allBusinessUsers.filter(
         (user) => user.BusinessId === businessId
       );
-      //console.log('usuarios filtrados por business en getAllUsers', usersFiltered);
       return {
         ...state,
         users: usersFiltered,
         allUsers: usersFiltered,
       };
     case GET_USER_BY_ID:
-      //console.log('3A - entro al reducer de GET_USER_BY_ID', action.payload);
       return {
         ...state,
         user: action.payload,
@@ -153,7 +146,6 @@ const rootReducer = (state = initialState, action) => {
         user: {},
       };
     case GET_USER_BY_ADMI:
-      //console.log('3A - entro al reducer de GET_USER_BY_ID', action.payload);
       return {
         ...state,
         userByAdmi: action.payload,
@@ -172,16 +164,13 @@ const rootReducer = (state = initialState, action) => {
     //**REDUCER MENSAJES RECIBIDOS */
     case GET_ALL_MESSAGES_RECIVED:
       const messages = action.payload;
-      //console.log('todos los mensajes', messages);
 
       let business_Id =
         state.business.id || sessionStorage.getItem("businessId");
-      //console.log('id empresa', business_Id);
 
       const allMessagesFiltered = messages.filter(
         (message) => message.BusinessId === business_Id
       );
-      //console.log('mensajes por empresa', allMessagesFiltered);
 
       return {
         ...state,
@@ -274,10 +263,6 @@ const rootReducer = (state = initialState, action) => {
       };
     //update estados
     case UPDATE_STATE_TO_READ_MESSAGE_RECEIVED:
-      //console.log(
-      //   "update to read: entro al reducer con payload",
-      //   action.payload
-      // );
       return {
         ...state,
         messagesReceived: state.messagesReceived.map((message) =>
@@ -316,7 +301,6 @@ const rootReducer = (state = initialState, action) => {
       };
     //MENSAJES ENVIADOS
     case CREATE_MESSAGE_SEND:
-      //console.log('entro en el reducer, envio el objeto al back');
       return {
         ...state,
       };
@@ -330,11 +314,6 @@ const rootReducer = (state = initialState, action) => {
         messagesSent: allMessagesSentFiltered,
       };
     case SET_UPLOAD_FILE:
-      // console.log(
-      //   "entro al reducer setUploadFile con payload:",
-      //   action.payload
-      // );
-
       return {
         ...state,
         uploadedFile: action.payload,
@@ -362,7 +341,6 @@ const rootReducer = (state = initialState, action) => {
       const allMsgsReceived = state.allMessagesReceived;
       const payload =
         action.payload === "Facebook" ? "Messenger" : action.payload;
-      //console.log('payload: ', payload);
 
       if (payload === "TODOS") {
         return {
@@ -462,10 +440,7 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case FILTER_BY_USER:
-      //console.log("entro en el reducer con payload", action.payload);
-
       const allMsgsRecd = state.allMessagesReceived;
-      //console.log('mensajes recibidos en filtro', allMsgsRecd);
       if (action.payload === "TODOS") {
         return {
           ...state,
@@ -560,7 +535,6 @@ const rootReducer = (state = initialState, action) => {
     //** REDUCER DE REDES SOCIALES */
     case GET_ALL_SOCIAL_MEDIA_BY_BUSINESS:
       let allSocialMedia = action.payload;
-      //console.log('redes sociales desde el reducer', allSocialMedia);
 
       //esta parte del codigo debera descomentarse cuando la actualizacion del token de Meli cambie la red social activa en lugar de crear una nueva
       //const socialMediaFiltered = state.business && allSocialMedia.filter(sm => sm.Businesses.length && sm.Businesses[0].id === state.business.id)

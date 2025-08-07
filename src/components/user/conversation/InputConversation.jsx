@@ -23,14 +23,10 @@ const InputConversation = () => {
     idSeller: "", //id como vendedor en mercado libre, una vez realizada la compra
     idBuyer: "", //id del comprador en mercado libre, compra realizada
   });
-
-  //console.log("Esto es lo que sale del input:", input)
   const dispatch = useDispatch();
   const contact = useSelector((state) => state.contact);
-  //console.log("contacto", contact);
 
   const socialMedia = useSelector((state) => state.socialMedia);
-  //console.log("socialMedia", socialMedia);
 
   const findSocialMedia = socialMedia.find(
     (sm) => sm.socialMediaId === contact.SocialMediumId
@@ -40,8 +36,6 @@ const InputConversation = () => {
       ? findSocialMedia.accessToken
       : null;
 
-  // console.log('token', token);
-
   const user = useSelector((state) => state.user);
   const uploadedFile = useSelector((state) => state.uploadedFile);
   const business = useSelector((state) => state.business);
@@ -50,9 +44,9 @@ const InputConversation = () => {
     contact && contact.MsgReceiveds && contact.MsgReceiveds.length > 1
       ? contact.MsgReceiveds.sort((a, b) => b.timestamp - a.timestamp)
       : contact.MsgReceiveds;
-  //console.log("mensajes", messages);
+
   const contactChatId = messages ? messages[0].chatId : null;
-  //console.log("chatId", contactChatId);
+
   const contactIdSeller = messages ? messages[0].idSeller : null;
   const contactIdBuyer = messages ? messages[0].idBuyer : null;
 
@@ -101,9 +95,6 @@ const InputConversation = () => {
       idSeller: contactIdSeller,
       idBuyer: contactIdBuyer,
     });
-    //}
-    //console.log("Esto es lo que sale del input:", input)
-    //console.log("input", input);
   };
 
   const handleSubmit = (e) => {
@@ -123,12 +114,10 @@ const InputConversation = () => {
         idBuyer: contactIdBuyer,
       });
     }
-    //console.log("input SUBMIT: ", input);
 
     //setPreview(false);
     if (input.UserId && input.message && input.chatId) {
       dispatch(createMessageSentAction(input));
-      //console.log("LOG2-envio el mensaje: ", input);
       // newMessages.forEach((message) =>
       //   dispatch(updateStateMessageReceivedAction(message.id))
       // );

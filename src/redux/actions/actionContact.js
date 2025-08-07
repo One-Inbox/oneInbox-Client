@@ -39,7 +39,6 @@ export const getContactByIdAction = (contactId) => {
     try {
       const response = await axios.get(`${URL_API}/contact/${contactId}`);
       const contact = response.data;
-      //console.log("contact en action", contact);
 
       dispatch({ type: GET_CONTACT_BY_ID, payload: contact });
     } catch (error) {

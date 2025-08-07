@@ -1,15 +1,13 @@
 import React from "react";
 
 const IconUserProfile = ({ name }) => {
-  //console.log("name: ", name);
   const nameArray = name ? name.split(" ") : null;
-  //console.log("name en array: ", nameArray);
+
   const firstNameI = name ? nameArray[0][0].toUpperCase() : null;
-  //console.log("inicial del primer nombre: ", firstNameI);
+
   const lastNameI = name ? nameArray[1][0] : null;
-  //console.log("inicial del apellido: ", lastNameI);
+
   const fullNameI = name ? `${firstNameI}${lastNameI}` : null;
-  //console.log(fullNameI);
 
   return (
     <div>

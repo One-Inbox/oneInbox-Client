@@ -5,7 +5,6 @@ const FormExitButton = (path) => {
   const navigate = useNavigate();
 
   const handlerOnClick = () => {
-    //console.log("path", path);
     navigate(path.path);
   };
 

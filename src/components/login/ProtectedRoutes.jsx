@@ -32,8 +32,6 @@ export const ProtectRoutes = ({ type }) => {
     const isBusinessLogged = sessionStorage.getItem("loginBusiness") === "true";
     const isAdmiLogged = sessionStorage.getItem("loginAdmi") === "true";
 
-    //console.log("isBusinessLogged:", isBusinessLogged);
-    // console.log("isAdmiLogged:", isAdmiLogged);
     const checkAccess = async () => {
       if (type === "business" && !isBusinessLogged) {
         await sweetAlertsError(

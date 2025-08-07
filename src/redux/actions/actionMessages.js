@@ -27,14 +27,10 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllMessagesReceivedAction = () => {
-  //console.log("URL_API en getAllMessagesReceived ", URL_API);
-
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${URL_API}/message/received`);
-      //console.log("respusta del back en action getAllMessages", response);
       const messages = response.data;
-      //console.log("despacho la action getALlMessages con Payload", messages);
       dispatch({ type: GET_ALL_MESSAGES_RECIVED, payload: messages });
 
       const { socket } = getState(); // socket desde el estado global
@@ -48,7 +44,6 @@ export const getAllMessagesReceivedAction = () => {
         });
       }
     } catch (error) {
-      //console.log(error);
       if (error.response.status !== 400) {
         sweetAlertsError(
           "Intenta de nuevo",
@@ -162,13 +157,6 @@ export const updateArchivedMessageReceivedAction = (messageId) => {
 
       const { messages, newState, conversationId } = response.data;
 
-      console.log(
-        `Conversación ${conversationId} ${
-          newState ? "archivada" : "desarchivada"
-        }`
-      );
-      console.log(`${messages.length} mensajes actualizados`);
-
       // ✅ Despachar TODOS los mensajes de la conversación de una vez
       dispatch({
         type: UPDATE_ARCHIVED_MESSAGE_RECEIVED,
@@ -211,13 +199,11 @@ export const setActiveMessageAction = (messageId) => {
 
 //***UPDATE PARA PASAR EL MENSAJE A LEIDO */
 export const updateStateToReadMessageReceivedAction = (messageId) => {
-  //console.log("entro en la action de cambio estado a leido:", messageId);
   try {
     return async (dispatch) => {
       const response = await axios.put(
         `${URL_API}/message/received/state/read/${messageId}`
       );
-      //console.log("update to Read: Respuesta del backend:", response.data);
       const message = response.data.message || null;
       dispatch({
         type: UPDATE_STATE_TO_READ_MESSAGE_RECEIVED,
@@ -261,22 +247,16 @@ export const updateStateToAnsweredMessageReceivedAction = (messageId) => {
 // };
 
 export const createMessageSentAction = (input) => {
-  //console.log('input en action', input);
-
   return async (dispatch) => {
     try {
       const response = await axios.post(`${URL_API}/messageSend`, input);
-      //console.log('respusta telegram', response);
       const message = response.data;
-      //console.log('mensaje en action', message);
-      //console.log("status", response.status);
       dispatch({ type: CREATE_MESSAGE_SEND, payload: message });
 
       if (response.status === 200) {
         const messagesUnresponded = await axios.get(
           `${URL_API}/message/received/unresponded/${input.contactId}`
         );
-        //console.log("mensajes no respondidos", messagesUnresponded.data);
         const messages = messagesUnresponded.data;
 
         messages.length &&
@@ -285,7 +265,6 @@ export const createMessageSentAction = (input) => {
           );
       }
     } catch (error) {
-      //console.log("error de action", error);
       sweetAlertsError(
         "Intenta de nuevo",
         "No podemos enviar tu respuesta",
@@ -301,15 +280,11 @@ export const getAllMessagesSentAction = () => {
       const response = await axios.get(`${URL_API}/message/sent`);
       const messages = response.data;
       dispatch({ type: GET_ALL_MESSAGES_SENT, payload: messages });
-    } catch (error) {
-      //console.log("messageSent", error);
-    }
+    } catch (error) {}
   };
 };
 
 export const setUploadFileAction = (file) => {
-  //console.log("entro en la action setUploadFile con data:", file);
-
   return {
     type: SET_UPLOAD_FILE,
     payload: file,

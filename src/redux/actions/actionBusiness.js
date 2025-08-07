@@ -21,9 +21,6 @@ import {
 
 export const getBusinessByIdAction = (businessId, businessName) => {
   const idBusiness = businessId || sessionStorage.getItem("businessId");
-  //console.log("empresa: ", idBusiness);
-  //console.log("URL_API en getBusinessById ", URL_API);
-
   try {
     return async (dispatch) => {
       const response = await axios.get(`${URL_API}/business/${idBusiness}`);
@@ -45,26 +42,20 @@ export const updateBusnisessAction = (busnisessId, input) => {
       await axios.put(`${URL_API}/business/update/${busnisessId}`, input);
       dispatch({ type: UPDATE_BUSINESS });
     } catch (error) {
-      //console.log(error.message);
+      throw error;
     }
   };
 };
 
 export const loginBusinessAction = (input) => {
-  //console.log('input en action', input);
-  //console.log("URL_API en loginBusiness ", URL_API);
   return async (dispatch) => {
     try {
       const response = await axios.post(`${URL_API}/auth/login`, input, {
         withCredentials: true,
       });
-      //console.log("business en action", response.data.business);
-
       dispatch({ type: LOGIN_BUSINESS, payload: response.data.business });
       //getBusinessByIdAction(busnisessId, input.businessname)
     } catch (error) {
-      //console.log(error);
-
       sweetAlertsError(
         `${input.businessName} no puede acceder a OneInbox`,
         "comprueba que el nombre y la contraseña sean los correctos",
@@ -86,7 +77,6 @@ export const logoutBusinessAction = () => {
 };
 
 export const authBusinessByAllSocialMediaAction = (businessId) => {
-  //console.log("URL_API en authBusinessByAllSocialMedia ", URL_API);
   return async (dispatch) => {
     const meli = await axios.get(`${URL_API}/mercadolibre/auth`, businessId);
     if (meli) {

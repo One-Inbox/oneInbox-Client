@@ -29,7 +29,6 @@ const EditProfile = () => {
       [e.target.name]: e.target.value,
     });
   };
-  //console.log(input);
 
   const handlerEditSubmit = (e) => {
     e.preventDefault();
@@ -37,7 +36,6 @@ const EditProfile = () => {
       if (previewData === input) {
         navigate("/dashboardAdmi/profile/edit-business");
       } else {
-        //console.log("despacho la action al", user.id, "con data", input);
         dispatch(updateUserAction(user.id, input));
         sweetAlertsSuccessfully(
           `Felicitaciones ${input.name}!`,

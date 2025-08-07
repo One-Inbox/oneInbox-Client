@@ -54,10 +54,7 @@ export const sortedMessagesByTime = (messages, type) => {
 };
 
 export const selectMessage = (messages, type) => {
-  console.log("en select message", messages, type);
-
   const sortedMessages = sortedMessagesByTime(messages, type);
-  console.log("sortedMessages", sortedMessages);
   const lastMessage =
     sortedMessages && sortedMessages.length > 0 ? sortedMessages[0] : null;
   return lastMessage;

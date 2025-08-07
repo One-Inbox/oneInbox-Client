@@ -22,15 +22,11 @@ import {
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
 export const getAllUsersAction = () => {
-  //console.log("URL_API en getAllUsers ", URL_API);
   return async (dispatch) => {
-    // console.log("entro en la action GetAllUsersAction");
     try {
       const response = await axios.get(`${URL_API}/user`);
-      //console.log("repuesta en action de getAllUsers", response);
       const users = response.data;
       dispatch({ type: GET_ALL_USERS, payload: users });
-      //console.log("voy al reducer de getAllUsers");
     } catch (error) {
       throw error;
     }
@@ -38,7 +34,6 @@ export const getAllUsersAction = () => {
 };
 
 export const getUserByIdAction = (userId) => {
-  //console.log('2A- entro en getUserByIdAction con ID', userId);
   return async (dispatch) => {
     try {
       const response = await axios.get(`${URL_API}/user/${userId}`);
@@ -58,12 +53,9 @@ export const cleanUserByIdAction = () => {
 
 export const updateUserAction = (userId, input) => {
   return async (dispatch) => {
-    //console.log("entro a la action del", userId, "con data", input);
-
     try {
       await axios.put(`${URL_API}/user/update/${userId}`, input);
       dispatch({ type: UPDATE_USER });
-      //console.log("salgo al reducer");
     } catch (error) {
       throw error;
     }
@@ -77,7 +69,6 @@ export const admiLoginAction = (boolean) => {
 };
 
 export const getUserByAdmiAction = (userId) => {
-  //console.log('2A- entro en getUserByIdAction con ID', userId);
   return async (dispatch) => {
     try {
       const response = await axios.get(`${URL_API}/user/${userId}`);
@@ -92,9 +83,7 @@ export const getUserByAdmiAction = (userId) => {
 export const createUser = (input) => {
   return async (dispatch) => {
     try {
-      console.log("ENVIANDO A BACKEND:", input);
       const response = await axios.post(`${URL_API}/user/create`, input);
-      console.log("RESPUESTA BACKEND:", response.data);
       const user = response.data;
       dispatch({ type: CREATE_USER, payload: user });
     } catch (error) {

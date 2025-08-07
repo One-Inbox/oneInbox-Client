@@ -6,7 +6,6 @@ import FormattedTimestamp from "../FormatedTimeStamp";
 const MsgSent = (props) => {
   const users = useSelector((state) => state.users);
   const user = users.find((user) => user.id === props.props.UserId);
-  //console.log('usuario en msgSent', user);
 
   const message = props.props.message;
   const firstCharMsg = message.slice(0, 4);
