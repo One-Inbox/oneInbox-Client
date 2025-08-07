@@ -10,6 +10,8 @@ import {
   CLEAN_FILTERS,
   SEARCH_BY_CONTACT,
   FILTER_BY_USER,
+  FILTER_BY_PRIVILEGE_USER,
+  FILTER_BY_ACTIVE_USER,
 } from "../types.js";
 
 //LOCALHOST
@@ -51,7 +53,7 @@ export const filterByStateAction = (state) => {
 
 export const cleanFiltersAction = () => {
   return {
-    type: "CLEAN_FILTERS",
+    type: CLEAN_FILTERS,
   };
 };
 
@@ -83,5 +85,27 @@ export const filterByUserAction = (userId) => {
       "No podemos mostrar tu selección",
       "Ok"
     );
+  }
+};
+
+export const filterByPrivilegeUserAction = (privilege) => {
+  try {
+    return {
+      type: FILTER_BY_PRIVILEGE_USER,
+      payload: privilege,
+    };
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const filterByActiveUser = (active) => {
+  try {
+    return {
+      type: FILTER_BY_ACTIVE_USER,
+      payload: active,
+    };
+  } catch (error) {
+    throw error;
   }
 };

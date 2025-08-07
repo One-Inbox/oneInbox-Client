@@ -26,7 +26,7 @@ const SearchUser = () => {
           name="selectUser"
           onChange={selectHandler}
           value={user ? user.id : ""}
-          className=" bg-green-400 shadow-inner mt-2 ml-10 px-4 rounded-2xl text-white text-sm font-normal font-['Oswald'] capitalize"
+          className="bg-green-400 shadow-inner mt-2 px-4 w-40 mx-auto rounded-2xl text-white text-sm font-normal font-['Oswald'] capitalize"
         >
           <option value="TODOS" hidden={!user}>
             usuario...

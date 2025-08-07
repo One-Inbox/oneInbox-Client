@@ -1,12 +1,16 @@
 import React from "react";
 import privilegeJson from "../../../../public/json/privilegeJson";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { filterByPrivilegeUserAction } from "../../../redux/actions/actionFilters";
 
 const FilterByPrivilege = () => {
+  const dispatch = useDispatch();
   const [selectedFilter, setSelectedFilter] = useState("TODOS");
 
   const handlerOnChange = (e) => {
     setSelectedFilter(e.target.value);
+    dispatch(filterByPrivilegeUserAction(e.target.value));
   };
 
   return (

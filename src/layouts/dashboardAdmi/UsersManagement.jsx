@@ -12,10 +12,12 @@ import UsersTable from "../../components/admi/userManagment/UsersTable";
 
 const UserManagment = () => {
   const dispatch = useDispatch();
-  const businessRedux = useSelector((state) => state.business.id);
-  const businessId = businessRedux || sessionStorage.getItem("businessId");
-  const userRedux = useSelector((state) => state.user.id);
-  const userId = userRedux || sessionStorage.getItem("userId");
+  const businessRedux = useSelector((state) => state.business);
+  const businessId =
+    (businessRedux && businessRedux.id) || sessionStorage.getItem("businessId");
+  const userRedux = useSelector((state) => state.user);
+  const userId =
+    (userRedux && userRedux.id) || sessionStorage.getItem("userId");
 
   useEffect(() => {
     if (businessId) {

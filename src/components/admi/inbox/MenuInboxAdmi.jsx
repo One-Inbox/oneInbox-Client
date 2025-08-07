@@ -14,7 +14,9 @@ const MenuInboxAdmi = () => {
           customWidth="w-40 mx-auto"
           customButton="bg-green-400 -ml-14 text-white"
         />
-        <FilterByUser className="w-40" />
+        <div className="w-40 mx-auto">
+          <FilterByUser />
+        </div>
         <div className="mt-6">
           <FilterBySocialMedia />
         </div>

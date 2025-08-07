@@ -1,12 +1,25 @@
 import React from "react";
 import userActiveJson from "../../../../public/json/userActiveJson";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { filterByActiveUser } from "../../../redux/actions/actionFilters";
 
 const FilterByActiveUser = () => {
+  const dispatch = useDispatch();
   const [selectedFilter, setSelectedFilter] = useState("TODOS");
-
+  const parseBoolean = (str) => {
+    return String(str).toLowerCase() === "true";
+  };
   const handlerOnChange = (e) => {
+    console.log("valor en filtro  userActive", e.target.value);
+    console.log("typeof", typeof e.target.value);
+
     setSelectedFilter(e.target.value);
+    const value =
+      e.target.value !== "TODOS"
+        ? parseBoolean(e.target.value)
+        : e.target.value;
+    dispatch(filterByActiveUser(value));
   };
 
   return (

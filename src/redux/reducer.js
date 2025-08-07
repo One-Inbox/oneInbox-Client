@@ -29,6 +29,8 @@ import {
   GET_ALL_SOCIAL_MEDIA_BY_BUSINESS,
   UPDATE_SOCIAL_MEDIA,
   FILTER_BY_USER,
+  FILTER_BY_PRIVILEGE_USER,
+  FILTER_BY_ACTIVE_USER,
   GET_USER_BY_ADMI,
   LOGIN_BUSINESS,
   LOGOUT_BUSINESS,
@@ -78,6 +80,8 @@ const initialState = {
   stateFilter: "TODOS",
   userFilter: "TODOS",
   inputContact: "",
+  privilegeFilter: "TODOS",
+  activeUserFilter: "TODOS",
 
   //**--SOCKET--**//
   socket: null,
@@ -461,6 +465,47 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           messagesReceived: messagesFilteredByUser,
           userFilter: action.payload,
+        };
+      }
+    //filtros userManagment por privilegio:
+    case FILTER_BY_PRIVILEGE_USER:
+      const allUsers = state.allUsers;
+      if (action.payload === "TODOS") {
+        return {
+          ...state,
+          users: allUsers,
+          privilegeFilter: action.payload,
+        };
+      } else {
+        const usersByPrivilege =
+          allUsers &&
+          allUsers.filter((user) => user.privilege === action.payload);
+        return {
+          ...state,
+          users: usersByPrivilege,
+          privilegeFilter: action.payload,
+        };
+      }
+    case FILTER_BY_ACTIVE_USER:
+      const allUs = state.allUsers;
+      const usersFilter =
+        state.privilegeFilter === "TODOS"
+          ? allUs
+          : allUs.filter((us) => us.privilege === state.privilegeFilter);
+      if (action.payload === "TODOS") {
+        return {
+          ...state,
+          users: usersFilter,
+          activeUserFilter: action.payload,
+        };
+      } else {
+        const userByActive = usersFilter.filter(
+          (u) => u.active === action.payload
+        );
+        return {
+          ...state,
+          users: userByActive,
+          activeUserFilter: action.payload,
         };
       }
 

@@ -8,7 +8,7 @@ import AddUserButton from "./AddUserButton";
 const MenuUserManagment = () => {
   return (
     <div className="sticky w-56 h-screen overflow-y-auto overflow-x-hidden bg-green-400 flex flex-col py-4">
-      <div className="flex flex-col justify-between mt-6">
+      <div className="flex flex-col justify-between mt-6 mx-auto">
         <SearchUser />
       </div>
       <div className="mt-10">

@@ -22,7 +22,7 @@ const UsersTable = () => {
 
   useEffect(() => {
     let timeoutId;
-    if (allUsers.length) {
+    if (allUsers && allUsers.length) {
       setLoading(false);
     } else {
       setTimeout(() => {
@@ -73,17 +73,18 @@ const UsersTable = () => {
           </tr>
         ) : (
           <tbody className="overflow-x-auto">
-            {!allUsers.length ? (
+            {allUsers && !allUsers.length ? (
               <tr>
                 <td
                   colSpan="7"
                   className="text-center py-4 h-[600px] font-normal font-['Inter']"
                 >
                   {/* ver de hacer un filter con los textos segun los filtros aplicados */}
-                  <span> no hay usuarios </span>
+                  <span> no hay usuarios que coincidan con su búsqueda</span>
                 </td>
               </tr>
             ) : (
+              allUsers &&
               allUsers.map((user, index) => {
                 return (
                   <tr key={index} className="odd:bg-white even:bg-stone-300 ">
