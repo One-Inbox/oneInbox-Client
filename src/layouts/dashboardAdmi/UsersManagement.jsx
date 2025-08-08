@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getBusinessByIdAction } from "../../redux/actions/actionBusiness";
 import {
@@ -18,6 +18,7 @@ const UserManagment = () => {
   const userRedux = useSelector((state) => state.user);
   const userId =
     (userRedux && userRedux.id) || sessionStorage.getItem("userId");
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     if (businessId) {
@@ -49,11 +50,17 @@ const UserManagment = () => {
       {/* Contenedor del menú y tabla */}
       <div className="flex flex-row flex-grow overflow-hidden">
         <div className="w-56 flex-shrink-0 bg-white shadow-md h-full relative z-20">
-          <MenuUserManagment />
+          <MenuUserManagment
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+          />
         </div>
         {/* Tabla que ocupa el resto del espacio */}
         <div className="flex-grow overflow-auto">
-          <UsersTable />
+          <UsersTable
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+          />
         </div>
       </div>
     </div>

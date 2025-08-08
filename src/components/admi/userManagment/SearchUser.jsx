@@ -1,46 +1,18 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getUserByAdmiAction } from "../../../redux/actions/actionsUsers";
-
-const SearchUser = () => {
-  const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
-  const user = useSelector((state) => state.userByAdmi);
-
-  const selectHandler = async (e) => {
-    const value = e.target.value;
-
-    if (value === "") {
-      sessionStorage.removeItem("filterUser");
-    } else {
-      sessionStorage.setItem("filterUser", value);
-      dispatch(getUserByAdmiAction(value));
-    }
+const SearchUser = ({ searchInput, setSearchInput }) => {
+  //handler que setea el estado local
+  const handlerChange = (e) => {
+    setSearchInput(e.target.value);
   };
 
   return (
-    <div className="flex items-center">
-      <div>
-        <select
-          name="selectUser"
-          onChange={selectHandler}
-          value={user ? user.id : ""}
-          className="bg-green-400 shadow-inner mt-2 px-4 w-40 mx-auto rounded-2xl text-white text-sm font-normal font-['Oswald'] capitalize"
-        >
-          <option value="TODOS" hidden={!user}>
-            usuario...
-          </option>
-          {users &&
-            users.map((user, index) => {
-              return (
-                <option key={index} value={user.id}>
-                  {user.name.toUpperCase()}
-                </option>
-              );
-            })}
-        </select>
-      </div>
+    <div className="w-48 h-6 bg-white drop-shadow rounded-[30px] flex items-center gap-1 pl-1">
+      <input
+        className=" w-36 bg-white text-black pl-2 text-sm font-normal font-['Inter'] rounded-[30px] focus:outline-none"
+        type="search"
+        value={searchInput}
+        onChange={handlerChange}
+        placeholder="usuario..."
+      />
     </div>
   );
 };

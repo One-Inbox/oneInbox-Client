@@ -9,8 +9,13 @@ import DeleteUserButton from "./DeleteUserButton";
 import FormattedTimestamp from "../../utils/FormatedTimeStamp";
 import timeStampToISO from "../../utils/timeStampToISO";
 
-const UsersTable = () => {
+const UsersTable = ({ searchInput, setSearchInput }) => {
   const allUsers = useSelector((state) => state.users);
+  const userSearched =
+    allUsers &&
+    allUsers.filter((user) =>
+      user.name.toLowerCase().includes(searchInput.toLowerCase())
+    );
 
   const [loading, setLoading] = useState(true);
 
@@ -73,7 +78,7 @@ const UsersTable = () => {
           </tr>
         ) : (
           <tbody className="overflow-x-auto">
-            {allUsers && !allUsers.length ? (
+            {userSearched && !userSearched.length ? (
               <tr>
                 <td
                   colSpan="7"
@@ -84,8 +89,8 @@ const UsersTable = () => {
                 </td>
               </tr>
             ) : (
-              allUsers &&
-              allUsers.map((user, index) => {
+              userSearched &&
+              userSearched.map((user, index) => {
                 return (
                   <tr key={index} className="odd:bg-white even:bg-stone-300 ">
                     <td className=" pl-8 py-2 text-center text-xs font-normal">

@@ -11,9 +11,6 @@ const FilterByActiveUser = () => {
     return String(str).toLowerCase() === "true";
   };
   const handlerOnChange = (e) => {
-    console.log("valor en filtro  userActive", e.target.value);
-    console.log("typeof", typeof e.target.value);
-
     setSelectedFilter(e.target.value);
     const value =
       e.target.value !== "TODOS"
@@ -24,7 +21,6 @@ const FilterByActiveUser = () => {
 
   return (
     <div>
-      {/* <span> FILTER BY ACTIVE USER: <br/> No Implement Yet </span> */}
       {userActiveJson &&
         userActiveJson.map((element, index) => {
           return (
