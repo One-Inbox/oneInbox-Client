@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { filterByPrivilegeUserAction } from "../../../redux/actions/actionFilters";
 
-const FilterByPrivilege = () => {
+const FilterByPrivilege = ({ selectedByPrivilege, setSelectedByPrivilege }) => {
   const dispatch = useDispatch();
   const [selectedFilter, setSelectedFilter] = useState("TODOS");
 
   const handlerOnChange = (e) => {
-    setSelectedFilter(e.target.value);
+    setSelectedByPrivilege(e.target.value);
     dispatch(filterByPrivilegeUserAction(e.target.value));
   };
 
@@ -25,7 +25,7 @@ const FilterByPrivilege = () => {
                 <input
                   type="radio"
                   value={priv.value}
-                  checked={selectedFilter === `${priv.value}`}
+                  checked={selectedByPrivilege === `${priv.value}`}
                   onChange={handlerOnChange}
                   className=" absolute right-3 w-4 h-4 accent-amber-400"
                 />

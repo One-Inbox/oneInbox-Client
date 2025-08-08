@@ -4,14 +4,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { filterByActiveUser } from "../../../redux/actions/actionFilters";
 
-const FilterByActiveUser = () => {
+const FilterByActiveUser = ({ selectedByActive, setSelectedByActive }) => {
   const dispatch = useDispatch();
-  const [selectedFilter, setSelectedFilter] = useState("TODOS");
+  // const [selectedFilter, setSelectedFilter] = useState("TODOS");
   const parseBoolean = (str) => {
     return String(str).toLowerCase() === "true";
   };
   const handlerOnChange = (e) => {
-    setSelectedFilter(e.target.value);
+    setSelectedByActive(e.target.value);
     const value =
       e.target.value !== "TODOS"
         ? parseBoolean(e.target.value)
@@ -31,7 +31,7 @@ const FilterByActiveUser = () => {
                 <input
                   type="radio"
                   value={element.value}
-                  checked={selectedFilter === `${element.value}`}
+                  checked={selectedByActive === `${element.value}`}
                   onChange={handlerOnChange}
                   className=" absolute right-3 w-4 h-4 accent-amber-400"
                 />
