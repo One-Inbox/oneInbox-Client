@@ -23,7 +23,7 @@ const ProfileData = () => {
           {!user.name ? "nombre administrador" : user.name}
         </h1>
       </div>
-      <div className="flex flex-row justify-between px-12 mt-12">
+      <div className="flex flex-row justify-between px-12 mt-8">
         <div className="flex flex-col">
           <div className="flex flex-row">
             <h4 className="text-sm font-normal font-['Oswald'] uppercase">
@@ -37,7 +37,7 @@ const ProfileData = () => {
             <h4 className="text-sm font-normal font-['Oswald'] uppercase">
               E-MAIL:
             </h4>
-            <span className="text-sm font-normal font-['Inter'] ml-2 mb-8">
+            <span className="text-sm font-normal font-['Inter'] ml-2 mb-4">
               {user.email ? user.email : "administrador@email.com"}
             </span>
           </div>
@@ -51,7 +51,7 @@ const ProfileData = () => {
               {user.password ? user.password : "password"}
             </span>
           </div>
-          <div className="flex flex-row mb-12">
+          <div className="flex flex-row mb-6">
             <h4 className="text-sm font-normal font-['Oswald'] uppercase">
               TELEFONO:
             </h4>

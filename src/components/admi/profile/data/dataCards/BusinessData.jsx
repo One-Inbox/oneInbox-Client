@@ -6,7 +6,7 @@ const BusinessData = () => {
   //1rem = 16px
   return (
     <div className="w-[48.5rem] h-auto bg-neutral-200 rounded-tr-[50px] rounded-bl-[50px] relative">
-      <div className="flex flex-col items-center pt-6 mt-2">
+      <div className="flex flex-col items-center pt-4 mt-2">
         <h4 className="text-xs font-normal font-['Oswald'] uppercase">
           datos de la empresa
         </h4>
@@ -58,7 +58,7 @@ const BusinessData = () => {
               {business.city ? business.city : "buenos aires"}
             </span>
           </div>
-          <div className="flex flex-row mb-12">
+          <div className="flex flex-row mb-6">
             <h4 className="text-sm font-normal font-['Oswald'] uppercase">
               TELEFONO:
             </h4>

@@ -135,7 +135,7 @@ const InboxUser = () => {
       dispatch(getBusinessByIdAction(businessId));
       dispatch(getAllMessagesReceivedAction());
       dispatch(getAllUsersAction());
-      dispatch(getAllSocialMediaByBusinessAction());
+      dispatch(getAllSocialMediaByBusinessAction(businessId));
     }
   }, [dispatch, businessId]);
 

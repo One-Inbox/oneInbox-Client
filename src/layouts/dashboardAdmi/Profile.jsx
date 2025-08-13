@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBusinessByIdAction } from "../../redux/actions/actionBusiness";
 import { getUserByIdAction } from "../../redux/actions/actionsUsers";
+import { getAllSocialMediaByBusinessAction } from "../../redux/actions/actionSocialMedia";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Profile = () => {
       if (userId) {
         dispatch(getUserByIdAction(userId));
       }
+      dispatch(getAllSocialMediaByBusinessAction(businessId));
     }
   }, [dispatch, businessId, userId]);
 

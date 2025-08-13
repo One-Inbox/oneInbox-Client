@@ -18,14 +18,18 @@ import {
 //SERVER PRODUCCION
 //const URL ='https://electrica-mosconi-backend-main.onrender.com'
 
-export const getAllSocialMediaByBusinessAction = () => {
+export const getAllSocialMediaByBusinessAction = (businessId) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`${URL_API}/socialMedia/active`);
       const socialMedia = response.data;
+      const socialMediaByBusiness = socialMedia.filter(
+        (sm) => sm.Businesses[0].id === businessId
+      );
+
       dispatch({
         type: GET_ALL_SOCIAL_MEDIA_BY_BUSINESS,
-        payload: socialMedia,
+        payload: socialMediaByBusiness,
       });
     } catch (error) {
       throw error;

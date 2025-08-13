@@ -4,7 +4,7 @@ import SocialMediaIcons from "../../../../utils/icons/socialMediaIcons";
 
 const SocialMediaData = () => {
   const business = useSelector((state) => state.business);
-  const socialMediabyRedux = useSelector((state) => state.socialMedia);
+  const socialMediabyRedux = useSelector((state) => state.socialMediaActive);
   // Recuperar y parsear datos del sessionStorage
   const socialMediabyStorage = sessionStorage.getItem("SocialMedia");
   const parsedSocialMedia = socialMediabyStorage
@@ -41,8 +41,8 @@ const SocialMediaData = () => {
     socialMedia.length > 1 ? socialMediaSortered.slice(half) : false;
 
   return (
-    <div className="w-[48.5rem] h-auto bg-neutral-200 rounded-br-[50px] rounded-tr-[50px] rounded-bl-[50px] relative">
-      <div className="flex flex-col items-center pt-6 mt-2">
+    <div className="w-[48.5rem] h-auto bg-neutral-200 rounded-tl-[50px]  rounded-br-[50px] relative">
+      <div className="flex flex-col items-center pt-4 mt-2">
         <h1 className="text-base font-normal font-['Oswald'] uppercase">
           plataforma redes sociales
         </h1>
@@ -81,7 +81,7 @@ const SocialMediaData = () => {
         </div>
       ) : (
         <div className="flex flex-row justify-between px-12 mt-6">
-          <div className="flex flex-col mb-12">
+          <div className="flex flex-col mb-6">
             {groupA &&
               groupA.map((sm, index) => (
                 <div className="flex flex-row mt-2" key={index}>
@@ -108,7 +108,7 @@ const SocialMediaData = () => {
                 </div>
               ))}
           </div>
-          <div className="flex flex-col px-12 mb-12">
+          <div className="flex flex-col px-12 mb-6">
             {groupB &&
               groupB.map((sm, index) => (
                 <div className="flex flex-row mt-2" key={index}>
