@@ -16,6 +16,7 @@ import EditUser from "../components/admi/userManagment/EditUser";
 import MetricsAnalysis from "./dashboardAdmi/MetricsAnalysis";
 import BusinessLogin from "../components/login/BusinessLogin";
 import MercadoLibreAuth from "./auth/MercadoLibreAuth";
+import AddAutomaticResponse from "../components/admi/profile/formsEdit/AddAutomaticResponse";
 
 export {
   LandingPage,
@@ -36,4 +37,5 @@ export {
   EditUser,
   MetricsAnalysis,
   MercadoLibreAuth,
+  AddAutomaticResponse,
 };

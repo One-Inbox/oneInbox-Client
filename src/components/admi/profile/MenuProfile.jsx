@@ -20,9 +20,9 @@ const MenuProfile = () => {
         path={path}
       />
       <MenuButton
-        route={"/dashboardAdmi/profile/edit-socialMedia"}
-        nameRoute={"Mensajes Automáticos"}
-        path={"/dashboardAdmi/profile/edit-socialMedia"}
+        route={"/dashboardAdmi/profile/add-automaticResponse"}
+        nameRoute={"Crear Mensajes Automáticos"}
+        path={"/dashboardAdmi/profile/add-automaticResponse"}
       />
     </div>
   );

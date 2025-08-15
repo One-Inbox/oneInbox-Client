@@ -42,6 +42,7 @@ import {
   SOCKET_DISCONNECTED,
   SOCKET_ERROR,
   CREATE_USER,
+  UPDATE_AUTOMATIC_RESPONSE,
 } from "./types";
 
 const initialState = {
@@ -620,6 +621,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         meliAuthError: action.payload,
+      };
+    case UPDATE_AUTOMATIC_RESPONSE:
+      return {
+        ...state,
       };
 
     default:

@@ -19,6 +19,7 @@ import {
   EditUser,
   MetricsAnalysis,
   MercadoLibreAuth,
+  AddAutomaticResponse,
 } from "./layouts";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -63,6 +64,7 @@ const App = () => {
       location.pathname === "/dashboardAdmi/profile/edit" ||
       location.pathname === "/dashboardAdmi/profile/edit-business" ||
       location.pathname === "/dashboardAdmi/profile/edit-socialMedia" ||
+      location.pathname === "/dashboardAdmi/profile/add-automaticResponse" ||
       location.pathname === "/dashboardAdmi/usersManagement/addUser" ||
       location.pathname.includes("/dashboardAdmi/usersManagement/edit/") ||
       location.pathname.includes("/MeLi_auth") ? null : (
@@ -93,6 +95,10 @@ const App = () => {
             <Route
               path="/dashboardAdmi/profile/edit-socialMedia"
               element={<EditSocialMedia />}
+            />
+            <Route
+              path="/dashboardAdmi/profile/add-automaticResponse"
+              element={<AddAutomaticResponse />}
             />
             <Route path="/dashboardAdmi/inboxAdmi" element={<InboxAdmi />} />
             <Route

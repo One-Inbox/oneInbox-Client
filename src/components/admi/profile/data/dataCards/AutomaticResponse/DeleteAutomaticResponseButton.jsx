@@ -43,7 +43,7 @@ const DeleteAutomaticResponseButton = ({ socialMediaActiveIds }) => {
       <img
         src={"/managmentIcons/trash-icon.svg"}
         alt="delete"
-        className="w-4 h-auto"
+        className="w-6 h-auto"
         onClick={handlerOnClick}
       />
     </div>

@@ -20,3 +20,4 @@ const GetDayOfWeek = (day) => {
       return null;
   }
 };
+export default GetDayOfWeek;

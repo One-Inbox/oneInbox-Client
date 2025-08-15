@@ -9,6 +9,8 @@ import {
   UPDATE_SOCIAL_MEDIA,
   POST_CODE_TO_AUTH_MELI,
   POST_CODE_TO_AUTH_MELI_ERROR,
+  UPDATE_AUTOMATIC_RESPONSE,
+  DELETE_AUTOMATIC_RESPONSE,
 } from "../types.js";
 
 //LOCALHOST
@@ -71,6 +73,21 @@ export const postCodeToAuthMeLiAction = (code, navigate) => {
         type: "POST_CODE_TO_AUTH_MELI_ERROR",
         payload: `MELI-AUTH: Error al enviar el código de autorización: ${error.message}`,
       });
+    }
+  };
+};
+export const updateAutomaticResponseAction = (id, automaticResponse) => {
+  console.log("entro a la action con id", id, "y data", automaticResponse);
+
+  return async (dispatch) => {
+    try {
+      await axios.put(
+        `${URL_API}/socialMedia/active/updateAutomaticResponse/${id}`,
+        { automaticResponse }
+      );
+      dispatch({ type: UPDATE_AUTOMATIC_RESPONSE });
+    } catch (error) {
+      throw error;
     }
   };
 };
