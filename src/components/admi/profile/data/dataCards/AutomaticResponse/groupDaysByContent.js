@@ -84,7 +84,24 @@ const groupDaysByContent = (automaticResponseActive) => {
     });
   });
 
-  return Object.values(groupedBySocialMedia);
+  // FILTRADO: Eliminar subgroups con mensaje vacío
+  Object.keys(groupedBySocialMedia).forEach((key) => {
+    groupedBySocialMedia[key].subgroups = groupedBySocialMedia[
+      key
+    ].subgroups.filter(
+      (subgroup) =>
+        subgroup.pattern.message && subgroup.pattern.message.trim() !== ""
+    );
+  });
+
+  // FILTRADO: Eliminar grupos que quedaron sin subgroups
+  const filteredResult = Object.values(groupedBySocialMedia).filter(
+    (group) => group.subgroups.length > 0
+  );
+
+  console.log("groupedBySocialMedia (filtered)", filteredResult);
+
+  return filteredResult;
 };
 
 export default groupDaysByContent;
