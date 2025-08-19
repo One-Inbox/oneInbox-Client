@@ -16,6 +16,7 @@ import {
   DESACTIVATE_ALL_MESSAGES_RECEIVED,
   GET_CONTACT_BY_ID,
   GET_CONTACT_BY_MESSAGE_RECEIVED,
+  GET_ALL_CONTACTS,
   CREATE_MESSAGE_SEND,
   GET_ALL_MESSAGES_SENT,
   CLEAN_FILTERS,
@@ -43,6 +44,7 @@ import {
   SOCKET_ERROR,
   CREATE_USER,
   UPDATE_AUTOMATIC_RESPONSE,
+  SELECT_METRICS,
 } from "./types";
 
 const initialState = {
@@ -71,7 +73,7 @@ const initialState = {
   //contacto por id // mensaje
   contact: {},
   //searchContacts
-  //contacts: [],
+  contacts: [],
   //**--REDES SOCIALES--* *//
   socialMedia: [],
   socialMediaActive: [],
@@ -93,6 +95,9 @@ const initialState = {
   //**--AUTH--**//
   meliAuthData: null,
   meliAuthError: null,
+
+  //**--METRICAS--**//
+  metricsSelected: "",
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -341,6 +346,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         contact: {},
+      };
+    case GET_ALL_CONTACTS:
+      return {
+        ...state,
+        contacts: action.payload,
       };
     //FILTROS:
     case FILTER_BY_SOCIAL_MEDIA:
@@ -625,6 +635,13 @@ const rootReducer = (state = initialState, action) => {
     case UPDATE_AUTOMATIC_RESPONSE:
       return {
         ...state,
+      };
+
+    //**--METRICAS-- */
+    case SELECT_METRICS:
+      return {
+        ...state,
+        metricsSelected: action.payload,
       };
 
     default:

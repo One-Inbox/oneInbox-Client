@@ -8,6 +8,7 @@ import {
   GET_CONTACT_BY_ID,
   GET_CONTACT_BY_MESSAGE_RECEIVED,
   CLEAR_CONTACT,
+  GET_ALL_CONTACTS,
 } from "../types";
 
 //LOCALHOST
@@ -77,4 +78,21 @@ export const clearContactAction = () => {
   return (dispatch) => {
     dispatch({ type: CLEAR_CONTACT });
   };
+};
+
+export const getAllContactsByBusinessIdAction = (businessId) => {
+  try {
+    return async (dispatch) => {
+      const response = await axios.get(`${URL_API}/contact`);
+      const data = response.data;
+      console.log("data en actionContact", data);
+
+      const contacts = data.filter(
+        (contact) => contact.businessId === businessId
+      );
+      dispatch({ type: GET_ALL_CONTACTS, payload: contacts });
+    };
+  } catch (error) {
+    throw error;
+  }
 };
