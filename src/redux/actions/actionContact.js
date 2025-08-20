@@ -85,7 +85,6 @@ export const getAllContactsByBusinessIdAction = (businessId) => {
     return async (dispatch) => {
       const response = await axios.get(`${URL_API}/contact`);
       const data = response.data;
-      console.log("data en actionContact", data);
 
       const contacts = data.filter(
         (contact) => contact.businessId === businessId

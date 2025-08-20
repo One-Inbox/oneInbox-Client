@@ -11,11 +11,11 @@ const DoughnutChart = ({ data, label }) => {
         label: label,
         data: data.map((item) => item.quantity),
         backgroundColor: [
-          "rgb(175, 185, 199)",
           "rgb(8, 47, 73)",
           "rgb(52, 211, 153)",
           "rgb(156, 163, 175)",
           "rgb(245, 158, 11)",
+          "rgb(175, 185, 199)",
         ],
 
         borderWidth: 2,

@@ -18,15 +18,15 @@ const InboxAdmi = () => {
   const userRedux = useSelector((state) => state.user.id);
   const userId = userRedux || sessionStorage.getItem("userId");
 
-  // useEffect(() => {
-  //   if (businessId && userId) {
-  //     // dispatch(getBusinessByIdAction(businessId));
-  //     // dispatch(getAllMessagesReceivedAction({ limit: 100, offset: 0 }));
-  //     // dispatch(getAllUsersAction());
-  //     //console.log('despacho la action getAllMessages desde inboxAdmi');
-  //     dispatch(getUserByIdAction(userId));
-  //   }
-  // }, [dispatch, businessId, userId]);
+  useEffect(() => {
+    if (businessId && userId) {
+      // dispatch(getBusinessByIdAction(businessId));
+      dispatch(getAllMessagesReceivedAction());
+      // dispatch(getAllUsersAction());
+      //console.log('despacho la action getAllMessages desde inboxAdmi');
+      dispatch(getUserByIdAction(userId));
+    }
+  }, [dispatch, businessId, userId]);
 
   const user = useSelector((state) => state.user);
 

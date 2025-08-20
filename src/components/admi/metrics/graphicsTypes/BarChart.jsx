@@ -1,10 +1,11 @@
 import React from "react";
+//import { IconUser } from "../../../utils/selectUser/IconUser";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
+  //Title,
   Tooltip,
   Legend,
 } from "chart.js";
@@ -14,43 +15,63 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
+  //Title,
   Tooltip,
   Legend
 );
 
-const BarChart = () => {
+const BarChart = ({ data, label }) => {
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        display: false,
       },
-      title: {
-        display: true,
-        text: "RESPUESTA DE USUARIOS",
+      labels: {
+        boxWidth: 12, // ancho del cuadradito de color
+        padding: 10, // espacio entre leyendas
+        color: "#333",
+        font: {
+          size: 12,
+          family: "Inter, sans-serif",
+          weight: "200",
+        },
+        // usePointStyle: true, // si querés que los íconos sean circulares
+      },
+      // title: {
+      //   display: true,
+      //   text: "respuesta de usuarios",
+      // },
+      tooltip: {
+        enabled: true,
+        bodyFont: {
+          size: 12,
+          family: "Inter, sans-serif",
+          weight: "200",
+        },
       },
     },
+    layout: {
+      padding: 10,
+    },
   };
-  const data = {
-    labels: ["Camila", "Juan", "Matias", "Virginia", "Zoe", "Julian", "Miguel"],
+  const utilsData = {
+    labels: data.map((item) => item.name),
     datasets: [
       {
-        label: "Respuestas por usuario",
-        data: [12, 19, 3, 5, 2, 7, 8],
+        label: label,
+        data: data.map((item) => item.quantity),
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
-          "rgba(255, 99, 132, 0.2)",
+          "rgb(8, 47, 73)",
+          "rgb(52, 211, 153)",
+          "rgb(156, 163, 175)",
+          "rgb(245, 158, 11)",
+          "rgb(175, 185, 199)",
         ],
       },
     ],
   };
-  return <Bar options={options} data={data} />;
+  return <Bar options={options} data={utilsData} />;
 };
 
 export default BarChart;

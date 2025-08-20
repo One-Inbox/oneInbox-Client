@@ -5,7 +5,10 @@ import Metrics from "../../components/admi/metrics/Metrics";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBusinessByIdAction } from "../../redux/actions/actionBusiness";
-import { getUserByIdAction } from "../../redux/actions/actionsUsers";
+import {
+  getUserByIdAction,
+  getAllUsersAction,
+} from "../../redux/actions/actionsUsers";
 import { getAllContactsByBusinessIdAction } from "../../redux/actions/actionContact";
 import { getAllSocialMediaByBusinessAction } from "../../redux/actions/actionSocialMedia";
 
@@ -21,6 +24,7 @@ const MetricsAnalysis = () => {
       dispatch(getBusinessByIdAction(businessId));
       dispatch(getAllContactsByBusinessIdAction(businessId));
       dispatch(getAllSocialMediaByBusinessAction(businessId));
+      dispatch(getAllUsersAction());
       if (userId) {
         dispatch(getUserByIdAction(userId));
       }
@@ -37,7 +41,7 @@ const MetricsAnalysis = () => {
       <div className="flex flex-col">
         <MenuMetrics />
       </div>
-      <div className="flex flex-1 items-center justify-center overflow-y-auto overflow-x-hidden">
+      <div className="flex flex-1 overflow-hidden">
         <Metrics />
       </div>
     </div>
