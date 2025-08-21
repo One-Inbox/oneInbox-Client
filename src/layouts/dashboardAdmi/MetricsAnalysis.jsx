@@ -11,6 +11,7 @@ import {
 } from "../../redux/actions/actionsUsers";
 import { getAllContactsByBusinessIdAction } from "../../redux/actions/actionContact";
 import { getAllSocialMediaByBusinessAction } from "../../redux/actions/actionSocialMedia";
+import { getAllMessagesReceivedAction } from "../../redux/actions/actionMessages";
 
 const MetricsAnalysis = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const MetricsAnalysis = () => {
       dispatch(getAllContactsByBusinessIdAction(businessId));
       dispatch(getAllSocialMediaByBusinessAction(businessId));
       dispatch(getAllUsersAction());
+      dispatch(getAllMessagesReceivedAction());
       if (userId) {
         dispatch(getUserByIdAction(userId));
       }

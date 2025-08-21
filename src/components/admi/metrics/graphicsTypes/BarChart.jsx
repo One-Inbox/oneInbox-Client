@@ -27,6 +27,11 @@ const BarChart = ({ data, label }) => {
       legend: {
         display: false,
       },
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
       labels: {
         boxWidth: 12, // ancho del cuadradito de color
         padding: 10, // espacio entre leyendas
@@ -56,7 +61,7 @@ const BarChart = ({ data, label }) => {
     },
   };
   const utilsData = {
-    labels: data.map((item) => item.name),
+    labels: data.map((item) => item.name.split(" ")),
     datasets: [
       {
         label: label,
