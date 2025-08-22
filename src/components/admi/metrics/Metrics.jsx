@@ -1,6 +1,7 @@
 import SocialMediaMetrics from "./socialMediaMetrics/socialMediaMetrics";
 import RankingUsers from "./rankingUsers/RankingUsers";
 import RankingSchedules from "./rankingSchedules/RankingSchedules";
+import TimeToResponseMetrics from "./timeToResponseMetrics/timeToResponseMetrics";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMetricsAction } from "../../../redux/actions/actionMetrics";
 
@@ -36,12 +37,7 @@ const Metrics = () => {
           <SocialMediaMetrics />
         ) : metricsSelected && metricsSelected === "Tiempos de Respuesta" ? (
           <div className="flex-1 flex justify-center items-center">
-            <img
-              //src="https://www1.upme.gov.co/simco/PublishingImages/Pagina_en_construccion.jpg"
-              src="/pagina en construccion.png"
-              alt="sector en construccion"
-              className="w-auto h-3/4"
-            />
+            <TimeToResponseMetrics />
           </div>
         ) : metricsSelected && metricsSelected === "Ranking de Usuarios" ? (
           <div className="flex-1 flex justify-center items-center">

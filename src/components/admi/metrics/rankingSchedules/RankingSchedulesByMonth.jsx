@@ -49,7 +49,7 @@ const RankingSchedulesByMonth = () => {
         });
   const someMsg = data.some((item) => item.quantity > 0);
   return (
-    <div className="w-full h-full bg-neutral-100 rounded-bl-[50px] relative flex flex-col overflow-hidden">
+    <div className="w-full h-full bg-neutral-100 rounded-b-[50px] rounded-tr-[50px] relative flex flex-col overflow-hidden">
       <div className="flex flex-col items-start pt-4 my-2 ml-6 flex-shrink-0">
         <h4 className="text-xs font-normal font-['Oswald'] uppercase">
           Métricas mensuales
