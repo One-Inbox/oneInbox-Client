@@ -1,7 +1,7 @@
 import SocialMediaMetrics from "./socialMediaMetrics/SocialMediaMetrics";
 import RankingUsers from "./rankingUsers/RankingUsers";
 import RankingSchedules from "./rankingSchedules/RankingSchedules";
-import TimeToResponseMetrics from "./timeToResponseMetrics/timeToResponseMetrics";
+import TimeToResponseMetrics from "./timeToResponseMetrics/TimeToResponseMetrics";
 import { useSelector, useDispatch } from "react-redux";
 import { selectMetricsAction } from "../../../redux/actions/actionMetrics";
 
