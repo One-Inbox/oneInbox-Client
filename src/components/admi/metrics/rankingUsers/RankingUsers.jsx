@@ -1,4 +1,4 @@
-import RankingUserByYear from "./rankingUserByYear";
+import RankingUserByYear from "./RankingUserByYear";
 import RankingUserByMonth from "./RankingUsersByMonth";
 
 const RankingUsers = () => {
