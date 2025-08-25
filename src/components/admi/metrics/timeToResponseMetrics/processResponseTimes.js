@@ -235,7 +235,7 @@ const processResponseTimes = (conversation) => {
       }
     }
   }
-
+  console.log("agrego para pushear");
   return {
     beforeTime,
     onTime,
