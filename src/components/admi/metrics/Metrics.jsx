@@ -1,4 +1,4 @@
-import SocialMediaMetrics from "./socialMediaMetrics/socialMediaMetrics";
+import SocialMediaMetrics from "./socialMediaMetrics/SocialMediaMetrics";
 import RankingUsers from "./rankingUsers/RankingUsers";
 import RankingSchedules from "./rankingSchedules/RankingSchedules";
 import TimeToResponseMetrics from "./timeToResponseMetrics/timeToResponseMetrics";
