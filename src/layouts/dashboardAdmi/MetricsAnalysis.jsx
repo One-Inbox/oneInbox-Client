@@ -19,14 +19,42 @@ const MetricsAnalysis = () => {
   const businessId = businessRedux || sessionStorage.getItem("businessId");
   const userRedux = useSelector((state) => state.user.id);
   const userId = userRedux || sessionStorage.getItem("userId");
+  const msgReceived = useSelector((state) => state.messagesReceived);
+
+  // useEffect(() => {
+  //   if (businessId) {
+  //     dispatch(getBusinessByIdAction(businessId));
+  //     dispatch(getAllContactsByBusinessIdAction(businessId));
+  //     dispatch(getAllSocialMediaByBusinessAction(businessId));
+  //     dispatch(getAllUsersAction());
+  //     dispatch(getAllMessagesReceivedAction());
+  //     if (userId) {
+  //       dispatch(getUserByIdAction(userId));
+  //     }
+  //   }
+  // }, [dispatch, businessId, userId]);
 
   useEffect(() => {
     if (businessId) {
+      // ✅ Datos que siempre se actualizan (pueden cambiar frecuentemente)
       dispatch(getBusinessByIdAction(businessId));
       dispatch(getAllContactsByBusinessIdAction(businessId));
       dispatch(getAllSocialMediaByBusinessAction(businessId));
       dispatch(getAllUsersAction());
-      dispatch(getAllMessagesReceivedAction());
+
+      // 🎯 OPTIMIZACIÓN: Solo cargar mensajes si no hay cache
+      if (!msgReceived || msgReceived.length === 0) {
+        console.log(
+          "📭 MetricsAnalysis: No hay mensajes en cache - carga inicial"
+        );
+        dispatch(getAllMessagesReceivedAction());
+      } else {
+        console.log(
+          `📊 MetricsAnalysis: Usando ${msgReceived.length} mensajes desde cache para métricas`
+        );
+      }
+
+      // ✅ Usuario si está disponible
       if (userId) {
         dispatch(getUserByIdAction(userId));
       }

@@ -130,12 +130,30 @@ const InboxUser = () => {
   const msgSent = useSelector((state) => state.messagesSent);
   const msgReceived = useSelector((state) => state.messagesReceived); // Tu selector actual
 
+  // useEffect(() => {
+  //   if (businessId) {
+  //     dispatch(getBusinessByIdAction(businessId));
+  //     dispatch(getAllMessagesReceivedAction());
+  //     dispatch(getAllUsersAction());
+  //     dispatch(getAllSocialMediaByBusinessAction(businessId));
+  //   }
+  // }, [dispatch, businessId]);
+  // 🚀 ESTRATEGIA CON SOCKET: Solo carga inicial si no hay cache
   useEffect(() => {
     if (businessId) {
+      // ✅ Siempre ejecutar (datos que no están en persist)
       dispatch(getBusinessByIdAction(businessId));
-      dispatch(getAllMessagesReceivedAction());
       dispatch(getAllUsersAction());
       dispatch(getAllSocialMediaByBusinessAction(businessId));
+
+      // 🎯 MENSAJES: Solo si NO hay cache, sino el socket se encarga
+      if (!msgReceived || msgReceived.length === 0) {
+        console.log("📭 No hay mensajes en cache - carga inicial");
+        dispatch(getAllMessagesReceivedAction());
+      } else {
+        console.log(`📱 ${msgReceived.length} mensajes cargados desde cache`);
+        console.log("🔌 Socket se encarga de mensajes nuevos en tiempo real");
+      }
     }
   }, [dispatch, businessId]);
 

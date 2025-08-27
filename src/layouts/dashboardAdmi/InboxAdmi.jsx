@@ -17,14 +17,32 @@ const InboxAdmi = () => {
   const businessId = businessRedux || sessionStorage.getItem("businessId");
   const userRedux = useSelector((state) => state.user.id);
   const userId = userRedux || sessionStorage.getItem("userId");
+  const msgReceived = useSelector((state) => state.messagesReceived);
+
+  // useEffect(() => {
+  //   if (businessId && userId) {
+  //     // dispatch(getBusinessByIdAction(businessId));
+  //     dispatch(getAllMessagesReceivedAction());
+  //     // dispatch(getAllUsersAction());
+  //     //console.log('despacho la action getAllMessages desde inboxAdmi');
+  //     dispatch(getUserByIdAction(userId));
+  //   }
+  // }, [dispatch, businessId, userId]);
 
   useEffect(() => {
     if (businessId && userId) {
-      // dispatch(getBusinessByIdAction(businessId));
-      dispatch(getAllMessagesReceivedAction());
-      // dispatch(getAllUsersAction());
-      //console.log('despacho la action getAllMessages desde inboxAdmi');
+      // ✅ Usuario siempre se actualiza (datos que pueden cambiar)
       dispatch(getUserByIdAction(userId));
+
+      // 🎯 OPTIMIZACIÓN: Solo cargar mensajes si no hay cache
+      if (!msgReceived || msgReceived.length === 0) {
+        console.log("📭 InboxAdmi: No hay mensajes en cache - carga inicial");
+        dispatch(getAllMessagesReceivedAction());
+      } else {
+        console.log(
+          `📱 InboxAdmi: ${msgReceived.length} mensajes cargados desde cache`
+        );
+      }
     }
   }, [dispatch, businessId, userId]);
 
